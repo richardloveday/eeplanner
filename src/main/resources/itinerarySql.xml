@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <util:map id="itinerarySQLQueries" map-class="java.util.LinkedHashMap">
+
+        <entry key="getItineraryByID">
+            <value>
+                select *
+                from eeplanner.itinerary
+                WHERE ID = ?
+                ;
+            </value>
+        </entry>
+        <entry key="storeNewItinerary">
+            <value>
+                INSERT INTO `eeplanner`.`itinerary`
+                (`id`,
+                `name`,
+                `staff_id`,
+                `year`,
+                `deleted`,
+                `camp_id`,
+                `transfer_1_id`,
+                `transfer_2_id`,
+                `flight_id`)
+                VALUES
+                (
+                :ID ,
+                :name ,
+                :staffID ,
+                :year ,
+                :deleted ,
+                :campID ,
+                :transfer1ID ,
+                :transfer2ID ,
+                :flightID
+                );
+
+            </value>
+        </entry>
+        <entry key="editItinerary">
+            <value>
+                UPDATE `eeplanner`.`itinerary`
+                SET
+                `id` = :ID ,
+                `name` = :name ,
+                `staff_id` = :staffID ,
+                `year` = :year ,
+                `deleted` = :deleted ,
+                `camp_id` = :campID ,
+                `transfer_1_id` = :transfer1ID ,
+                `transfer_2_id` = :transfer2ID ,
+                `flight_id` = :flightID
+                WHERE id = :ID;
+
+            </value>
+        </entry>
+        <entry key="setDeleted">
+            <value>
+                update eeplanner.itinerary set
+                deleted = :isDeleted
+                where ID = :ID
+                ;
+            </value>
+        </entry>
+    </util:map>
+
+</beans>

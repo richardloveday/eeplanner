@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <util:map id="noteSQLQueries" map-class="java.util.LinkedHashMap">
+        <entry key="getNotesByContactID">
+            <value>
+            	select * 
+            	from eeplanner.note
+            	where contactID = ? ;
+            </value>
+        </entry>
+        <entry key="storeNewNote">
+            <value>
+                insert into eeplanner.note
+                    (name,text,type,contactID)
+                values
+                    (:name,:text,:type,:contactID);
+            </value>
+        </entry>
+        <entry key="editNote">
+            <value>
+                update eeplanner.note set
+                	name = :name,
+                    text = :text,
+                    type = :type,
+                    contactID = :contactID
+                where ID = :ID
+                ;
+            </value>
+        </entry>
+        <entry key="removeNote">
+            <value>
+                delete from eeplanner.note
+                where ID = :ID
+                ;
+            </value>
+        </entry>
+    </util:map>
+
+
+</beans>

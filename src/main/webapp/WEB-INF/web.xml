@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4"
+         xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+    <display-name>Archetype Created Web Application</display-name>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:datasources.xml
+            classpath:app-config.xml
+            classpath:staffMemberSql.xml
+            classpath:contactSql.xml
+            classpath:emailSql.xml
+            classpath:phoneSql.xml
+            classpath:noteSql.xml
+            classpath:campSql.xml
+            classpath:flightSql.xml
+            classpath:availabilitySql.xml
+            classpath:itinerarySql.xml
+            classpath:transferSql.xml
+            classpath:templateSql.xml
+            /WEB-INF/applicationContext-security.xml
+            classpath:app-config-rtf.xml
+        </param-value>
+    </context-param>
+
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+
+    <filter-mapping>
+      <filter-name>springSecurityFilterChain</filter-name>
+      <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>Spring Dispatcher Servlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>
+            	/WEB-INF/eeplanner-servlet.xml
+            </param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Spring Dispatcher Servlet</servlet-name>
+        <url-pattern>*.htm</url-pattern>
+    </servlet-mapping>
+    
+    <session-config>
+    	<!-- Session timeout in minutes 12 * 60 -->
+		<session-timeout>720</session-timeout>
+	</session-config>
+
+</web-app>

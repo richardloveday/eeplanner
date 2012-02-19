@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+    <util:map id="flightSQLQueries" map-class="java.util.LinkedHashMap">
+
+
+
+        <entry key="getFlightListByYear">
+            <value>
+					SELECT t.* FROM `eeplanner`.`flight` t
+					where year(t.outboundDeparture) = :year
+					and (deleted = false or deleted = :showDeleted) 
+					;
+            </value>
+        </entry>
+
+
+        <entry key="getFlightByCampAndStaffID">
+            <value>                 
+					SELECT t.* FROM `eeplanner`.`flight` t
+					left join eeplanner.flightcamp tc on t.ID = tc.flightID
+					left join eeplanner.camp c on c.ID = tc.campID
+					left join eeplanner.campstaff cs on cs.campID = c.ID
+					left join eeplanner.staff s on s.ID = cs.staffID
+					left join eeplanner.itinerary i on i.ID = t.itineraryID
+					where i.staffID = :staffID and s.ID = :staffID and c.ID = :campID
+					;
+            </value>
+      </entry> 
+        <entry key="setDeleted">
+            <value>
+                update eeplanner.flight set
+                    deleted = :isDeleted
+                where ID = :ID
+                ;
+            </value>
+        </entry>
+
+        <entry key="getFlightList">
+            <value>
+                select *                    
+                from eeplanner.flight 
+                where deleted = false or deleted = :showDeleted 
+                order by :orderBy
+                ;
+            </value>
+        </entry>
+        <entry key="getFlightByStaffMemberIDCampID">
+            <value>
+                select *
+                from eeplanner.flight t
+                inner join eeplanner.flightcamp fc fc.flightID = t.ID
+                inner join eeplanner.flightstaff fs on fs.flightID = t.ID
+                where fc.campID = :campID
+                and fs.staffID = :staffMemberID
+                ;
+            </value>
+        </entry>
+        <entry key="getFlightsByCampID">
+            <value>
+                select *
+
+                from eeplanner.flight t
+                inner join eeplanner.camp cmp on cmp.ID = t.campID
+                where cmp.ID = ?
+                ;
+            </value>
+        </entry>
+        <entry key="getFlightByID">
+            <value>
+                select *
+                from eeplanner.flight
+                where ID = ?
+                ;
+            </value>
+        </entry>
+        <entry key="storeNewFlight">
+            <value>
+                insert into eeplanner.flight (carrier, type, flightNumber,
+                                               destination, outboundArrival, outboundDeparture,
+                                               returnArrival, returnDeparture,
+                                               cost, campID, numberOfSeats, airport, itineraryID)
+
+                values (:carrier, :type, :flightNumber,
+                        :destination, :outboundArrival, :outboundDeparture,
+                        :returnArrival, :returnDeparture,
+                        :cost, :campID, :numberOfSeats, :airport, :itineraryID)
+            </value>
+        </entry>
+        <entry key="editFlight">
+            <value>
+                update eeplanner.flight set
+                    carrier = :carrier,
+                    type = :type,
+                    flightNumber = :flightNumber,
+                    outboundArrival = :outboundArrival,
+                    outboundDeparture = :outboundDeparture,
+                    returnArrival = :returnArrival,
+                    returnDeparture = :returnDeparture,
+                    cost = :cost,
+                    campID = :campID,
+                    numberOfSeats = :numberOfSeats,
+                    airport = :airport,
+                    deleted = :deleted,
+                    itineraryID = :itineraryID
+                where ID = :ID
+                ;
+            </value>
+        </entry>
+        <entry key="addFlightCamp">
+            <value>
+                insert into eeplanner.flightcamp (flightID, campID)
+                values ( :flightID, :campID )
+                ;
+            </value>
+        </entry>
+        <entry key="removeFlightCamp">
+            <value>
+                delete from eeplanner.flightcamp
+                where campID = :campID and flightID = :flightID
+                ;
+            </value>
+        </entry>
+        <entry key="editFlightCamp">
+            <value>
+                update eeplanner.flightcamp set
+                infoSent = :infoSent
+                where campID = :campID and flightID = :flightID
+                ;
+            </value>
+        </entry>
+        <entry key="addFlightStaffMember">
+            <value>
+                insert into eeplanner.flightstaff (flightID, staffID)
+                values ( :flightID, :staffMemberID )
+                ;
+            </value>
+        </entry>
+        <entry key="removeFlightStaffMember">
+            <value>
+                delete from eeplanner.flightstaff
+                where staffID = :staffMemberID and flightID = :flightID
+                ;
+            </value>
+        </entry>
+        <entry key="editFlightStaffMember">
+            <value>
+                update eeplanner.flightstaff set
+                infoSent = :infoSent,
+                transferNeeded = :transferNeeded
+                where staffID = :staffMemberID and flightID = :flightID
+                ;
+            </value>
+        </entry>
+        <entry key="getFlightsByItineraryID">
+            <value>
+                select *
+                from eeplanner.flight
+                where itineraryID = ?
+                ;
+            </value>
+        </entry>                    
+        <entry key="removeAllFlights">
+            <value>
+                delete from eeplanner.flight
+                ;
+            </value>
+        </entry> 
+                <entry key="removeFlight">
+            <value>
+                delete from eeplanner.flight
+                where ID = :ID
+                ;
+            </value>
+        </entry>   
+    </util:map>
+
+</beans>

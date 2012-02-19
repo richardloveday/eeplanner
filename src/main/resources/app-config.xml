@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+     <bean id="persistService" class="com.eeplanner.dao.services.PersistImpl">
+        <property name="staffDao" ref="staffDao"/>
+        <property name="contactDao" ref="contactDao"/>
+        <property name="emailDao" ref="emailDao"/>
+        <property name="phoneDao" ref="phoneDao"/>
+        <property name="noteDao" ref="noteDao"/>
+        <property name="campDao" ref="campDao"/>
+        <property name="flightDao" ref="flightDao"/>
+        <property name="staffAvailabilityDao" ref="staffAvailabilityDao"/>
+        <property name="itineraryDao" ref="itineraryDao"/>
+        <property name="transferDao" ref="transferDao"/>
+    </bean>
+
+    <bean id="emailDao" class="com.eeplanner.dao.email.EmailDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlQueries" ref="emailSQLQueries"/>
+    </bean>
+
+    <bean id="phoneDao" class="com.eeplanner.dao.phone.PhoneDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlQueries" ref="phoneSQLQueries"/>
+    </bean>
+
+    <bean id="noteDao" class="com.eeplanner.dao.note.NoteDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlQueries" ref="noteSQLQueries"/>
+    </bean>
+
+    <bean id="staffDao" class="com.eeplanner.dao.staff.StaffDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlQueries" ref="staffSQLQueries"/>
+    </bean>
+
+    <bean id="campDao" class="com.eeplanner.dao.camp.CampDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlQueries" ref="campSQLQueries"/>
+    </bean>
+
+    <bean id="contactDao" class="com.eeplanner.dao.contact.ContactDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlQueries" ref="contactSQLQueries"/>
+        <property name="emailDao" ref="emailDao"/>
+        <property name="phoneDao" ref="phoneDao"/>
+        <property name="noteDao" ref="noteDao"/>
+    </bean>
+
+    <bean id="flightDao" class="com.eeplanner.dao.flight.FlightDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlQueries" ref="flightSQLQueries"/>
+    </bean>
+
+    <bean id="staffAvailabilityDao" class="com.eeplanner.dao.staffavailability.StaffAvailabilityDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlQueries" ref="availabilitySQLQueries"/>
+    </bean>
+    <bean id="transferDao" class="com.eeplanner.dao.transfer.TransferDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlQueries" ref="transferSQLQueries"/>
+    </bean>
+    <bean id="itineraryDao" class="com.eeplanner.dao.itinerary.ItineraryDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlQueries" ref="itinerarySQLQueries"/>
+    </bean>
+    <bean id="templateDao" class="com.eeplanner.dao.template.TemplateDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlQueries" ref="templateSQLQueries"/>
+    </bean>
+
+</beans>

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <util:map id="campSQLQueries" map-class="java.util.LinkedHashMap">
+        <entry key="getAvailableCampsByTransferID">
+            <value>
+
+                select *
+                from eeplanner.camp c
+
+			    where c.ID not in (
+			        select tc.campID from eeplanner.transfercamp tc
+			        where tc.transferID = :ID
+			    )
+                and ( deleted = false or deleted = :includeDeleted )
+                order by :orderBy
+            </value>
+        </entry>
+        <entry key="getAvailableCampsByFlightID">
+            <value>
+
+                select *
+                from eeplanner.camp c
+
+			    where c.ID not in (
+			        select fc.campID from eeplanner.flightcamp fc
+			        where fc.flightID = :ID
+			    )
+                and ( deleted = false or deleted = :includeDeleted )
+                order by :orderBy
+            </value>
+        </entry>
+        <entry key="getCampsByFlightID">
+            <value>
+                select *
+                from eeplanner.camp c
+                inner join eeplanner.flightcamp fc on fc.campID = c.ID
+                where fc.flightID = :ID
+                order by :orderBy
+                ;
+            </value>
+        </entry>
+        <entry key="getCampsByTransferID">
+            <value>
+                select *
+                from eeplanner.camp c
+                inner join eeplanner.transfercamp tc on tc.campID = c.ID
+                where tc.transferID = :ID
+                order by :orderBy
+                ;
+            </value>
+        </entry>
+        <entry key="getCampsByStaffMemberID">
+            <value>
+                select *
+                from eeplanner.camp c
+                inner join eeplanner.campstaff cs on cs.campID = c.ID
+                where cs.staffID = :ID
+                order by :orderBy
+                ;
+            </value>
+        </entry>
+        <entry key="getCampsByName">
+            <value>
+                select * from eeplanner.camp
+                where name like :name ;
+            </value>
+        </entry>
+        <entry key="getCampSearchDataByCampName">
+            <value>
+
+            	THIS NEEDS DOING NEXT CHARLIE
+            	THIS NEEDS DOING NEXT CHARLIE
+            	THIS NEEDS DOING NEXT CHARLIE
+            	THIS NEEDS DOING NEXT CHARLIE
+
+				select c.ID, c.name, c.start, c.end, c.studentNumber, c.coordinatorsNeeded, c.teachersNeeded, c.dramaTeachersNeeded,
+                		  c.activityCoordinatorsNeeded, c.dptCoordinatorsNeeded, c.courseSpecialistsNeeded,
+				          c.activityLeadersNeeded, c.legacyID, c.siblingNumber, c.ageRange6_7, c.ageRange8_10, c.ageRange11_12,
+				          c.ageRange13_14, c.forwardingDate, c.deliveryDate, c.deleted,
+
+				          cs.accepted, cs.offered, cs.returned, cs.job, cs.staffID as 'staffID'
+
+				from camp c
+
+				left join campstaff cs on cs.campID = c.ID
+
+
+				where c.deleted = false
+				or c.deleted = :includeDeleted
+				order by start desc;
+
+
+            </value>
+        </entry>
+        <entry key="getCampListWithStaffNumbers">
+            <value>
+				select c.ID, c.name, c.start, c.end, c.studentNumber, c.coordinatorsNeeded, c.teachersNeeded, c.dramaTeachersNeeded,
+                		  c.activityCoordinatorsNeeded, c.dptCoordinatorsNeeded, c.courseSpecialistsNeeded,
+				          c.activityLeadersNeeded, c.legacyID, c.siblingNumber, c.ageRange6_7, c.ageRange8_10, c.ageRange11_12,
+				          c.ageRange13_14, c.forwardingDate, c.deliveryDate, c.deleted,
+
+				          cs.accepted, cs.offered, cs.returned, cs.job, cs.staffID as 'staffID'
+
+				from camp c
+
+				left join campstaff cs on cs.campID = c.ID
+
+				where c.deleted = false
+				or c.deleted = :includeDeleted
+				order by start desc;
+            </value>
+        </entry>
+        <entry key="getCampListWithStaffNumbersAndYear">
+            <value>
+				select c.ID, c.name, c.start, c.end, c.studentNumber, c.coordinatorsNeeded, c.teachersNeeded, c.dramaTeachersNeeded,
+                		  c.activityCoordinatorsNeeded, c.dptCoordinatorsNeeded, c.courseSpecialistsNeeded,
+				          c.activityLeadersNeeded, c.legacyID, c.siblingNumber, c.ageRange6_7, c.ageRange8_10, c.ageRange11_12,
+				          c.ageRange13_14, c.forwardingDate, c.deliveryDate, c.deleted, c.contactID,
+
+				          cs.accepted, cs.offered, cs.returned, cs.job, cs.staffID as 'staffID'
+
+				from camp c
+
+				left join campstaff cs on cs.campID = c.ID
+
+
+				where ((c.start between :startDate and :endDate)
+				and (c.end between :startDate and :endDate))
+				and ((c.deleted = false)
+				or (c.deleted = :includeDeleted))
+				order by start desc;
+            </value>
+        </entry>
+
+        <entry key="getCampList">
+            <value>
+                select * from eeplanner.camp
+                where deleted = false
+                	or deleted = :includeDeleted
+                order by start desc;
+            </value>
+        </entry>
+        <entry key="getAllCamps">
+            <value>
+                select distinct *
+                from eeplanner.camp
+                order by start desc;
+            </value>
+        </entry>
+        <entry key="getCampByID">
+            <value>
+            	select *
+            	from eeplanner.camp
+            	where ID = ? ;
+            </value>
+        </entry>
+        <entry key="setDeleted">
+            <value>
+                update eeplanner.camp set
+                    deleted = :isDeleted
+                where ID = :ID
+                ;
+            </value>
+        </entry>
+        <entry key="editCamp">
+            <value>
+                update eeplanner.camp set
+                    name = :name,
+                    start = :start,
+                    end = :end,
+                    studentNumber = :studentNumber,
+                    coordinatorsNeeded = :coordinatorsNeeded,
+                    teachersNeeded = :teachersNeeded,
+                    dramaTeachersNeeded = :dramaTeachersNeeded,
+                    activityLeadersNeeded = :activityLeadersNeeded,
+                    activityCoordinatorsNeeded = :activityCoordinatorsNeeded,
+                    dptCoordinatorsNeeded = :dptCoordinatorsNeeded,
+                    courseSpecialistsNeeded = :courseSpecialistsNeeded,
+                    ageRange6_7 = :ageRange6_7,
+                    ageRange8_10 = :ageRange8_10,
+                    ageRange11_12 = :ageRange11_12,
+                    ageRange13_14 = :ageRange13_14,
+                    contactID = :contactID,
+                    schoolContactID = :schoolContactID,
+                    legacyID = :legacyID,
+                    deliveryDate = :deliveryDate,
+                    forwardingDate = :forwardingDate,
+                    siblingNumber = :siblingNumber,
+                    deleted = :deleted,
+                    predictedStudents = :predictedStudents,
+					studentRegistrations = :studentRegistrations,
+					dateStamp = :dateStamp,
+					students2Week = :students2Week,
+					students1week = :students1week,
+					dailyHours = :dailyHours,
+                    presentationTime = :presentationTime,
+					materialsSent = :materialsSent,
+					itemsSent = :itemsSent,
+					timeReceived = :timeReceived,
+					signature = :signature,
+					schoolPhone = :schoolPhone,
+					schoolFax = :schoolFax,
+					schoolEmail = :schoolEmail
+
+                where ID = :ID
+                ;
+            </value>
+        </entry>
+        <entry key="storeNewCamp">
+            <value>
+                insert into eeplanner.camp
+                    (name,start,end,studentNumber,coordinatorsNeeded,teachersNeeded,dramaTeachersNeeded,
+                		activityCoordinatorsNeeded,dptCoordinatorsNeeded,courseSpecialistsNeeded,
+                        activityLeadersNeeded,contactID,schoolContactID,legacyID,siblingNumber,forwardingDate,deliveryDate,
+                        ageRange6_7,ageRange8_10,ageRange11_12,ageRange13_14,predictedStudents,studentRegistrations,
+                        dateStamp,students2Week, students1week, dailyHours, presentationTime, materialsSent, itemsSent,
+                        timeReceived,signature,schoolPhone,schoolFax,schoolEmail)
+                values
+                    (:name,:start,:end,:studentNumber,:coordinatorsNeeded,:teachersNeeded,
+                		:activityCoordinatorsNeeded,:dptCoordinatorsNeeded,:courseSpecialistsNeeded,
+                        :dramaTeachersNeeded,:activityLeadersNeeded,:contactID, :schoolContactID,:legacyID,:siblingNumber,:forwardingDate,:deliveryDate,
+                        :ageRange6_7,:ageRange8_10,:ageRange11_12,:ageRange13_14,:predictedStudents,:studentRegistrations,
+                        :dateStamp,:students2Week,:students1week, :dailyHours, :presentationTime, :materialsSent, :itemsSent,
+                        :timeReceived, :signature,:schoolPhone, :schoolFax,:schoolEmail )
+                        ;
+            </value>
+        </entry>
+        <entry key="addCampStaffMember">
+            <value>
+                insert into eeplanner.campstaff (campID, staffID)
+                values ( :campID, :staffID )
+                ;
+            </value>
+        </entry>
+        <entry key="removeAllCampStaffMembers">
+        	<value>
+                delete from eeplanner.campstaff
+                where campID = :campID
+                ;
+        	</value>
+        </entry>
+        <entry key="removeCampStaffMember">
+            <value>
+                delete from eeplanner.campstaff
+                where staffID = :staffMemberID and campID = :campID
+                ;
+            </value>
+        </entry>
+        <entry key="editCampStaffMember">
+            <value>
+                update eeplanner.campstaff set
+                offered = :offered,
+                accepted = :accepted,
+                returned = :returned,
+                job = :job,
+                contract_date = :contractDate
+                where staffID = :staffMemberID and campID = :campID
+                ;
+            </value>
+        </entry>
+        <entry key="getCampStaff">
+            <value>
+                select *
+            	from eeplanner.campstaff
+            	where campID = ? and staffID = ? ;
+            </value>
+        </entry>
+
+    </util:map>
+
+
+</beans>

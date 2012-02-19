@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="rtfDocumentService" class="com.eeplanner.service.RtfDocumentService">
+        <property name="templateDao" ref="templateDao"/>
+    </bean>
+
+	<!-- ********************************************************************** 
+		 ********************* RTFTEMPLTE IMPLEMENTATION ********************** 
+		 ********************************************************************** -->
+
+	<!-- Defautlt RTFTemplate implementation with freemarker template engine -->
+	<bean id="ftlRTFTemplate" class="net.sourceforge.rtf.RTFTemplate" >
+		<property name="parser" ref="defaultRTFParser" />
+		<property name="transformer" ref="ftlTransformer" />
+		<property name="templateEngine" ref="ftl" />
+	</bean>
+
+	<!-- Defautlt RTFDocument Parser -->
+	<bean id="defaultRTFParser" class="net.sourceforge.rtf.handler.RTFDocumentHandler">
+	</bean>
+	
+	       
+ 	<!-- **********************************************************************
+           ********************* FREEMARKER TEMPLATE ENGINE *********************
+           ********************************************************************** -->
+
+	<!-- Freemarker template engine -->
+	<bean id="ftl"
+		class="net.sourceforge.rtf.template.freemarker.FreemarkerTemplateEngineImpl" scope="prototype">
+		<property name="freemarkerConfiguration" ref="ftlConfiguration" />
+	</bean>
+
+	<!-- Freemarker Configuration -->
+	<bean id="ftlConfiguration" class="freemarker.template.Configuration" scope="prototype">
+	</bean>
+
+	<!-- Freemarker RTF Document Transformer -->
+	<bean id="ftlTransformer"
+		class="net.sourceforge.rtf.template.freemarker.RTFFreemarkerTransformerImpl">
+	</bean> 
+   
+</beans>

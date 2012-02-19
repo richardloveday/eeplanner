@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <util:map id="staffSQLQueries" map-class="java.util.LinkedHashMap">
+        <entry key="setDeleted">
+            <value>
+                update eeplanner.staff set
+                    deleted = :isDeleted
+                where ID = :ID
+                ;
+            </value>
+        </entry>
+        
+        <entry key="permanentlyDelete">
+            <value>
+            	delete from eeplanner.staff
+                where ID = :ID
+                ;
+            </value>
+        </entry>
+
+        <entry key="getStaffMemberSearchDataByID">
+            <value>
+				select * from (
+
+          			select c.ID as 'campID', null as 'flightID', s.ID as 'staffMemberID', scon.ID as 'staffMemberContactID', scon.firstNames as 'staffMemberFirstNames',
+				                scon.secondName as 'staffMemberSecondName', null as 'transferNeeded', null as 'infoSent',
+				                c.name as 'campName', c.start, c.end, ccon.orgname as 'campContactOrgName', null as 'flightType',
+				                null as 'outboundArrival', null as 'outboundDeparture', null as 'returnArrival', null as 'returnDeparture',
+				                null as 'destination', null as 'flightNumber', s.deleted, s.parentID, s.hash 
+
+
+
+				  	from eeplanner.camp c
+
+				  	inner join eeplanner.campstaff cs on cs.campID = c.ID
+				  	inner join eeplanner.staff s on s.ID = cs.staffID
+		          	inner join eeplanner.contact scon on scon.ID = s.contactID
+		          	inner join eeplanner.contact ccon on ccon.ID = c.contactID
+
+				  	where s.ID = :ID
+
+				  	union
+
+          			select c.ID as 'campID', f.ID as 'flightID', s.ID as 'staffMemberID', scon.ID as 'staffMemberContactID', scon.firstNames as 'staffMemberFirstNames',
+				                scon.secondName as 'staffMemberSecondName', fs.transferNeeded, fs.infoSent, c.name as 'campName',
+				                c.start, c.end, ccon.orgname as 'campContactOrgName', f.type as 'flightType', f.outboundArrival,
+				                f.outboundDeparture, f.returnArrival, f.returnDeparture, f.destination, f.flightNumber, s.deleted, s.parentID, s.hash 
+
+				  	from eeplanner.flight f
+
+					inner join eeplanner.flightstaff fs on fs.flightID = f.ID
+					inner join eeplanner.flightcamp fc on fc.flightID = f.ID
+					inner join eeplanner.camp c on c.ID = fc.campID
+					inner join eeplanner.staff s on s.ID = fs.staffID
+         			inner join eeplanner.contact scon on scon.ID = s.contactID
+          			inner join eeplanner.contact ccon on ccon.ID = c.contactID
+
+
+				  	where fs.staffID = :ID
+
+				  	order by campID, flightID desc) thing
+
+				group by campID
+            </value>
+        </entry>
+        <entry key="getStaffMembersByName">
+            <value>
+                select s.ID, s.teacher, s.coordinator, s.drama, s.activityleader, s.kinName,
+                s.activityCoordinator, s.dptCoordinator, s.courseSpecialist,
+                s.kinNumber, s.archivePassword, s.existing, s.applied, s.interviewed, s.approved, s.status,
+                c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.add3, c.add4, c.postCode, c.dob, c.sex, s.deleted, 
+                s.profile, s.medical, s.dietary , s.travelOutside, s.travelWithinLondon, s.officeNotes, s.mixedRole,
+                s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
+                s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash
+                
+                from eeplanner.staff s
+                inner join eeplanner.contact c on s.contactID = c.ID
+                where c.secondName like :name
+                order by secondName asc
+            </value>
+        </entry>
+        <entry key="getStaffMemberByID">
+            <value>
+
+                select s.ID, s.teacher, s.coordinator, s.drama, s.activityleader, s.kinName,
+                s.activityCoordinator, s.dptCoordinator, s.courseSpecialist,
+                s.kinNumber, s.archivePassword, s.existing, s.applied, s.interviewed, s.approved, s.status,
+                c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.add3, c.add4, c.postCode, c.dob, c.sex, s.deleted, s.profile, s.medical, s.dietary, 
+                s.travelOutside, s.travelWithinLondon, s.officeNotes, s.mixedRole,
+                s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
+                s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash
+                
+                from eeplanner.staff s
+                inner join eeplanner.contact c on s.contactID = c.ID
+                where s.ID = ? ;
+            </value>
+        </entry>
+        <entry key="storeNewStaffMember">
+            <value>
+                insert into eeplanner.staff
+                (contactID,teacher,coordinator,drama,activityleader,kinName,kinNumber,
+                activityCoordinator,dptCoordinator,courseSpecialist,
+                archivePassword,existing, applied, interviewed, approved, status, profile, medical, dietary,
+                travelOutside, travelWithinLondon, officeNotes, mixedRole,
+                staffNotes, prefAgeAny, prefAgeGroup1, prefAgeGroup2, prefActivityArt, prefActivitySport, prefActivityDrama, prefActivityAny, parentID, hash)
+                
+                values
+                (:contactID,:teacher,:coordinator,:drama,:activityleader,:kinName,:kinNumber,
+                :activityCoordinator,:dptCoordinator,:courseSpecialist,
+                :archivePassword,:existing,:applied, :interviewed, :approved,:status, :profile, :medical, :dietary,
+                :travelOutside, :travelWithinLondon, :officeNotes, :mixedRole,
+                :staffNotes, :prefAgeAny, :prefAgeGroup1, :prefAgeGroup2, :prefActivityArt, :prefActivitySport, :prefActivityDrama, :prefActivityAny, :parentID, :hash);
+            </value>
+        </entry>
+        <entry key="editStaffMember">
+            <value>
+                update eeplanner.staff set
+                contactID = :contactID,
+                teacher = :teacher,
+                coordinator = :coordinator,
+                drama = :drama,
+                activityleader = :activityleader,
+                activityCoordinator = :activityCoordinator,
+                dptCoordinator = :dptCoordinator,
+                courseSpecialist = :courseSpecialist,
+                kinName = :kinName,
+                kinNumber = :kinNumber,
+                archivePassword = :archivePassword,
+                existing = :existing,
+                applied = :applied,
+                interviewed = :interviewed,
+                approved = :approved,
+                status = :status,
+                deleted = :deleted,
+                profile = :profile,
+                medical = :medical,
+                dietary = :dietary,
+                travelOutside = :travelOutside,
+                travelWithinLondon =:travelWithinLondon,
+                officeNotes =:officeNotes,
+                mixedRole =:mixedRole,
+                staffNotes =:staffNotes,
+                prefAgeAny =:prefAgeAny, 
+                prefAgeGroup1 =:prefAgeGroup1, 
+                prefAgeGroup2 =:prefAgeGroup2, 
+                prefActivityArt =:prefActivityArt, 
+                prefActivitySport =:prefActivitySport, 
+                prefActivityDrama =:prefActivityDrama, 
+                prefActivityAny =:prefActivityAny,
+                parentID =:parentID,
+                hash =:hash
+                
+                where ID = :ID
+                ;
+            </value>
+        </entry>
+        <entry key="getStaffMemberList">
+            <value>
+
+                select s.ID, s.teacher, s.coordinator, s.drama, s.activityleader, s.kinName,
+                s.activityCoordinator, s.dptCoordinator, s.courseSpecialist,
+                s.kinNumber, s.archivePassword, s.existing, s.applied, s.interviewed, s.approved, s.status,
+                c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.add3, c.add4, c.postCode, c.dob, c.sex, s.deleted, s.profile, s.medical, s.dietary,
+                s.travelOutside, s.travelWithinLondon, s.officeNotes, s.mixedRole,
+                s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
+                s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash
+                
+                from eeplanner.staff s
+                inner join eeplanner.contact c on s.contactID = c.ID
+                
+                where deleted = false or deleted = :showDeleted
+                
+                order by c.secondName asc
+            </value>
+        </entry>
+        <entry key="getStaffMemberForCamp">
+            <value>
+                select s.ID, s.teacher, s.coordinator, s.drama, s.activityleader, s.kinName,
+                s.activityCoordinator, s.dptCoordinator, s.courseSpecialist,
+                s.kinNumber, s.archivePassword, s.existing, s.applied, s.interviewed, s.approved, 
+                s.status, s.profile, s.medical, s.dietary, s.travelOutside, s.travelWithinLondon, s.officeNotes, s.mixedRole,
+                s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
+                s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash,
+                c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.add3, c.add4, c.postCode, c.dob, c.sex,
+                cs.offered, cs.accepted, cs.job,
+                cmp.ID as 'campID', cmp.name as 'campName', cmp.start, cmp.end, s.deleted
+
+                from eeplanner.staff s
+                inner join eeplanner.contact c on s.contactID = c.ID
+                inner join eeplanner.campstaff cs on s.ID = cs.staffID
+                left join eeplanner.camp cmp on cmp.ID = cs.campID
+                where cs.campID = :campID
+                and cs.staffID = :staffMemberID
+                limit 1
+            </value>
+        </entry>
+        <entry key="getStaffMembersForCamps">
+            <value>
+                select s.ID, s.teacher, s.coordinator, s.drama, s.activityleader, s.kinName,
+                s.activityCoordinator, s.dptCoordinator, s.courseSpecialist,
+                s.kinNumber, s.archivePassword, s.existing, s.applied, s.interviewed, s.approved,
+                s.status, s.profile, s.medical, s.dietary, s.travelOutside, s.travelWithinLondon, s.officeNotes, s.mixedRole,
+                s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
+                s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash,
+                c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.add3, c.add4, c.postCode, c.dob, c.sex,
+                cs.offered, cs.accepted, cs.returned, cs.job, s.deleted
+
+                from eeplanner.staff s
+                inner join eeplanner.contact c on s.contactID = c.ID
+                inner join eeplanner.campstaff cs on s.ID = cs.staffID
+                left join eeplanner.camp cmp on cmp.ID = cs.campID
+
+            </value>
+        </entry>
+        <entry key="getStaffMembersForCamp">
+            <value>
+                select s.ID, s.teacher, s.coordinator, s.drama, s.activityleader, s.kinName,
+                s.activityCoordinator, s.dptCoordinator, s.courseSpecialist,
+                s.kinNumber, s.archivePassword, s.existing,s.applied, s.interviewed, s.approved,
+                s.status, s.profile, s.medical, s.dietary, s.travelOutside, s.travelWithinLondon, s.officeNotes, s.mixedRole,
+                s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
+                s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash,
+                c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.add3, c.add4, c.postCode, c.dob, c.sex,
+                cs.offered, cs.accepted, cs.returned, cs.job,
+                cmp.ID as 'campID', cmp.name as 'campName', cmp.start, cmp.end, s.deleted
+
+                from eeplanner.staff s
+                inner join eeplanner.contact c on s.contactID = c.ID
+                inner join eeplanner.campstaff cs on s.ID = cs.staffID
+                left join eeplanner.camp cmp on cmp.ID = cs.campID
+                where cs.campID = :campID
+                order by :orderBy
+            </value>
+        </entry>
+        <entry key="getStaffMembersCountForCamp">
+            <value>
+                select count(cs.staffID)
+                from eeplanner.campstaff cs
+                where cs.campID = :campID
+            </value>
+        </entry>
+        <entry key="getAvailableStaffMembersForCamp">
+            <value>
+                select s.ID, s.teacher, s.coordinator, s.drama, s.activityleader, s.kinName,
+                s.activityCoordinator, s.dptCoordinator, s.courseSpecialist,
+                s.kinNumber, s.archivePassword, s.existing, s.applied, s.interviewed, s.approved, s.status, 
+                c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.add3, c.add4, c.postCode, c.dob, c.sex, s.deleted , s.profile, s.medical, s.dietary,
+                s.travelOutside, s.travelWithinLondon, s.officeNotes, s.mixedRole,
+                s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
+                s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash
+
+                from eeplanner.staff s
+                inner join eeplanner.contact c on s.contactID = c.ID
+
+                where s.ID not in (
+                select cs.staffID from eeplanner.campstaff cs
+                inner join eeplanner.camp cmp on cmp.ID = cs.campID
+                where ( cmp.start between :start and :end )
+                or ( cmp.end between :start and :end )
+                )
+                order by :orderBy
+            </value>
+        </entry>
+        <entry key="getAvailableStaffMembers">
+            <value>
+                select s.ID, s.teacher, s.coordinator, s.drama, s.activityleader, s.kinName,
+                s.activityCoordinator, s.dptCoordinator, s.courseSpecialist,
+                s.kinNumber, s.archivePassword, s.existing, s.applied, s.interviewed, s.approved, s.status, 
+                c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.add3, c.add4, c.postCode, c.dob, c.sex, s.deleted, s.profile, s.medical, s.dietary,
+                s.travelOutside, s.travelWithinLondon, s.officeNotes, s.mixedRole,
+                s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
+                s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash
+
+                from eeplanner.staff s
+                left join eeplanner.contact c on s.contactID = c.ID
+				left join eeplanner.staffavailability a on s.ID = a.staffID
+                where
+                a.years = :year and  
+                ( deleted = false or deleted = :showDeleted ) 
+               
+            </value>
+        </entry>
+        <entry key="getAvailableStaffMembersForCamp">
+            <value>
+                select s.ID, s.teacher, s.coordinator, s.drama, s.activityleader, s.kinName,
+                s.activityCoordinator, s.dptCoordinator, s.courseSpecialist,
+                s.kinNumber, s.archivePassword, s.existing, s.applied, s.interviewed, s.approved, 
+                s.status, s.profile, s.medical, s.dietary, s.travelOutside, s.travelWithinLondon, s.officeNotes, s.mixedRole,
+                s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
+                s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash,
+                c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.add3, c.add4, c.postCode, c.dob, c.sex, s.deleted
+
+                from eeplanner.staff s
+                inner join eeplanner.contact c on s.contactID = c.ID
+
+                where s.ID not in (
+                select cs.staffID from eeplanner.campstaff cs
+                inner join eeplanner.camp cmp on cmp.ID = cs.campID
+                where ( cmp.start between :start and :end )
+                or ( cmp.end between :start and :end )
+                )
+                order by :orderBy
+            </value>
+        </entry>
+        <entry key="getStaffMembersForFlight">
+            <value>
+
+                select s.ID, s.teacher, s.coordinator, s.drama, s.activityleader, s.kinName,
+                s.activityCoordinator, s.dptCoordinator, s.courseSpecialist,
+                s.kinNumber, s.archivePassword, s.existing, s.applied, s.interviewed, s.approved, 
+                s.status, s.profile, s.medical, s.dietary, s.travelOutside, s.travelWithinLondon, s.officeNotes, s.mixedRole,
+                s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
+                s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash,
+                c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.add3, c.add4, c.postCode, c.dob, c.sex, fs.infoSent, fs.transferNeeded, s.deleted
+
+                from eeplanner.staff s
+                inner join eeplanner.contact c on s.contactID = c.ID
+                left join eeplanner.flightstaff fs on s.ID = fs.staffID
+
+                where fs.flightID = :flightID
+                order by :orderBy
+            </value>
+        </entry>
+        <entry key="getStaffMemberForFlight">
+            <value>
+
+                select s.ID, s.teacher, s.coordinator, s.drama, s.activityleader, s.kinName,
+                s.activityCoordinator, s.dptCoordinator, s.courseSpecialist,
+                s.kinNumber, s.archivePassword, s.existing, s.applied, s.interviewed, s.approved,
+                s.status, s.profile, s.medical, s.dietary, s.travelOutside, s.travelWithinLondon, s.officeNotes, s.mixedRole,
+                s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
+                s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash,
+                c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.add3, c.add4, c.postCode, c.dob, c.sex, fs.infoSent, fs.transferNeeded, s.deleted
+
+                from eeplanner.staff s
+                inner join eeplanner.contact c on s.contactID = c.ID
+                left join eeplanner.flightstaff fs on s.ID = fs.staffID
+
+                where fs.flightID = :flightID
+                and s.ID = :staffMemberID
+                limit 1
+            </value>
+        </entry>
+        <entry key="getListOfItinerariesForStaffMember">
+            <value>
+
+             	select * 
+            	from eeplanner.itinerary
+            	where staffID = :staffID
+            	and year = :year ;
+            </value>
+        </entry>
+    </util:map>
+
+</beans>

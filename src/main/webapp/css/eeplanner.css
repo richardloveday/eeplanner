@@ -1,0 +1,67 @@
+#title { font-size:18px; font-weight:bold; margin:20px 0 10px 20px }
+#title2 { font-size:16px; font-weight:bold; margin:0 0 20px 20px }
+
+div{ font-family:verdana,sans-serif; font-size:12px; }
+p{ font-family:verdana,sans-serif; font-size:12px; }
+table td { font-family:verdana,sans-serif; font-size:12px;  }
+table th { font-family:verdana,sans-serif; font-size:12px; color:#3333FF }
+table td a { text-decoration:none; color:#FF0000 }
+table td a:hover {text-decoration:underline;}
+
+h2 { padding: 0; font-size: 12px; font-weight: bold; font-family:verdana,sans-serif; }
+
+
+.left{ float:left; }
+.right{ float:right; }
+.clear{ clear:both; }
+
+.blueBorder {border:3px solid #3399ff; }
+.marginTop {margin-top:5px;}
+.marginRight {margin-right:5px;}
+.marginBottom {margin-bottom:5px;}
+.marginLeft {margin-left:5px;}
+.marginAll {margin:5px 5px 5px 5px;}
+
+.paddingLeft {padding:0 0 0 5px;}
+
+.error{ color: #ff0000 }
+
+.bold{ font-weight:bold; }
+
+.staffData {width:500px;}
+.staffData .data {margin:5px 5px 5px 5px;}
+.staffData .data p {margin:1px 1px 1px 1px;}
+
+
+
+.mainnav li{ float:left; list-style-type:none; text-align:center; width:100px;
+                line-height:20px; border-right:1px solid #FFFFFF; border-bottom:1px solid #FFFFFF;}
+
+.mainnav .level1 li{ background-color: #3333ff; color: #ffffff; padding:0 10px 0 10px;}
+.mainnav .level1 li:hover{ background-color: #000099; color: #ffffff; }
+.mainnav .level1 a{ background-color: #3333ff; color: #ffffff; text-decoration:none; }
+.mainnav .level1 a:hover{ background-color: #000099; color: #ffffff; text-decoration:none; }
+
+.mainnav .level2 li{ background-color: #000099; color: #3399ff; padding:0 10px 0 10px;}
+.mainnav .level2 li:hover{ background-color: #3333ff; color: #ffffff; }
+.mainnav .level2 a{ background-color: #000099; color: #3399ff; text-decoration:none; }
+.mainnav .level2 a:hover{ background-color: #3333ff; color: #ffffff; text-decoration:none;  }
+
+.numTitle {vertical-align:text-top;}
+.rmNumLink a {vertical-align:bottom;}
+.listTable td{border-bottom:1px groove darkcyan;border-right:1px groove darkcyan;margin:5px 5px 0 0; }
+.listTable th{border-bottom:1px groove darkcyan;border-right:1px groove darkcyan;margin:5px 5px 0 0; }
+
+.searchResultTable td {border-bottom:1px groove darkcyan;border-right:1px groove darkcyan;margin:5px 5px 0 0; }
+
+
+.listHeader {font-family:verdana,sans-serif; font-size:13px; font-weight:bold; font-style:italic;}
+
+label.error { float: none; color: red; padding-left: .5em; vertical-align: top; }
+
+.dateselect {}
+
+.boxForm { border:2px solid #000000; padding:5px 0 5px 0;margin:10px 0 10px 0; width="100%";}
+.phoneEmailNoteTd { border:1px solid #000000; padding:5px 0 5px 0;margin:10px 0 10px 0;}
+
+.nvpTable { border:none; padding:0 0 0 0;margin:0 0 0 0;}

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <util:map id="contactSQLQueries" map-class="java.util.LinkedHashMap">
+        <entry key="getContactByID">
+            <value>
+            	select * 
+            	from eeplanner.contact 
+            	where ID = ? ;
+            </value>
+        </entry>
+        <entry key="permanentlyDelete">
+            <value>
+            	delete from eeplanner.contact
+                where ID = :ID
+                ;
+            </value>
+        </entry>
+        <entry key="editContact">
+            <value>
+                update eeplanner.contact set
+                    firstNames = :firstNames,
+                    secondName = :secondName,
+                    orgName = :orgName,
+                    add1 = :add1,
+                    add2 = :add2,
+                    add3 = :add3,
+                    add4 = :add4,
+                    postCode = :postCode,
+                    type = :type,
+                    dob = :dob,
+                    relatedID = :relatedID,
+                    sex = :sex,
+                    accountHolderName = :accountHolderName,
+                    accountNumber = :accountNumber,
+                    accountSortCode = :accountSortCode,
+                    nationalInsuranceNumber = :nationalInsuranceNumber,
+                    student = :student
+                where ID = :ID
+                ;
+            </value>
+        </entry>
+        <entry key="storeNewContact">
+            <value>
+                insert into eeplanner.contact
+                    (firstNames,secondName,orgName,add1,add2,add3,add4,postCode,type,dob,relatedID,sex,accountHolderName,accountNumber,accountSortCode,nationalInsuranceNumber,student)
+                values
+                    (:firstNames,:secondName,:orgName,:add1,:add2,:add3,:add4,:postCode,:type,:dob,:relatedID,:sex,:accountHolderName,:accountNumber,:accountSortCode,:nationalInsuranceNumber,:student);
+            </value>
+        </entry>
+
+        <entry key="getContactsByTypeRelatedID">
+            <value>
+                select * 
+            	from eeplanner.contact
+            	where relatedID = :relatedID
+                and type = :type
+                ;
+            </value>
+        </entry>
+
+        <entry key="removeContactEmails">
+            <value>
+                delete from eeplanner.email where contactID = :contactID;
+            </value>
+        </entry>
+
+        <entry key="removeContactPhoneNumbers">
+            <value>
+                delete from eeplanner.phone where contactID = :contactID;
+            </value>
+        </entry>
+
+        <entry key="removeContactNotes">
+            <value>
+                delete from eeplanner.note where contactID = :contactID;
+            </value>
+        </entry>
+        
+    </util:map>
+    
+
+</beans>

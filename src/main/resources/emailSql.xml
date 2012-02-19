@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <util:map id="emailSQLQueries" map-class="java.util.LinkedHashMap">
+        <entry key="getEmailsByContactID">
+            <value>
+            	select * 
+            	from eeplanner.email
+            	where contactID = ? ;
+            </value>
+        </entry>
+        <entry key="storeNewEmail">
+            <value>
+                insert into eeplanner.email
+                    (address,contactID,name)
+                values
+                    (:address,:contactID,:name);
+            </value>
+        </entry>
+        <entry key="editEmail">
+            <value>
+                update eeplanner.email set
+                	address = :address,
+                    contactID = :contactID,
+                    name = :name
+                where ID = :ID
+                ;
+            </value>
+        </entry>
+        <entry key="removeEmail">
+            <value>
+                delete from eeplanner.email
+                where ID = :ID
+                ;
+            </value>
+        </entry>
+    </util:map>
+
+</beans>

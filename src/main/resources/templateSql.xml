@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <util:map id="templateSQLQueries" map-class="java.util.LinkedHashMap">
+
+        <entry key="getTemplateList">
+            <value>
+                select *
+                from eeplanner.template
+                order by type
+                ;
+            </value>
+        </entry>
+        <entry key="storeNewTemplate">
+            <value>
+                insert into eeplanner.template
+                (type, text, edited_date)
+                values
+                (:type, :text, :editedDate)
+            </value>
+        </entry>
+        <entry key="editTemplate">
+            <value>
+                UPDATE `eeplanner`.`template`
+                SET
+                `type` = :type ,
+                `text` = :text ,
+                `edited_date` = :editedDate
+                WHERE id = :ID;
+
+                ;
+            </value>
+        </entry>
+        <entry key="getTemplateByID">
+            <value>
+                select *
+                from eeplanner.template
+                where id = ?
+                ;
+            </value>
+        </entry>
+        <entry key="getTemplateByType">
+            <value>
+                select *
+                from eeplanner.template
+                where type = ?
+                ;
+            </value>
+        </entry>
+    </util:map>
+
+</beans>

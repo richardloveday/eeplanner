@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="internal.definition" template="/WEB-INF/jsp/layout/internal.jsp">
+		<put-attribute name="title" value="The English Experience Plan" />
+		<put-attribute name="header" value="/WEB-INF/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="" />
+	</definition>
+	
+	<definition name="error" extends="internal.definition">
+		<put-attribute name="pageName" value="Error" />
+		<put-attribute name="body" value="/WEB-INF/jsp/wireframe/error.jsp" />
+	</definition>
+	
+	
+
+	<definition name="external.definition" template="/WEB-INF/jsp/layout/external.jsp">
+		<put-attribute name="title" value="The English Experience Plan" />
+		<put-attribute name="header" value="/WEB-INF/jsp/layout/header.jsp" />
+		<put-attribute name="body" value="" />
+	</definition>
+	<definition name="staffMemberExternalForm" extends="external.definition">
+		<put-attribute name="pageName" value="Staff Information" />
+		<put-attribute name="body" value="/WEB-INF/jsp/staff/staffMemberExternalForm.jsp" />
+	</definition>
+	
+	<definition name="staffMemberExternalSuccess" extends="external.definition">
+		<put-attribute name="pageName" value="Staff Information" />
+		<put-attribute name="body" value="/WEB-INF/jsp/staff/staffMemberExternalSuccess.jsp" />
+	</definition>
+
+</tiles-definitions>
