@@ -1,17 +1,18 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.cicoders.eeplanner</groupId>
     <artifactId>eeplanner</artifactId>
     <version>0.0.3-SNAPSHOT</version>
     <packaging>war</packaging>
-	
-	<properties>
-		<org.springframework.version>3.1.0.RELEASE</org.springframework.version>
-		<org.springframework.data.version>1.0.2.RELEASE</org.springframework.data.version>
-		<org.springframework.security.version>3.1.0.RELEASE</org.springframework.security.version>
-		<hibernate.version>3.6.8.Final</hibernate.version>
-	</properties>
-    
+
+    <properties>
+        <org.springframework.version>3.1.0.RELEASE</org.springframework.version>
+        <org.springframework.data.version>1.0.2.RELEASE</org.springframework.data.version>
+        <org.springframework.security.version>3.1.0.RELEASE</org.springframework.security.version>
+        <hibernate.version>3.6.8.Final</hibernate.version>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -24,13 +25,13 @@
                 </configuration>
             </plugin>
             <plugin>
-			    <groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.8</version>
-				<configuration>
-					<forkMode>once</forkMode>
-				</configuration>
-		    </plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.8</version>
+                <configuration>
+                    <forkMode>once</forkMode>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -104,11 +105,11 @@
             <version>1.2.14</version>
         </dependency>
         <dependency>
-	        <groupId>org.slf4j</groupId>
-	        <artifactId>slf4j-log4j12</artifactId>
-	        <version>1.6.4</version>	        
-    	</dependency>
-        
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.6.4</version>
+        </dependency>
+
         <!-- Spring Dependencies -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -143,36 +144,34 @@
             <version>${org.springframework.version}</version>
         </dependency>
         <dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-expression</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
         <dependency>
-    		<groupId>org.springframework</groupId>
-    		<artifactId>spring-test</artifactId>
-    		<version>${org.springframework.version}</version>
-    		<scope>test</scope>
-		</dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${org.springframework.version}</version>
+            <scope>test</scope>
+        </dependency>
 
 
-
-		
-		<!-- Spring Security Dependencies -->	
+        <!-- Spring Security Dependencies -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-acl</artifactId>
@@ -193,40 +192,40 @@
             <artifactId>spring-security-web</artifactId>
             <version>${org.springframework.security.version}</version>
         </dependency>
-        
-       	<!-- JPA -->
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>${org.springframework.data.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>${org.springframework.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.0-api</artifactId>
-			<version>1.0.0.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${hibernate.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javassist</groupId>
-					<artifactId>javassist</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-        
+
+        <!-- JPA -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${org.springframework.data.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.0-api</artifactId>
+            <version>1.0.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javassist</groupId>
+                    <artifactId>javassist</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <dependency>
             <groupId>taglibs</groupId>
             <artifactId>standard</artifactId>
@@ -241,67 +240,43 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
-		<dependency>
-			<groupId>org.javassist</groupId>
-			<artifactId>javassist</artifactId>
-			<version>3.15.0-GA</version>
-			<optional>true</optional>
-		</dependency>
         <dependency>
-			<groupId>aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>1.5.4</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-	    	<groupId>net.sf.spring-json</groupId>
-	    	<artifactId>spring-json</artifactId>
-	    	<version>1.3.1</version>
-	    	<exclusions>
-	    		<exclusion>
-	    			<artifactId>spring</artifactId>
-	    			<groupId>org.springframework</groupId>
-	    		</exclusion>
-	    		<exclusion>
-	    			<artifactId>spring-mock</artifactId>
-	    			<groupId>org.springframework</groupId>
-	    		</exclusion>
-	    		<exclusion>
-	    			<artifactId>servlet-api</artifactId>
-	    			<groupId>javax.servlet</groupId>
-	    		</exclusion>
-	    	</exclusions>
-		</dependency>
-		<!--<dependency>
-	    	<groupId>net.sf.sojo</groupId>
-	    	<artifactId>sojo-optional</artifactId>
-	    	<version>0.5.0</version>
-		</dependency>-->
-		<dependency>
-		    <groupId>net.sourceforge.rtftemplate</groupId>
-		    <artifactId>rtftemplate</artifactId>
-		    <version>1.0.1-b13</version>
-		    <exclusions>
-		    	<exclusion>
-		    		<artifactId>spring</artifactId>
-		    		<groupId>org.springframework</groupId>
-		    	</exclusion>
-		    	<exclusion>
-		    		<artifactId>servlet-api</artifactId>
-		    		<groupId>javax.servlet</groupId>
-		    	</exclusion>
-		    </exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tiles</groupId>
-			<artifactId>tiles-jsp</artifactId>
-			<version>2.2.2</version>
-		</dependency>
-	    <dependency>
-	        <groupId>junit</groupId>
-	        <artifactId>junit</artifactId>
-	        <version>4.10</version>
-	        <scope>test</scope>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.15.0-GA</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.5.4</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.rtftemplate</groupId>
+            <artifactId>rtftemplate</artifactId>
+            <version>1.0.1-b13</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>servlet-api</artifactId>
+                    <groupId>javax.servlet</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-jsp</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

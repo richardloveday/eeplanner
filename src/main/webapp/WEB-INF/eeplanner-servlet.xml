@@ -333,37 +333,11 @@
                 <prop key="/process-phone-email-note.htm">processPhoneEmailNoteController</prop>
                 <prop key="/delete-entity.htm">deleteEntityController</prop>
 
-				<prop key="/transfer-ajax.htm">transferAjaxController</prop>
-
                 <prop key="/generate-rtf.htm">rtfGeneratorController</prop>
                 <prop key="/template-list.htm">templateListController</prop>
                 <prop key="/template.htm">templateController</prop>
             </props>
         </property>
     </bean>
-
-
-
-    <!-- JSON view to enable ajax style json response... -->
-    <bean name="jsonView" class="org.springframework.web.servlet.view.json.JsonView"/>
-
-    <!-- transfer controller using the ajax style JSON view -->
-    <bean id="transferAjaxController" class="com.eeplanner.web.transfer.TransferAjaxController">
-        <property name="formView" value="/transfer/transferAjaxForm" />
-        <property name="successView" value="jsonView" />
-        <property name="commandClass" value="com.eeplanner.datastructures.Transfer"/>
-        <property name="commandName" value="transfer"/>
-        <property name="transferDao" ref="transferDao"/>
-    </bean>
-
-    <!-- flight controller using the ajax style JSON view -->
-    <bean id="flightAjaxController" class="com.eeplanner.web.flight.FlightAjaxController">
-        <property name="formView" value="/flight/flightAjaxForm" />
-        <property name="successView" value="jsonView" />
-        <property name="commandClass" value="com.eeplanner.datastructures.Flight"/>
-        <property name="commandName" value="flight"/>
-        <property name="flightDao" ref="flightDao"/>
-    </bean>
-
 
 </beans>
