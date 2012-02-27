@@ -272,11 +272,11 @@
 	    		</exclusion>
 	    	</exclusions>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 	    	<groupId>net.sf.sojo</groupId>
 	    	<artifactId>sojo-optional</artifactId>
 	    	<version>0.5.0</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
 		    <groupId>net.sourceforge.rtftemplate</groupId>
 		    <artifactId>rtftemplate</artifactId>
