@@ -16,7 +16,7 @@
 	<authentication-manager>
 		<authentication-provider>
 			<user-service>
-				<user name="eeadmin" password="friedcake" authorities="ROLE_SUPERVISOR, ROLE_USER, ROLE_TELLER" />
+				<user name="${EEPLANNER_SPRING_SECURITY_USER}" password="${EEPLANNER_SPRING_SECURITY_PASSWORD}" authorities="ROLE_SUPERVISOR" />
 			</user-service>
 		</authentication-provider>
 	</authentication-manager>

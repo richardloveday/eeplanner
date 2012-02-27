@@ -513,6 +513,14 @@
 	                            <input type="submit" value="contract"/>
 	                        </td>
 					    </form>
+					    <form action="<c:url value="/generate-rtf.htm" />">
+					        <input type="hidden" name="action" value="generateStaffOffer">
+                       		<input type="hidden" name="staffMemberID" value="${staffMember.ID}">
+					        <input type="hidden" name="campID" value="${camp.ID}">
+                            <td>
+	                            <input type="submit" value="offer"/>
+	                        </td>
+					    </form>
 	                    <form action="<c:url value="/process-camp-staff.htm" />">
 	                        <input type="hidden" name="action" value="removeStaffMember">
 	                        <input type="hidden" name="campID" value="${camp.ID}">

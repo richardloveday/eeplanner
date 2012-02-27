@@ -4,18 +4,6 @@
     <artifactId>eeplanner</artifactId>
     <version>0.0.3-SNAPSHOT</version>
     <packaging>war</packaging>
-
-	<!--<repositories>
-		<repository>
-			<id>central</id>
-			<name>Maven Repository Switchboard</name>
-			<layout>default</layout>
-			<url>http://spring-json.sourceforge.net/repository/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>-->
 	
 	<properties>
 		<org.springframework.version>3.1.0.RELEASE</org.springframework.version>
@@ -44,44 +32,37 @@
 				</configuration>
 		    </plugin>
             <plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-				<version>6.1.14</version>
-				<configuration>
-					<webAppConfig>
-						<contextPath>/eeplanner</contextPath>								
-					</webAppConfig>
-					<scanIntervalSeconds>3</scanIntervalSeconds>
-					<scanTargets>
-						<scanTarget>../core/</scanTarget>
-						<!--
-							You need to setup only if you want the hot deployment for
-							content of webapp. The directory src/main/java is scanned by
-							default. Alternatively, you can specify only src/.
-						-->
-						<scanTarget>src/main/webapp/</scanTarget>
-					</scanTargets>
-					<connectors>
-						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-							<port>8181</port>
-							<maxIdleTime>60000</maxIdleTime>
-						</connector>
-					</connectors>
-
-					<requestLog implementation="org.mortbay.jetty.NCSARequestLog">
-						<filename>target/yyyy_mm_dd.request.log</filename>
-						<retainDays>90</retainDays>
-						<append>true</append>
-						<extended>true</extended>
-						<logTimeZone>GMT</logTimeZone>
-					</requestLog>
-					<stopKey>stopNow</stopKey>
-					<stopPort>9999</stopPort>
-				</configuration>
-			</plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.mortbay.jetty</groupId>
+                                    <artifactId>jetty-runner</artifactId>
+                                    <version>7.4.5.v20110725</version>
+                                    <destFileName>jetty-runner.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+        </dependency>
+
         <dependency>
             <groupId>xalan</groupId>
             <artifactId>xalan</artifactId>
@@ -131,6 +112,28 @@
         <!-- Spring Dependencies -->
         <dependency>
             <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
@@ -144,6 +147,11 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
@@ -159,7 +167,10 @@
     		<artifactId>spring-test</artifactId>
     		<version>${org.springframework.version}</version>
     		<scope>test</scope>
-		</dependency>	
+		</dependency>
+
+
+
 		
 		<!-- Spring Security Dependencies -->	
         <dependency>
@@ -229,13 +240,6 @@
             <version>5.1.12</version>
             <type>jar</type>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>tomcat</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>5.5.23</version>
-            <type>jar</type>
-            <scope>provided</scope>
         </dependency>
 		<dependency>
 			<groupId>org.javassist</groupId>

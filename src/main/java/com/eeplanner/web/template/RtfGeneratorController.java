@@ -1,5 +1,6 @@
 package com.eeplanner.web.template;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,6 +8,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.joda.time.DateTime;
+import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
@@ -30,13 +33,26 @@ public class RtfGeneratorController extends MultiActionController {
 
 	public ModelAndView generateStaffContract(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		return createCampStaffBasedTemplate(request, response, TemplateType.Contract_of_a_staff_member);
+	}
+	
+	public ModelAndView generateStaffOffer(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		return createCampStaffBasedTemplate(request, response, TemplateType.Offer_Letter);
+	}
+
+	private ModelAndView createCampStaffBasedTemplate(
+			HttpServletRequest request, HttpServletResponse response, TemplateType templateType)
+			throws ServletRequestBindingException, Exception, IOException {
+		
 		int staffId = ServletRequestUtils.getIntParameter(request, "staffMemberID");
 		int campId = ServletRequestUtils.getIntParameter(request, "campID");
 		StaffMember staff = staffDao.getStaffMemberByID(staffId);
 		Camp camp = campDao.getCampByID(campId);
 		CampStaff campStaff = campDao.getCampStaff(campId, staffId);
 
-		if(campStaff.getContractDate()==null){
+		if(templateType == TemplateType.Contract_of_a_staff_member 
+				&& campStaff.getContractDate()==null){
 			campStaff.setContractDate(new Date());
 			campDao.editCampStaffMember(campStaff);
 		}
@@ -46,12 +62,13 @@ public class RtfGeneratorController extends MultiActionController {
 		sourceObjects.put("camp", camp);
 		sourceObjects.put("campStaff", campStaff);
 		sourceObjects.put("currentDate", new Date());
+		sourceObjects.put("currentYear", new DateTime().toString("YYYY"));
 
-		String rtf = documentService.createRtfDocument(TemplateType.Contract_of_a_staff_member, sourceObjects);
+		String rtf = documentService.createRtfDocument(templateType, sourceObjects);
 
 		// Write to response
 		response.setContentType("application/rtf");
-		response.setHeader("content-disposition", "attachment;filename=Contract-" + staff.getContact().getFirstNames()
+		response.setHeader("content-disposition", "attachment;filename=" + templateType.name() + "-" + staff.getContact().getFirstNames()
 				+ staff.getContact().getSecondName() + ".rtf");
 		response.getWriter().print(rtf);
 		response.flushBuffer();
