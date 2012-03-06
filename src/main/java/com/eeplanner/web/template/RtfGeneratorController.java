@@ -61,17 +61,22 @@ public class RtfGeneratorController extends MultiActionController {
 		Camp camp = campDao.getCampByID(campId);
 		CampStaff campStaff = campDao.getCampStaff(campId, staffId);
 
+		Map<String, Object> sourceObjects = new HashMap<String, Object>();
+		
 		if((templateType == TemplateType.Contract_of_a_staff_member) 
 				&& campStaff.getContractDate()==null){
 			campStaff.setContractDate(new Date());
 			campDao.editCampStaffMember(campStaff);
+			
+			if (campStaff.getContractDate() != null) {
+				sourceObjects.put("campStaffContractDate", DateFormatUtils.format(campStaff.getContractDate(), "dd MMMM yyyy"));
+			}
 		}
 		
 		if(campStaff.getJob().equalsIgnoreCase("Coordinator")){
 			templateType = TemplateType.Contract_of_a_coordinator;
 		}
-
-		Map<String, Object> sourceObjects = new HashMap<String, Object>();
+		
 		campStaff.setJob(StringUtils.capitalize(campStaff.getJob()));
 		
 		sourceObjects.put("staff", staff);
@@ -79,7 +84,7 @@ public class RtfGeneratorController extends MultiActionController {
 		sourceObjects.put("campStaff", campStaff);
 		sourceObjects.put("campStartDate", DateFormatUtils.format(camp.getStart(), "dd-MM-yyyy"));
 		sourceObjects.put("campEndDate", DateFormatUtils.format(camp.getEnd(), "dd-MM-yyyy"));
-		sourceObjects.put("campStaffContractDate", DateFormatUtils.format(campStaff.getContractDate(), "dd MMMM yyyy"));
+		
 		sourceObjects.put("currentDate", new Date());
 		sourceObjects.put("currentYear", new DateTime().toString("YYYY"));
 
