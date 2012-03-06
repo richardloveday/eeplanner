@@ -3,11 +3,14 @@ package com.eeplanner.web.template;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.joda.time.DateTime;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
@@ -15,10 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.eeplanner.dao.camp.CampDao;
+import com.eeplanner.dao.flight.FlightDao;
 import com.eeplanner.dao.staff.StaffDao;
 import com.eeplanner.dao.template.TemplateDao;
 import com.eeplanner.datastructures.Camp;
 import com.eeplanner.datastructures.CampStaff;
+import com.eeplanner.datastructures.Flight;
 import com.eeplanner.datastructures.StaffMember;
 import com.eeplanner.datastructures.Template;
 import com.eeplanner.datastructures.TemplateType;
@@ -30,15 +35,20 @@ public class RtfGeneratorController extends MultiActionController {
 	private StaffDao staffDao;
 	private TemplateDao templateDao;
 	private CampDao campDao;
+	private FlightDao flightDao;
 
-	public ModelAndView generateStaffContract(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView generateStaffContract(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
-		return createCampStaffBasedTemplate(request, response, TemplateType.Contract_of_a_staff_member);
+		return createCampStaffBasedTemplate(request, response,
+				TemplateType.Contract_of_a_staff_member);
 	}
-	
-	public ModelAndView generateStaffOffer(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		return createCampStaffBasedTemplate(request, response, TemplateType.Offer_Letter);
+	public ModelAndView generateStaffOffer(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		return createCampStaffBasedTemplate(request, response,
+				TemplateType.Offer_Letter);
 	}
 
 	private ModelAndView createCampStaffBasedTemplate(
@@ -51,16 +61,25 @@ public class RtfGeneratorController extends MultiActionController {
 		Camp camp = campDao.getCampByID(campId);
 		CampStaff campStaff = campDao.getCampStaff(campId, staffId);
 
-		if(templateType == TemplateType.Contract_of_a_staff_member 
+		if((templateType == TemplateType.Contract_of_a_staff_member) 
 				&& campStaff.getContractDate()==null){
 			campStaff.setContractDate(new Date());
 			campDao.editCampStaffMember(campStaff);
 		}
+		
+		if(campStaff.getJob().equalsIgnoreCase("Coordinator")){
+			templateType = TemplateType.Contract_of_a_coordinator;
+		}
 
 		Map<String, Object> sourceObjects = new HashMap<String, Object>();
+		campStaff.setJob(StringUtils.capitalize(campStaff.getJob()));
+		
 		sourceObjects.put("staff", staff);
 		sourceObjects.put("camp", camp);
 		sourceObjects.put("campStaff", campStaff);
+		sourceObjects.put("campStartDate", DateFormatUtils.format(camp.getStart(), "dd-MM-yyyy"));
+		sourceObjects.put("campEndDate", DateFormatUtils.format(camp.getEnd(), "dd-MM-yyyy"));
+		sourceObjects.put("campStaffContractDate", DateFormatUtils.format(campStaff.getContractDate(), "dd MMMM yyyy"));
 		sourceObjects.put("currentDate", new Date());
 		sourceObjects.put("currentYear", new DateTime().toString("YYYY"));
 
@@ -76,15 +95,44 @@ public class RtfGeneratorController extends MultiActionController {
 		return null;
 	}
 
-	public ModelAndView viewTemplateDocument(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView generateFlightInfo(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		int flightId = ServletRequestUtils.getIntParameter(request, "id");
+		Flight flight = flightDao.getFlightByID(flightId);
+		List<StaffMember> staffMembers = staffDao.getStaffMembersForFlight(
+				flight, "secondName asc");
+
+		Map<String, Object> sourceObjects = new HashMap<String, Object>();
+		sourceObjects.put("flight", flight);
+		sourceObjects.put("staffMembers", staffMembers);
+		sourceObjects.put("currentDate", new Date());
+		sourceObjects.put("currentYear", new DateTime().toString("YYYY"));
+
+		String rtf = documentService.createRtfDocument(
+				TemplateType.Flight_data, sourceObjects);
+
+		// Write to response
+		response.setContentType("application/rtf");
+		response.setHeader("content-disposition",
+				"attachment;filename=" + TemplateType.Flight_data.name() + "-"
+						+ flight.getFlightNumber() + ".rtf");
+		response.getWriter().print(rtf);
+		response.flushBuffer();
+
+		return null;
+	}
+
+	public ModelAndView viewTemplateDocument(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
 		int id = ServletRequestUtils.getIntParameter(request, "id");
 		Template template = templateDao.getTemplateById(id);
 
-
 		// Write to response
 		response.setContentType("application/rtf");
-		response.setHeader("content-disposition", "attachment;filename=" + template.getType() + ".rtf");
+		response.setHeader("content-disposition", "attachment;filename="
+				+ template.getType() + ".rtf");
 		response.getWriter().print(template.getText());
 		response.flushBuffer();
 
@@ -105,6 +153,10 @@ public class RtfGeneratorController extends MultiActionController {
 
 	public void setTemplateDao(TemplateDao templateDao) {
 		this.templateDao = templateDao;
+	}
+
+	public void setFlightDao(FlightDao flightDao) {
+		this.flightDao = flightDao;
 	}
 
 }

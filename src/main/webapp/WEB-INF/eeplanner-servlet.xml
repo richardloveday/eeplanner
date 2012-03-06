@@ -215,6 +215,7 @@
     	<property name="templateDao" ref="templateDao"/>
         <property name="staffDao" ref="staffDao"/>
         <property name="campDao" ref="campDao"/>
+        <property name="flightDao" ref="flightDao"/>
         <property name="methodNameResolver">
             <bean class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
                 <property name="paramName" value="action"/>

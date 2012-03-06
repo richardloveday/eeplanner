@@ -27,7 +27,7 @@ public class RtfDocumentService implements DocumentService {
 		RTFTemplateBuilder builder = RTFTemplateBuilder.newRTFTemplateBuilder();
 
 		// 2. Get RTFtemplate with default Implementation of template engine (Freemarker)
-		RTFTemplate rtfTemplate = builder.newRTFTemplate(RTFTemplateBuilder.DEFAULT_FREEMARKER_RTFTEMPLATE);
+		RTFTemplate rtfTemplate = builder.newRTFTemplate();
 
 		// 3. Set the RTF model source
 		StringReader reader = new StringReader(templateDao.getTemplateByType(documentType.name()).getText());

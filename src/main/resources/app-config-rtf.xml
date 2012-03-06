@@ -14,11 +14,18 @@
 		 ********************************************************************** -->
 
 	<!-- Defautlt RTFTemplate implementation with freemarker template engine -->
-	<bean id="ftlRTFTemplate" class="net.sourceforge.rtf.RTFTemplate" >
+	<bean id="ftlRTFTemplate" class="net.sourceforge.rtf.RTFTemplate" scope="prototype">
 		<property name="parser" ref="defaultRTFParser" />
 		<property name="transformer" ref="ftlTransformer" />
 		<property name="templateEngine" ref="ftl" />
 	</bean>
+	
+	<!-- Defautlt RTFTemplate implementation with velocity template engine  --> 
+     <bean id="vmRTFTemplate" class="net.sourceforge.rtf.RTFTemplate" scope="prototype" >                     
+             <property name="parser" ref="defaultRTFParser" />   
+             <property name="transformer" ref="vmTransformer" />                      
+             <property name="templateEngine" ref="vm" />                     
+     </bean>
 
 	<!-- Defautlt RTFDocument Parser -->
 	<bean id="defaultRTFParser" class="net.sourceforge.rtf.handler.RTFDocumentHandler">
@@ -30,8 +37,7 @@
            ********************************************************************** -->
 
 	<!-- Freemarker template engine -->
-	<bean id="ftl"
-		class="net.sourceforge.rtf.template.freemarker.FreemarkerTemplateEngineImpl" scope="prototype">
+	<bean id="ftl" class="net.sourceforge.rtf.template.freemarker.FreemarkerTemplateEngineImpl" scope="prototype">
 		<property name="freemarkerConfiguration" ref="ftlConfiguration" />
 	</bean>
 
@@ -43,5 +49,21 @@
 	<bean id="ftlTransformer"
 		class="net.sourceforge.rtf.template.freemarker.RTFFreemarkerTransformerImpl">
 	</bean> 
+	
+	<!-- **********************************************************************
+           *********************  VELOCITY TEMPLATE ENGINE  *********************
+           ********************************************************************** -->   
+  
+	<bean id="vm" class="net.sourceforge.rtf.template.velocity.VelocityTemplateEngineImpl" scope="prototype">
+		<property name="velocityEngine" ref="vmEngine" />
+	</bean>
+
+	<!-- VelocityEngine Configuration -->
+	<bean id="vmEngine" class="org.apache.velocity.app.VelocityEngine">
+	</bean>
+
+	<!-- Velocity RTF Document Transformer -->
+	<bean id="vmTransformer" class="net.sourceforge.rtf.template.velocity.RTFVelocityTransformerImpl">
+	</bean>  
    
 </beans>

@@ -232,6 +232,16 @@
 		    <jsp:param name="id" value="${flight.ID}"/>
 		</jsp:include>
 	</div>
+	<div class="marginTop marginLeft left">
+		<div class="blueborder">
+			<h2 class="marginAll">Flight document</h2>            
+			<form action="<c:url value="/generate-rtf.htm" />">
+				<input type="hidden" name="action" value="generateFlightInfo">
+	            <input type="hidden" name="id" value="${flight.ID}"/>
+	            <input type="submit" value="generate"/>
+	    	</form>
+		</div>
+	</div>
 	
 </div>
 
