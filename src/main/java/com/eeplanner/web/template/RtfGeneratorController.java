@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.eeplanner.dao.camp.CampDao;
+import com.eeplanner.dao.contact.ContactDao;
 import com.eeplanner.dao.flight.FlightDao;
 import com.eeplanner.dao.staff.StaffDao;
 import com.eeplanner.dao.template.TemplateDao;
@@ -36,6 +37,7 @@ public class RtfGeneratorController extends MultiActionController {
 	private TemplateDao templateDao;
 	private CampDao campDao;
 	private FlightDao flightDao;
+	private ContactDao contactDao;
 
 	public ModelAndView generateStaffContract(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -60,7 +62,9 @@ public class RtfGeneratorController extends MultiActionController {
 		StaffMember staff = staffDao.getStaffMemberByID(staffId);
 		Camp camp = campDao.getCampByID(campId);
 		CampStaff campStaff = campDao.getCampStaff(campId, staffId);
-
+		if (camp != null && camp.getContactID() > 0) {
+			camp.setContact(contactDao.getContactByID(camp.getContactID()));
+		}
 		Map<String, Object> sourceObjects = new HashMap<String, Object>();
 		
 		if((templateType == TemplateType.Contract_of_a_staff_member) 
@@ -162,6 +166,10 @@ public class RtfGeneratorController extends MultiActionController {
 
 	public void setFlightDao(FlightDao flightDao) {
 		this.flightDao = flightDao;
+	}
+
+	public void setContactDao(ContactDao contactDao) {
+		this.contactDao = contactDao;
 	}
 
 }
