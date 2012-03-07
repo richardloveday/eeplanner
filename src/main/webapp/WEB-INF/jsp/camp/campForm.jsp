@@ -580,6 +580,17 @@
 			</jsp:include>
 		</div>
 		
+		<div class="marginTop marginLeft left">
+			<div class="blueborder">
+				<h2 class="marginAll">Staff profiles document</h2>            
+				<form action="<c:url value="/generate-rtf.htm" />">
+					<input type="hidden" name="action" value="generateStaffProfilesForACamp">
+		            <input type="hidden" name="id" value="${camp.ID}"/>
+		            <input type="submit" value="generate"/>
+		    	</form>
+			</div>
+		</div>
+		
 	</div>
 </div>
 <div class="clear"></div>

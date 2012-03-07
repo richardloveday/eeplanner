@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.joda.time.DateTime;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,11 +21,14 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import com.eeplanner.dao.camp.CampDao;
 import com.eeplanner.dao.contact.ContactDao;
 import com.eeplanner.dao.flight.FlightDao;
+import com.eeplanner.dao.phone.PhoneDao;
 import com.eeplanner.dao.staff.StaffDao;
 import com.eeplanner.dao.template.TemplateDao;
 import com.eeplanner.datastructures.Camp;
 import com.eeplanner.datastructures.CampStaff;
+import com.eeplanner.datastructures.Contact;
 import com.eeplanner.datastructures.Flight;
+import com.eeplanner.datastructures.Phone;
 import com.eeplanner.datastructures.StaffMember;
 import com.eeplanner.datastructures.Template;
 import com.eeplanner.datastructures.TemplateType;
@@ -38,6 +42,7 @@ public class RtfGeneratorController extends MultiActionController {
 	private CampDao campDao;
 	private FlightDao flightDao;
 	private ContactDao contactDao;
+	private PhoneDao phoneDao;
 
 	public ModelAndView generateStaffContract(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -103,7 +108,7 @@ public class RtfGeneratorController extends MultiActionController {
 
 		return null;
 	}
-
+	
 	public ModelAndView generateFlightInfo(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
@@ -118,8 +123,7 @@ public class RtfGeneratorController extends MultiActionController {
 		sourceObjects.put("currentDate", new Date());
 		sourceObjects.put("currentYear", new DateTime().toString("YYYY"));
 
-		String rtf = documentService.createRtfDocument(
-				TemplateType.Flight_data, sourceObjects);
+		String rtf = documentService.createRtfDocument(TemplateType.Flight_data, sourceObjects);
 
 		// Write to response
 		response.setContentType("application/rtf");
@@ -129,6 +133,52 @@ public class RtfGeneratorController extends MultiActionController {
 		response.getWriter().print(rtf);
 		response.flushBuffer();
 
+		return null;
+	}
+	
+	public ModelAndView generateStaffProfilesForACamp(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		int campId = ServletRequestUtils.getIntParameter(request, "id");
+		Camp camp = campDao.getCampByID(campId);
+		List<StaffMember> staffMembers = staffDao.getStaffMembersForCamp(camp, "secondName asc");
+
+		Map<String, Object> sourceObjects = new HashMap<String, Object>();
+		if (camp != null && camp.getContactID() > 0) {
+			Contact campContact = contactDao.getContactByID(camp.getContactID());
+			camp.setContact(campContact);
+			if(campContact!=null){
+				List<Phone> phoneNumbers = phoneDao.getPhoneNumberListByContactID(campContact.getID());
+				sourceObjects.put("contactMobile", findMobileNumber(phoneNumbers));
+			}
+		}
+		sourceObjects.put("camp", camp);
+		sourceObjects.put("staffMembers", staffMembers);
+		sourceObjects.put("currentDate", new Date());
+		sourceObjects.put("currentYear", new DateTime().toString("YYYY"));
+
+		String rtf = documentService.createRtfDocument(TemplateType.Staff_profiles_for_a_camp, sourceObjects);
+
+		// Write to response
+		response.setContentType("application/rtf");
+		response.setHeader("content-disposition",
+				"attachment;filename=" + TemplateType.Staff_profiles_for_a_camp.name() + "-"
+						+ camp.getName() + ".rtf");
+		response.getWriter().print(rtf);
+		response.flushBuffer();
+
+		return null;
+	}
+
+	private Object findMobileNumber(List<Phone> phoneNumbers) {
+		if(!CollectionUtils.isEmpty(phoneNumbers)){
+			for(Phone phone : phoneNumbers){
+				if(StringUtils.contains(phone.getName(), "mobile")) {
+					return phone.getNumber();
+				}
+			}
+			return phoneNumbers.get(0).getNumber();
+		}
 		return null;
 	}
 
@@ -170,6 +220,10 @@ public class RtfGeneratorController extends MultiActionController {
 
 	public void setContactDao(ContactDao contactDao) {
 		this.contactDao = contactDao;
+	}
+
+	public void setPhoneDao(PhoneDao phoneDao) {
+		this.phoneDao = phoneDao;
 	}
 
 }
