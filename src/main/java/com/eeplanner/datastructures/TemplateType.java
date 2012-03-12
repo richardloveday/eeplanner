@@ -9,6 +9,7 @@ public enum TemplateType {
 	Staff_profiles_for_a_camp,
 	Host_family_profiles_for_a_camp,
 	List_staff_on_a_camp,
-	Flight_data;
+	Flight_data,
+	Staff_data_form;
 	
 }

@@ -531,6 +531,18 @@
 			</p>
 		</div>
 	</div>
+	
+	<div class="marginTop marginLeft left">
+		<div class="blueborder">
+			<h2 class="marginAll">Staff Data Form</h2>            
+			<form action="<c:url value="/generate-rtf.htm" />">
+				<input type="hidden" name="action" value="generateStaffDataForm">
+	            <input type="hidden" name="id" value="${staffMember.ID}"/>
+	            <input type="submit" value="generate"/>
+	    	</form>
+		</div>
+	</div>
+	
 </div>
 
 <jsp:include page="../wireframe/footer.jsp"/>

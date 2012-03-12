@@ -169,6 +169,31 @@ public class RtfGeneratorController extends MultiActionController {
 
 		return null;
 	}
+	
+	public ModelAndView generateStaffDataForm(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		int staffId = ServletRequestUtils.getIntParameter(request, "id");
+		StaffMember staff = staffDao.getStaffMemberByID(staffId);
+
+		Map<String, Object> sourceObjects = new HashMap<String, Object>();
+		sourceObjects.put("staff", staff);
+		sourceObjects.put("currentDate", new Date());
+		sourceObjects.put("currentYear", new DateTime().toString("YYYY"));
+
+		String rtf = documentService.createRtfDocument(TemplateType.Staff_data_form, sourceObjects);
+
+		// Write to response
+		response.setContentType("application/rtf");
+		response.setHeader("content-disposition",
+				"attachment;filename=" + TemplateType.Staff_data_form.name() + "-"
+						+ staff.getContact().getFirstNames() + staff.getContact().getSecondName() + ".rtf");
+		response.getWriter().print(rtf);
+		response.flushBuffer();
+
+		return null;
+	}
+
 
 	private Object findMobileNumber(List<Phone> phoneNumbers) {
 		if(!CollectionUtils.isEmpty(phoneNumbers)){
