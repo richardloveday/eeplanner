@@ -14,7 +14,7 @@ $(document).ready(function() {
     });
 
     $(document).ready(function() {
-        $(".dateselect").datepicker({ buttonImage: 'http://eeplanner.cicoders.com/i/icon_date_picker.jpg', buttonImageOnly: true, showOn: 'button', buttonText: "select", dateFormat: 'dd/mm/yy' });
+        $(".dateselect").datepicker({ buttonImage: '/i/icon_date_picker.jpg', buttonImageOnly: true, showOn: 'button', buttonText: "select", dateFormat: 'dd/mm/yy' });
     });
 
     $('#addPhoneNumber').click(function() {
