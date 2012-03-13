@@ -218,6 +218,9 @@
         <property name="flightDao" ref="flightDao"/>
         <property name="contactDao" ref="contactDao"/>
         <property name="phoneDao" ref="phoneDao"/>
+        <property name="emailDao" ref="emailDao"/>
+        <property name="noteDao" ref="noteDao"/>
+        <property name="staffAvailabilityDao" ref="staffAvailabilityDao"/>
         <property name="methodNameResolver">
             <bean class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
                 <property name="paramName" value="action"/>

@@ -20,9 +20,12 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.eeplanner.dao.camp.CampDao;
 import com.eeplanner.dao.contact.ContactDao;
+import com.eeplanner.dao.email.EmailDao;
 import com.eeplanner.dao.flight.FlightDao;
+import com.eeplanner.dao.note.NoteDao;
 import com.eeplanner.dao.phone.PhoneDao;
 import com.eeplanner.dao.staff.StaffDao;
+import com.eeplanner.dao.staffavailability.StaffAvailabilityDao;
 import com.eeplanner.dao.template.TemplateDao;
 import com.eeplanner.datastructures.Camp;
 import com.eeplanner.datastructures.CampStaff;
@@ -38,11 +41,14 @@ public class RtfGeneratorController extends MultiActionController {
 
 	private DocumentService documentService;
 	private StaffDao staffDao;
+	protected StaffAvailabilityDao staffAvailabilityDao;
 	private TemplateDao templateDao;
 	private CampDao campDao;
 	private FlightDao flightDao;
 	private ContactDao contactDao;
 	private PhoneDao phoneDao;
+	protected EmailDao emailDao;
+    protected NoteDao noteDao;
 
 	public ModelAndView generateStaffContract(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -175,6 +181,10 @@ public class RtfGeneratorController extends MultiActionController {
 
 		int staffId = ServletRequestUtils.getIntParameter(request, "id");
 		StaffMember staff = staffDao.getStaffMemberByID(staffId);
+		if (staff != null) {
+			staff.setStaffAvailability(staffAvailabilityDao.getStaffAvailabilityByIDAndYear(staff.getID(), new DateTime().getYear()));
+			staff.setContact(getContact(staff));
+        }
 
 		Map<String, Object> sourceObjects = new HashMap<String, Object>();
 		sourceObjects.put("staff", staff);
@@ -195,6 +205,16 @@ public class RtfGeneratorController extends MultiActionController {
 	}
 
 
+	protected Contact getContact(StaffMember staffMember) throws Exception {
+		Contact contact = contactDao.getContactByID(staffMember.getContactID());
+		if(contact!=null) {
+			contact.setPhoneNumbers(phoneDao.getPhoneNumberListByContactID(contact.getID()));
+			contact.setEmails(emailDao.getEmailListByContactID(contact.getID()));
+			contact.setNotes(noteDao.getNotesListByContactID(contact.getID()));
+		}
+		return contact;
+	}
+	
 	private Object findMobileNumber(List<Phone> phoneNumbers) {
 		if(!CollectionUtils.isEmpty(phoneNumbers)){
 			for(Phone phone : phoneNumbers){
@@ -250,5 +270,18 @@ public class RtfGeneratorController extends MultiActionController {
 	public void setPhoneDao(PhoneDao phoneDao) {
 		this.phoneDao = phoneDao;
 	}
+
+	public void setStaffAvailabilityDao(StaffAvailabilityDao staffAvailabilityDao) {
+		this.staffAvailabilityDao = staffAvailabilityDao;
+	}
+
+	public void setEmailDao(EmailDao emailDao) {
+		this.emailDao = emailDao;
+	}
+
+	public void setNoteDao(NoteDao noteDao) {
+		this.noteDao = noteDao;
+	}
+	
 
 }
