@@ -33,7 +33,7 @@
 				select * from (
 
           			select c.ID as 'campID', null as 'flightID', s.ID as 'staffMemberID', scon.ID as 'staffMemberContactID', scon.firstNames as 'staffMemberFirstNames',
-				                scon.secondName as 'staffMemberSecondName', null as 'transferNeeded', null as 'infoSent',
+				                scon.secondName as 'staffMemberSecondName',
 				                c.name as 'campName', c.start, c.end, ccon.orgname as 'campContactOrgName', null as 'flightType',
 				                null as 'outboundArrival', null as 'outboundDeparture', null as 'returnArrival', null as 'returnDeparture',
 				                null as 'destination', null as 'flightNumber', s.deleted, s.parentID, s.hash 
@@ -52,7 +52,7 @@
 				  	union
 
           			select c.ID as 'campID', f.ID as 'flightID', s.ID as 'staffMemberID', scon.ID as 'staffMemberContactID', scon.firstNames as 'staffMemberFirstNames',
-				                scon.secondName as 'staffMemberSecondName', fs.transferNeeded, fs.infoSent, c.name as 'campName',
+				                scon.secondName as 'staffMemberSecondName', c.name as 'campName',
 				                c.start, c.end, ccon.orgname as 'campContactOrgName', f.type as 'flightType', f.outboundArrival,
 				                f.outboundDeparture, f.returnArrival, f.returnDeparture, f.destination, f.flightNumber, s.deleted, s.parentID, s.hash 
 
@@ -331,7 +331,7 @@
                 s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
                 s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash,
                 c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
-                c.add3, c.add4, c.postCode, c.dob, c.sex, fs.infoSent, fs.transferNeeded, s.deleted
+                c.add3, c.add4, c.postCode, c.dob, c.sex, s.deleted
 
                 from eeplanner.staff s
                 inner join eeplanner.contact c on s.contactID = c.ID
@@ -351,7 +351,7 @@
                 s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
                 s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash,
                 c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
-                c.add3, c.add4, c.postCode, c.dob, c.sex, fs.infoSent, fs.transferNeeded, s.deleted
+                c.add3, c.add4, c.postCode, c.dob, c.sex, s.deleted
 
                 from eeplanner.staff s
                 inner join eeplanner.contact c on s.contactID = c.ID

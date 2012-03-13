@@ -143,26 +143,9 @@
             <table>
                 <c:forEach items="${flight.staffMembers}" var="staffMember">
                     <tr>
-                        <form action="<c:url value="/process-flight-staff.htm" />">
-
-                            <input type="hidden" name="action" value="editStaffMember">
-                            <input type="hidden" name="flightID" value="${flight.ID}">
-                            <input type="hidden" name="staffMemberID" value="${staffMember.ID}">
-                            <td width="100px">
-                                <a href="<c:url value="/staff-member.htm"/>?id=${staffMember.ID}">${staffMember.contact.secondName}, ${staffMember.contact.firstNames}</a>
-                            </td>
-                            <td>
-                                info sent? <input type="checkbox" name="infoSent"
-                                                  value="infoSent" ${staffMember.infoSent?'CHECKED':''}/>
-                            </td>
-                            <td>
-                                transfer needed? <input type="checkbox" name="transferNeeded"
-                                                  value="transferNeeded" ${staffMember.transferNeeded?'CHECKED':''}/>
-                            </td>
-                            <td>
-                                <input type="submit" value="save">
-                            </td>
-                        </form>
+                        <td width="100px">
+                            <a href="<c:url value="/staff-member.htm"/>?id=${staffMember.ID}">${staffMember.contact.secondName}, ${staffMember.contact.firstNames}</a>
+                        </td>
                         <form action="<c:url value="/process-flight-staff.htm" />">
                             <input type="hidden" name="action" value="removeStaffMember">
                             <input type="hidden" name="flightID" value="${flight.ID}">

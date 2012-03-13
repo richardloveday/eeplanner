@@ -44,8 +44,6 @@ public class StaffMember {
     private String dietary;
     
     private String job;
-    private boolean infoSent;
-    private boolean transferNeeded;
     private Contact contact = new Contact();
     private Camp camp = new Camp();
     
@@ -69,20 +67,6 @@ public class StaffMember {
 
     public StaffMember(){}    
     
-    public StaffMember(int iD, int campID, boolean accepted, boolean offered,
-			String job, boolean infoSent, Contact contact, Camp camp) {
-		this.ID = iD;
-		this.campID = campID;
-		this.accepted = accepted;
-		this.offered = offered;
-		this.job = job;
-		this.infoSent = infoSent;
-		this.contact = contact;
-		this.camp = camp;
-	}
-
-
-
 	public StaffMember(int ID, int campID, boolean accepted, boolean offered, String job, Contact contact, Camp camp) {
         this.ID = ID;
         this.campID = campID;
@@ -137,14 +121,6 @@ public class StaffMember {
 		this.deleted = deleted;
 	}
     
-	public boolean isTransferNeeded() {
-        return transferNeeded;
-    }
-
-    public void setTransferNeeded(boolean transferNeeded) {
-        this.transferNeeded = transferNeeded;
-    }
-
     public boolean isExisting() {
         return existing;
     }
@@ -216,18 +192,6 @@ public class StaffMember {
     public void setActivityleader(boolean activityleader) {
         this.activityleader = activityleader;
     }
-
-    public boolean isInfoSent() {
-		return infoSent;
-	}
-
-
-
-	public void setInfoSent(boolean infoSent) {
-		this.infoSent = infoSent;
-	}
-
-
 
 	public String getJob() {
 		return job;

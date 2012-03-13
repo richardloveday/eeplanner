@@ -86,24 +86,6 @@ public class FlightDaoImpl implements FlightDao {
         }
     }
 
-
-    public boolean editFlightCamp(int flightID, int campID) {
-        try {
-            Map params = new HashMap();
-            params.put("flightID", flightID);
-            params.put("campID", campID);
-
-            String qry = sqlQueries.get("editFlightCamp");
-            this.namedParameterJdbcTemplate.update(qry, params);
-
-            return true;
-
-        } catch (DataAccessException e) {
-            log.fatal(e.getMessage());
-            return false;
-        }
-    }
-
     public boolean addFlightCamp(int flightID, int campID) {
 
         try {
@@ -140,29 +122,6 @@ public class FlightDaoImpl implements FlightDao {
         }
     }
     
-    
-    
-    
-    
-    public boolean editFlightStaffMember(int flightID, int staffMemberID, boolean infoSent, boolean transferNeeded) {
-        try {
-            Map params = new HashMap();
-            params.put("flightID", flightID);
-            params.put("staffMemberID", staffMemberID);
-            params.put("infoSent", infoSent);
-            params.put("transferNeeded", transferNeeded);
-
-            String qry = sqlQueries.get("editFlightStaffMember");
-            this.namedParameterJdbcTemplate.update(qry, params);
-
-            return true;
-
-        } catch (DataAccessException e) {
-            log.fatal(e.getMessage());
-            return false;
-        }
-    }
-
     public boolean addFlightStaffMember(int flightID, int staffMemberID) {
 
         try {

@@ -127,14 +127,6 @@
                 ;
             </value>
         </entry>
-        <entry key="editFlightCamp">
-            <value>
-                update eeplanner.flightcamp set
-                infoSent = :infoSent
-                where campID = :campID and flightID = :flightID
-                ;
-            </value>
-        </entry>
         <entry key="addFlightStaffMember">
             <value>
                 insert into eeplanner.flightstaff (flightID, staffID)
@@ -145,15 +137,6 @@
         <entry key="removeFlightStaffMember">
             <value>
                 delete from eeplanner.flightstaff
-                where staffID = :staffMemberID and flightID = :flightID
-                ;
-            </value>
-        </entry>
-        <entry key="editFlightStaffMember">
-            <value>
-                update eeplanner.flightstaff set
-                infoSent = :infoSent,
-                transferNeeded = :transferNeeded
                 where staffID = :staffMemberID and flightID = :flightID
                 ;
             </value>

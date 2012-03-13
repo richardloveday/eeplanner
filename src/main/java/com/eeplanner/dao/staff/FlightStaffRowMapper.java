@@ -33,8 +33,6 @@ public class FlightStaffRowMapper implements RowMapper{
         staffMember.setArchivePassword(rs.getString("archivePassword"));
         staffMember.setExisting(rs.getBoolean("existing"));
         staffMember.setStatus(rs.getString("status"));
-        staffMember.setInfoSent(rs.getBoolean("infoSent"));
-        staffMember.setTransferNeeded(rs.getBoolean("transferNeeded"));
         staffMember.setDeleted(rs.getBoolean("deleted"));
 
         Contact contact = new Contact();

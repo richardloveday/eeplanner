@@ -29,9 +29,6 @@ public class StaffSearchRowMapper implements RowMapper {
         data.getStaffMember().getContact().setFirstNames(rs.getString("staffMemberFirstNames"));
         data.getStaffMember().getContact().setSecondName(rs.getString("staffMemberSecondName"));
 
-        data.getStaffMember().setTransferNeeded(rs.getBoolean("transferNeeded"));
-        data.getStaffMember().setInfoSent(rs.getBoolean("infoSent"));
-
         data.getCamp().setName(rs.getString("campName"));
         data.getCamp().setStart(rs.getTimestamp("start"));
         data.getCamp().setEnd(rs.getTimestamp("end"));

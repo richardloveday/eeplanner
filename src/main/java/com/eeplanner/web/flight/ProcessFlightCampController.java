@@ -37,16 +37,4 @@ public class ProcessFlightCampController  extends MultiActionController {
 	        return new ModelAndView("redirect:/flight.htm?id="+flightID);
 	    }
 	    
-	    public ModelAndView editCamp(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	        int flightID = 0;
-	        if (ServletRequestUtils.getIntParameter(request, "campID") != null) {
-	            int campID = ServletRequestUtils.getIntParameter(request, "campID");
-	            flightID = ServletRequestUtils.getIntParameter(request, "flightID");
-	            boolean infoSent = false;
-	            if(request.getParameter("infoSent")!=null) infoSent = true;
-	            flightDao.editFlightCamp(flightID, campID);
-	        }
-	        return new ModelAndView("redirect:/flight.htm?id="+flightID);
-	    }
-
 }

@@ -37,18 +37,4 @@ public class ProcessFlightStaffController extends MultiActionController {
         return new ModelAndView("redirect:/flight.htm?id="+flightID);
     }
     
-    public ModelAndView editStaffMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        int flightID = 0;
-        if (ServletRequestUtils.getIntParameter(request, "staffMemberID") != null) {
-            int staffMemberID = ServletRequestUtils.getIntParameter(request, "staffMemberID");
-            flightID = ServletRequestUtils.getIntParameter(request, "flightID");
-            boolean infoSent = false;
-            if(request.getParameter("infoSent")!=null) infoSent = true;
-            boolean transferNeeded = false;
-            if(request.getParameter("transferNeeded")!=null) transferNeeded = true;
-            flightDao.editFlightStaffMember(flightID, staffMemberID, infoSent, transferNeeded);
-        }
-        return new ModelAndView("redirect:/flight.htm?id="+flightID);
-    }
-
 }
