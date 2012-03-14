@@ -173,6 +173,7 @@
 
     <bean id="flightListController" class="com.eeplanner.web.flight.FlightListController">
         <property name="flightDao" ref="flightDao"/>
+        <property name="staffDao" ref="staffDao"/>
         <property name="viewName" value="/flight/flightList"/>
         <property name="cacheSeconds" value="0"/>
     </bean>

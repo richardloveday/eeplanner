@@ -41,15 +41,19 @@
     	<tr>	
 	    	<th>Destination</th>
 	        <th>Flight number</th>
-	        <th>outbound arrival</th>
-	        <th>type</th>
+	        <th>Outbound Departure</th>
+	        <th>Return Departure</th>
+	        <th>Seats</th>
+	        <th>Remaining</th>
     	</tr>
         <c:forEach items="${flights}" var="flight">
             <tr>
                 <td><a href="<c:url value='/flight.htm'/>?id=${flight.ID}">${flight.destination}</a></td>
             	<td><a href="<c:url value='/flight.htm'/>?id=${flight.ID}">${flight.flightNumber}</a></td>
-                <td><fmt:formatDate pattern='dd/MM/yyyy HH:mm' value='${flight.outboundArrival}' /></td>
-                <td>${flight.type}</td>
+                <td><fmt:formatDate pattern='dd/MM/yyyy HH:mm' value='${flight.outboundDeparture}' /></td>
+                <td><fmt:formatDate pattern='dd/MM/yyyy HH:mm' value='${flight.returnDeparture}' /></td>
+                <td>${flight.numberOfSeats}</td>
+                <td>${flight.numberOfSeats - fn:length(flight.staffMembers)}</td>
             </tr>
         </c:forEach>
     </table>
