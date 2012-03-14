@@ -64,6 +64,12 @@
                 <td>number of seats:</td>
                 <td><form:input path="numberOfSeats"/></td>
             </tr>
+            <c:if test="${fn:length(flight.staffMembers) lt flight.numberOfSeats}">
+		        <tr>
+	                <td></td>
+	                <td>Remaining <c:out value="${flight.numberOfSeats - fn:length(flight.staffMembers)}"/> seats</td>
+	            </tr>
+		    </c:if>
             <tr>
                 <td>Notes:</td>
                 <td><form:textarea  path="notes" rows="2"/></td>
@@ -140,6 +146,7 @@
             <p class="error marginAll bold">This flight is now full...</p>
         </div>
     </c:if>
+    
     <div class="blueBorder">
 
         <div class="marginAll">
