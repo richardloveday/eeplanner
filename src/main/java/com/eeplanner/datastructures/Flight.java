@@ -31,6 +31,7 @@ public class Flight {
     private Camp camp;
     private int campID;
     private String itemLabel;
+    private String notes;
 
     public String getItemLabel() {
         return  "("+this.type + ") " + this.destination + " - " + this.outboundDeparture;
@@ -196,4 +197,12 @@ public class Flight {
     public void setReturnDeparture(Date returnDeparture) {
         this.returnDeparture = returnDeparture;
     }
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
 }

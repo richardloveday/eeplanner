@@ -33,4 +33,5 @@ ALTER TABLE `staffavailability` ADD `note` varchar(1000) NULL DEFAULT NULL  AFTE
 /* 13/03/2012 11:51:32 PM local */ 
 ALTER TABLE `flightstaff` DROP `transferNeeded`;
 ALTER TABLE `flightstaff` DROP `infoSent`;
+ALTER TABLE `flight` ADD `notes` text NULL DEFAULT NULL;
 

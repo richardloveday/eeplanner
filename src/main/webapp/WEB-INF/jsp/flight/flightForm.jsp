@@ -65,6 +65,10 @@
                 <td><form:input path="numberOfSeats"/></td>
             </tr>
             <tr>
+                <td>Notes:</td>
+                <td><form:textarea  path="notes" rows="2"/></td>
+            </tr>
+            <tr>
                 <td colspan="2">
                     <div class="blueborder marginAll">
                         <h2 class="marginLeft marginAll">outbound</h2>

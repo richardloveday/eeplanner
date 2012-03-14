@@ -85,12 +85,12 @@
                 insert into eeplanner.flight (carrier, type, flightNumber,
                                                destination, outboundArrival, outboundDeparture,
                                                returnArrival, returnDeparture,
-                                               cost, campID, numberOfSeats, airport, itineraryID)
+                                               cost, campID, numberOfSeats, airport, itineraryID, notes)
 
                 values (:carrier, :type, :flightNumber,
                         :destination, :outboundArrival, :outboundDeparture,
                         :returnArrival, :returnDeparture,
-                        :cost, :campID, :numberOfSeats, :airport, :itineraryID)
+                        :cost, :campID, :numberOfSeats, :airport, :itineraryID, :notes)
             </value>
         </entry>
         <entry key="editFlight">
@@ -108,7 +108,9 @@
                     numberOfSeats = :numberOfSeats,
                     airport = :airport,
                     deleted = :deleted,
-                    itineraryID = :itineraryID
+                    itineraryID = :itineraryID,
+                    notes = :notes
+                    
                 where ID = :ID
                 ;
             </value>
