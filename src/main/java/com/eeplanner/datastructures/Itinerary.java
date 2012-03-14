@@ -1,6 +1,5 @@
 package com.eeplanner.datastructures;
 
-import java.util.LinkedList;
 
 public class Itinerary {
 	
@@ -10,13 +9,9 @@ public class Itinerary {
     private int year;
 	private int staffID;
     private int campID;
-    private int transfer1ID;
-    private int transfer2ID;
     private int flightID;
     private boolean deleted;
     private Flight flight;
-    private Transfer transfer1;
-    private Transfer transfer2;
 
     public Itinerary() {
 
@@ -70,22 +65,6 @@ public class Itinerary {
         this.campID = campID;
     }
 
-    public int getTransfer1ID() {
-        return transfer1ID;
-    }
-
-    public void setTransfer1ID(int transfer1ID) {
-        this.transfer1ID = transfer1ID;
-    }
-
-    public int getTransfer2ID() {
-        return transfer2ID;
-    }
-
-    public void setTransfer2ID(int transfer2ID) {
-        this.transfer2ID = transfer2ID;
-    }
-
     public int getFlightID() {
         return flightID;
     }
@@ -100,22 +79,6 @@ public class Itinerary {
 
     public void setFlight(Flight flight) {
         this.flight = flight;
-    }
-
-    public Transfer getTransfer1() {
-        return transfer1;
-    }
-
-    public void setTransfer1(Transfer transfer1) {
-        this.transfer1 = transfer1;
-    }
-
-    public Transfer getTransfer2() {
-        return transfer2;
-    }
-
-    public void setTransfer2(Transfer transfer2) {
-        this.transfer2 = transfer2;
     }
 
     public void setDeleted(boolean deleted) {

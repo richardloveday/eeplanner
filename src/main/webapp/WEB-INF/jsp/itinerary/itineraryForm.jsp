@@ -26,22 +26,10 @@
             <input type="hidden" name="itinerary.campID" value="${itinerary.campID}"/>
             <input type="hidden" name="itinerary.year" value="${itinerary.year}"/>
 
-            <h2>Transfer 1</h2>
-
-            <form:select path="transfer1ID">
-                <form:options items="${transfers}" itemValue="ID" itemLabel="itemLabel"/>
-            </form:select>
-
             <h2>Flight</h2>
 
             <form:select path="flightID">
                 <form:options items="${flights}" itemValue="ID" itemLabel="itemLabel"/>
-            </form:select>
-
-            <h2>Transfer 2</h2>
-
-            <form:select path="transfer2ID">
-                <form:options items="${transfers}" itemValue="ID" itemLabel="itemLabel"/>
             </form:select>
 
             <input type="submit" value="Save Itinerary Changes"/>

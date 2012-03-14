@@ -34,4 +34,6 @@ ALTER TABLE `staffavailability` ADD `note` varchar(1000) NULL DEFAULT NULL  AFTE
 ALTER TABLE `flightstaff` DROP `transferNeeded`;
 ALTER TABLE `flightstaff` DROP `infoSent`;
 ALTER TABLE `flight` ADD `notes` text NULL DEFAULT NULL;
+ALTER TABLE `itinerary` DROP `transfer_1_id`;
+ALTER TABLE `itinerary` DROP `transfer_2_id`;
 
