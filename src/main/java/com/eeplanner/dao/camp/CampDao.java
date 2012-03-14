@@ -23,6 +23,7 @@ public interface CampDao {
     public List<Camp> getCampsByName(String name);
     public List<Camp> getCampsByStaffMemberID(int staffMemberID, String orderBy);
     public List<Camp> getCampsForFlight(int flightID, String orderBy);
+    public List<Camp> getCampsForYear(int year);
     public List<Camp> getCampsForTransfer(int transferID, String orderBy);
     public List<Camp> getAvailableCampsForFlight(int flightID, String orderBy, boolean includeDeleted);
     public List<Camp> getAvailableCampsForTransfer(int transferID, String orderBy, boolean includeDeleted);

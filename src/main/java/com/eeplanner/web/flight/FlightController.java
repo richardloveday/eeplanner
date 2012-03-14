@@ -1,6 +1,7 @@
 package com.eeplanner.web.flight;
 
 import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.validation.BindException;
@@ -175,11 +176,13 @@ public class FlightController extends EEPlannerSimpleFormController {
 
 			Flight flight = flightDao.getFlightByID(ServletRequestUtils.getIntParameter(request, "id"));
 
+			int flightsYear = new DateTime(flight.getOutboundDeparture()).getYear();
+			
 			List<Camp> camps = campDao.getAvailableCampsForFlight(flight.getID(), "secondName asc", false);
-			List<Camp> currentCamps = campDao.getCampsForFlight(flight.getID(), "secondName asc");
-			int[] campIDs = new int[currentCamps.size()];
+			List<Camp> currentYearsCamps = campDao.getCampsForYear(flightsYear);
+			int[] campIDs = new int[currentYearsCamps.size()];
 			int cntr = 0;
-			for(Camp camp: currentCamps){
+			for(Camp camp: currentYearsCamps){
 				campIDs[cntr] = camp.getID();
 				cntr++;
 			}

@@ -1,28 +1,23 @@
 package com.eeplanner.dao.camp;
 
-import org.springframework.jdbc.core.JdbcTemplate;
-
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.dao.DataAccessException;
-import org.apache.log4j.Logger;
-
-
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.joda.time.*;
-import com.eeplanner.dao.staff.StaffRowMapper;
+import javax.sql.DataSource;
+
+import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+
 import com.eeplanner.datastructures.Camp;
 import com.eeplanner.datastructures.CampStaff;
-import com.eeplanner.datastructures.StaffMember;
-
-import javax.sql.DataSource;
 
 /**
  * Created by IntelliJ IDEA.
@@ -395,6 +390,23 @@ public class CampDaoImpl implements CampDao {
         } catch (DataAccessException e) {
             log.fatal(e.getMessage());
             // crap
+            return null;
+        }
+	}
+	public List<Camp> getCampsForYear(int startYear) {
+		try {
+
+            String qry = sqlQueries.get("getCampsByYear");
+
+            HashMap params = new HashMap();
+            params.put("startYear", startYear);
+
+            List<Camp> camps = this.namedParameterJdbcTemplate.query(qry, params, new CampRowMapper());
+
+            return camps;
+
+        } catch (DataAccessException e) {
+            log.fatal(e.getMessage());
             return null;
         }
 	}

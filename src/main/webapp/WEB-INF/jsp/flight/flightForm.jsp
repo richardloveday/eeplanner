@@ -172,39 +172,6 @@
                 <input type="submit" value="Add staff member">
             </form>
         </c:if>
-        <div class="marginAll">
-            <h2>Current camps:</h2>
-            <table>
-                <c:forEach items="${flight.camps}" var="camp">
-                    <tr>
-                        <td width="100px">
-                            <a href="<c:url value="/camp.htm"/>?id=${camp.ID}">${camp.name}</a>
-                        </td>
-                        <form action="<c:url value="/process-flight-camp.htm" />">
-                            <input type="hidden" name="action" value="removeCamp">
-                            <input type="hidden" name="flightID" value="${flight.ID}">
-                            <input type="hidden" name="campID" value="${camp.ID}">
-                            <td>
-                                <input type="submit" value="remove">
-                            </td>
-                        </form>
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
-
-        <c:if test="${fn:length(availableCamps)>0}">
-            <form class="marginAll" action="<c:url value="/process-flight-camp.htm" />">
-                <input type="hidden" name="action" value="addCamp">
-                <input type="hidden" name="flightID" value="${flight.ID}">
-                <select name="campID">
-                    <c:forEach items="${availableCamps}" var="camp">
-                        <option value="${camp.ID}">${camp.name}</option>
-                    </c:forEach>
-                </select>
-                <input type="submit" value="Add camp">
-            </form>
-        </c:if>
 
     </div>
 

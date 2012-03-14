@@ -75,6 +75,12 @@
                 where name like :name ;
             </value>
         </entry>
+        <entry key="getCampsByYear">
+            <value>
+                select * from eeplanner.camp
+                where YEAR(start)=:startYear ;
+            </value>
+        </entry>
         <entry key="getCampSearchDataByCampName">
             <value>
 
