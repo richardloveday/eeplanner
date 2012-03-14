@@ -39,7 +39,7 @@ public class FlightListController extends AbstractController{
 		boolean showDeleted = ServletRequestUtils.getBooleanParameter(request, "showDeleted", false);
         int theYear = ServletRequestUtils.getIntParameter(request, "showYear",new DateTime().getYear());
         
-		List<Flight> flights = flightDao.getFlightListByYear("destination asc, outboundArrival desc", showDeleted, theYear);
+		List<Flight> flights = flightDao.getFlightListByYear("destination asc, outboundDeparture desc", showDeleted, theYear);
 		if (!CollectionUtils.isEmpty(flights)) {
 			for (Flight flight : flights) {
 				flight.setStaffMembers(staffDao.getStaffMembersForFlight(

@@ -81,7 +81,7 @@
                         <table>
                             <tr>
                                 <td>departure:</td>
-                                <td><input name="outboundDepartureDateToSave" class="dateselect date"
+                                <td><input name="outboundDepartureDateToSave" class="dateselect date required" 
                                            value="<fmt:formatDate pattern='dd/MM/yyyy' value='${flight.outboundDeparture}' />">
                                 </td>
                                 <td><input size="1" class="number min max" name="outdephours" id="outdephours"

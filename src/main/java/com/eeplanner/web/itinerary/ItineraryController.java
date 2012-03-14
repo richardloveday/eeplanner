@@ -91,13 +91,10 @@ public class ItineraryController extends EEPlannerSimpleFormController{
 
         int year = ServletRequestUtils.getIntParameter(request, "year", new DateTime().getYear());
 
-        model.put("transfers", transferDao.getTransferListByYear("outboundDeparture asc", false, year));
         model.put("flights", flightDao.getFlightListByYear("destination asc, outboundArrival desc", false, year));
 
         return model;
     }
-    // get the three journeys for the itinerary
-
 
     public void setItineraryDao(ItineraryDao itineraryDao) {
         this.itineraryDao = itineraryDao;
