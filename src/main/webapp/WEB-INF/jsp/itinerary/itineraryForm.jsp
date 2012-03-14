@@ -52,8 +52,8 @@
 	           <input type="hidden" name="id" value="${camp.ID}"/>
 	           <input type="submit" value="generate"/>
 	   	</form>
-		</div>
 	</div>
+</div>
 
 
 <jsp:include page="../wireframe/footer.jsp"/>
