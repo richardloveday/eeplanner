@@ -32,6 +32,12 @@
                 <form:options items="${flights}" itemValue="ID" itemLabel="itemLabel"/>
             </form:select>
 
+            <h2>Notes</h2>
+
+            <form:textarea  path="notes" rows="4" cols="30"/>
+            
+            <br/>
+
             <input type="submit" value="Save Itinerary Changes"/>
 
         </form:form>

@@ -15,10 +15,11 @@ public class ItineraryRowMapper implements RowMapper<Itinerary> {
 		itinerary.setID(rs.getInt("ID"));
 		itinerary.setName(rs.getString("name"));
 		itinerary.setStaffID(rs.getInt("staff_id"));
-		itinerary.setStaffID(rs.getInt("camp_id"));
+		itinerary.setCampID(rs.getInt("camp_id"));
 		itinerary.setFlightID(rs.getInt("flight_id"));
 		itinerary.setYear(rs.getInt("year"));
 		itinerary.setDeleted(rs.getBoolean("deleted"));
+		itinerary.setNotes(rs.getString("notes"));
 		
 		return itinerary;
 

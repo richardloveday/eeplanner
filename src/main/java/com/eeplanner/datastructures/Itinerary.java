@@ -12,6 +12,7 @@ public class Itinerary {
     private int flightID;
     private boolean deleted;
     private Flight flight;
+    private String notes;
 
     public Itinerary() {
 
@@ -87,6 +88,14 @@ public class Itinerary {
 
 	public boolean getDeleted() {
 		return deleted;
+	}
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 	
 }

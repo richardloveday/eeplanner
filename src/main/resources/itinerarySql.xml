@@ -16,6 +16,14 @@
                 ;
             </value>
         </entry>
+         <entry key="getItineraryByCampAndStaffID">
+            <value>
+                select *
+                from eeplanner.itinerary
+                WHERE camp_id = ? and staff_id = ?
+                ;
+            </value>
+        </entry>
         <entry key="storeNewItinerary">
             <value>
                 INSERT INTO `eeplanner`.`itinerary`
@@ -25,7 +33,8 @@
                 `year`,
                 `deleted`,
                 `camp_id`,
-                `flight_id`)
+                `flight_id`,
+                `notes`)
                 VALUES
                 (
                 :ID ,
@@ -34,7 +43,8 @@
                 :year ,
                 :deleted ,
                 :campID ,
-                :flightID
+                :flightID,
+                :notes
                 );
 
             </value>
@@ -49,7 +59,8 @@
                 `year` = :year ,
                 `deleted` = :deleted ,
                 `camp_id` = :campID ,
-                `flight_id` = :flightID
+                `flight_id` = :flightID,
+                `notes` = :notes
                 WHERE id = :ID;
 
             </value>

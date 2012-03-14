@@ -67,6 +67,11 @@ public class ItineraryController extends EEPlannerSimpleFormController{
         if(id>0){
             itinerary = itineraryDao.getItineraryByID(id);
             itinerary.setStaffMember(staffDao.getStaffMemberByID(itinerary.getStaffID()));
+        } else {
+        	itinerary = itineraryDao.getItineraryByCampAndStaffID(campID, staffMemberID);
+        	if(itinerary!=null){
+        		itinerary.setStaffMember(staffDao.getStaffMemberByID(itinerary.getStaffID()));
+        	}
         }
 
         if(itinerary==null){
