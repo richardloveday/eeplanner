@@ -1,6 +1,7 @@
 package com.eeplanner.web.template;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +23,7 @@ import com.eeplanner.dao.camp.CampDao;
 import com.eeplanner.dao.contact.ContactDao;
 import com.eeplanner.dao.email.EmailDao;
 import com.eeplanner.dao.flight.FlightDao;
+import com.eeplanner.dao.itinerary.ItineraryDao;
 import com.eeplanner.dao.note.NoteDao;
 import com.eeplanner.dao.phone.PhoneDao;
 import com.eeplanner.dao.staff.StaffDao;
@@ -31,10 +33,12 @@ import com.eeplanner.datastructures.Camp;
 import com.eeplanner.datastructures.CampStaff;
 import com.eeplanner.datastructures.Contact;
 import com.eeplanner.datastructures.Flight;
+import com.eeplanner.datastructures.Itinerary;
 import com.eeplanner.datastructures.Phone;
 import com.eeplanner.datastructures.StaffMember;
 import com.eeplanner.datastructures.Template;
 import com.eeplanner.datastructures.TemplateType;
+import com.eeplanner.service.DateTool;
 import com.eeplanner.service.DocumentService;
 
 public class RtfGeneratorController extends MultiActionController {
@@ -49,6 +53,7 @@ public class RtfGeneratorController extends MultiActionController {
 	private PhoneDao phoneDao;
 	protected EmailDao emailDao;
     protected NoteDao noteDao;
+    protected ItineraryDao itineraryDao;
 
 	public ModelAndView generateStaffContract(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -155,7 +160,7 @@ public class RtfGeneratorController extends MultiActionController {
 			camp.setContact(campContact);
 			if(campContact!=null){
 				List<Phone> phoneNumbers = phoneDao.getPhoneNumberListByContactID(campContact.getID());
-				sourceObjects.put("contactMobile", findMobileNumber(phoneNumbers));
+				// sourceObjects.put("contactMobile", findMobileNumber(phoneNumbers));
 			}
 		}
 		sourceObjects.put("camp", camp);
@@ -201,7 +206,87 @@ public class RtfGeneratorController extends MultiActionController {
 		response.getWriter().print(rtf);
 		response.flushBuffer();
 
+		return null; 
+	}
+	public ModelAndView generateHostFamilyProfilesForACamp(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		Map<String, Object> sourceObjects = new HashMap<String, Object>();
+
+		int campId = ServletRequestUtils.getIntParameter(request, "id");
+		Camp camp = campDao.getCampByID(campId);
+	
+		List<StaffWrapper> staffWrappers = new ArrayList<RtfGeneratorController.StaffWrapper>();
+		List<StaffMember> staffMembers = staffDao.getStaffMembersForCamp(camp, "secondName asc");
+		
+		if(!CollectionUtils.isEmpty(staffMembers)){
+			for(StaffMember staffMember : staffMembers){
+				staffMember.getContact().setPhoneNumbers(phoneDao.getPhoneNumberListByContactID(staffMember.getContact().getID()));
+				staffMember.getContact().setEmails(emailDao.getEmailListByContactID(staffMember.getContact().getID()));
+				staffMember.getContact().setNotes(noteDao.getNotesListByContactID(staffMember.getContact().getID()));
+				
+				Itinerary itinerary = itineraryDao.getItineraryByCampAndStaffID(campId, staffMember.getID());
+				
+				Flight flight = itinerary==null ? null : flightDao.getFlightByID(itinerary.getFlightID());
+				
+				staffWrappers.add(new StaffWrapper(staffMember, flight));
+			}
+		}
+		
+		sourceObjects.put("camp", camp);
+		sourceObjects.put("staffMembers", staffWrappers);
+		sourceObjects.put("currentDate", new Date());
+		sourceObjects.put("currentYear", new DateTime().toString("YYYY"));
+		sourceObjects.put("dateTool", new DateTool());
+
+		String rtf = documentService.createRtfDocument(TemplateType.Host_family_profiles_for_a_camp, sourceObjects);
+
+		// Write to response
+		response.setContentType("application/rtf");
+		response.setHeader("content-disposition",
+				"attachment;filename=" + TemplateType.Host_family_profiles_for_a_camp.name() + "-"
+						+ camp.getName() + ".rtf");
+		response.getWriter().print(rtf);
+		response.flushBuffer();
+
 		return null;
+	}
+	
+	public static class StaffWrapper 
+	{
+		final StaffMember staff;
+		final Flight flight;
+		final String mobileNumber;
+		
+		public StaffWrapper(StaffMember staff, Flight flight){
+			this.staff = staff;
+			this.flight = flight;
+			this.mobileNumber = findMobileNumber(staff.getContact().getPhoneNumbers());
+		}
+		
+		private String findMobileNumber(List<Phone> phoneNumbers) {
+			if(!CollectionUtils.isEmpty(phoneNumbers)){
+				for(Phone phone : phoneNumbers){
+					if(StringUtils.contains(phone.getName(), "mobile")) {
+						return phone.getNumber();
+					}
+				}
+				return phoneNumbers.get(0).getNumber();
+			}
+			return null;
+		}
+
+		public StaffMember getStaff() {
+			return staff;
+		}
+
+		public Flight getFlight() {
+			return flight;
+		}
+
+		public String getMobileNumber() {
+			return mobileNumber;
+		}
 	}
 
 
@@ -215,18 +300,6 @@ public class RtfGeneratorController extends MultiActionController {
 		return contact;
 	}
 	
-	private Object findMobileNumber(List<Phone> phoneNumbers) {
-		if(!CollectionUtils.isEmpty(phoneNumbers)){
-			for(Phone phone : phoneNumbers){
-				if(StringUtils.contains(phone.getName(), "mobile")) {
-					return phone.getNumber();
-				}
-			}
-			return phoneNumbers.get(0).getNumber();
-		}
-		return null;
-	}
-
 	public ModelAndView viewTemplateDocument(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
@@ -281,6 +354,10 @@ public class RtfGeneratorController extends MultiActionController {
 
 	public void setNoteDao(NoteDao noteDao) {
 		this.noteDao = noteDao;
+	}
+
+	public void setItineraryDao(ItineraryDao itineraryDao) {
+		this.itineraryDao = itineraryDao;
 	}
 	
 

@@ -34,6 +34,10 @@ public class CampStaffRowMapper implements RowMapper {
         staffMember.setExisting(rs.getBoolean("existing"));
         staffMember.setStatus(rs.getString("status"));
         staffMember.setDeleted(rs.getBoolean("deleted"));
+        
+        staffMember.setMedical(rs.getString("medical"));
+        staffMember.setProfile(rs.getString("profile"));
+        staffMember.setDietary(rs.getString("dietary"));
 
         staffMember.setAccepted(rs.getBoolean("accepted"));
         staffMember.setOffered(rs.getBoolean("offered"));

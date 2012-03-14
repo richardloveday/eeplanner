@@ -221,6 +221,7 @@
         <property name="phoneDao" ref="phoneDao"/>
         <property name="emailDao" ref="emailDao"/>
         <property name="noteDao" ref="noteDao"/>
+        <property name="itineraryDao" ref="itineraryDao"/>
         <property name="staffAvailabilityDao" ref="staffAvailabilityDao"/>
         <property name="methodNameResolver">
             <bean class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
