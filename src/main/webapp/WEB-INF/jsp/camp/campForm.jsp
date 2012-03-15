@@ -600,6 +600,16 @@
 		    	</form>
 			</div>
 		</div>
+		<div class="marginTop marginLeft left">
+			<div class="blueborder">
+				<h2 class="marginAll">Travel Summary document</h2>            
+				<form action="<c:url value="/generate-rtf.htm" />">
+					<input type="hidden" name="action" value="generateTravelSummaryForACamp">
+		            <input type="hidden" name="id" value="${camp.ID}"/>
+		            <input type="submit" value="generate"/>
+		    	</form>
+			</div>
+		</div>
 		
 	</div>
 </div>

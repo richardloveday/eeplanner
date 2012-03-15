@@ -260,6 +260,49 @@ public class RtfGeneratorController extends MultiActionController {
 		return null; 
 	}
 	
+	public ModelAndView generateTravelSummaryForACamp(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		Map<String, Object> sourceObjects = new HashMap<String, Object>();
+
+		int campId = ServletRequestUtils.getIntParameter(request, "id");
+		Camp camp = campDao.getCampByID(campId);
+	
+		List<StaffWrapper> staffWrappers = new ArrayList<RtfGeneratorController.StaffWrapper>();
+		List<StaffMember> staffMembers = staffDao.getStaffMembersForCamp(camp, "secondName asc");
+		
+		if(!CollectionUtils.isEmpty(staffMembers)){
+			for(StaffMember staffMember : staffMembers){
+				staffMember.getContact().setPhoneNumbers(phoneDao.getPhoneNumberListByContactID(staffMember.getContact().getID()));
+				
+				Itinerary itinerary = itineraryDao.getItineraryByCampAndStaffID(campId, staffMember.getID());
+				
+				Flight flight = itinerary==null ? null : flightDao.getFlightByID(itinerary.getFlightID());
+				
+				staffWrappers.add(new StaffWrapper(staffMember, flight));
+			}
+		}
+		
+		sourceObjects.put("camp", camp);
+		sourceObjects.put("staffMembers", staffWrappers);
+		sourceObjects.put("currentDate", new Date());
+		sourceObjects.put("currentYear", new DateTime().toString("YYYY"));
+		sourceObjects.put("dateTool", new DateTool());
+
+		String rtf = documentService.createRtfDocument(TemplateType.Travel_info_for_a_camp, sourceObjects);
+
+		// Write to response
+		response.setContentType("application/rtf");
+		response.setHeader("content-disposition",
+				"attachment;filename=" + TemplateType.Travel_info_for_a_camp.name() + "-"
+						+ camp.getName() + ".rtf");
+		response.getWriter().print(rtf);
+		response.flushBuffer();
+
+		return null;
+	}
+	
+	
 	public ModelAndView generateHostFamilyProfilesForACamp(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
