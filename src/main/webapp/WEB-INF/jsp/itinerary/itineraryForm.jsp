@@ -49,7 +49,8 @@
 		<h2 class="marginAll">Personal Travel Info document</h2>            
 		<form action="<c:url value="/generate-rtf.htm" />">
 			<input type="hidden" name="action" value="generatePersonalInfoDocument">
-	           <input type="hidden" name="id" value="${camp.ID}"/>
+	           <input type="hidden" name="staffMemberID" value="${itinerary.staffID}"/>
+	           <input type="hidden" name="campID" value="${itinerary.campID}"/>
 	           <input type="submit" value="generate"/>
 	   	</form>
 	</div>

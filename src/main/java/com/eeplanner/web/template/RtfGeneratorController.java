@@ -226,6 +226,40 @@ public class RtfGeneratorController extends MultiActionController {
 
 		return null; 
 	}
+	
+	public ModelAndView generatePersonalInfoDocument(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		int staffId = ServletRequestUtils.getIntParameter(request, "staffMemberID");
+		int campId = ServletRequestUtils.getIntParameter(request, "campID");
+		
+		Itinerary itinerary = itineraryDao.getItineraryByCampAndStaffID(campId, staffId);
+		
+		Flight flight = itinerary==null ? null : flightDao.getFlightByID(itinerary.getFlightID());
+		Camp camp = campDao.getCampByID(campId);
+		
+
+		Map<String, Object> sourceObjects = new HashMap<String, Object>();
+		sourceObjects.put("itinerary", itinerary);
+		sourceObjects.put("flight", flight);
+		sourceObjects.put("camp", camp);
+		sourceObjects.put("currentDate", new Date());
+		sourceObjects.put("currentYear", new DateTime().toString("YYYY"));
+		sourceObjects.put("dateTool", new DateTool());
+
+		String rtf = documentService.createRtfDocument(TemplateType.Personal_transfer_info, sourceObjects);
+
+		// Write to response
+		response.setContentType("application/rtf");
+		response.setHeader("content-disposition",
+				"attachment;filename=" + TemplateType.Personal_transfer_info.name() + "-"
+						+ itinerary.getName() + ".rtf");
+		response.getWriter().print(rtf);
+		response.flushBuffer();
+
+		return null; 
+	}
+	
 	public ModelAndView generateHostFamilyProfilesForACamp(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
