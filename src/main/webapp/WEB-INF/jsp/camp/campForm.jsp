@@ -443,7 +443,7 @@
 	        <table>
 	            <c:forEach items="${camp.staffMembers}" var="staffMember">
 	                <tr>
-	                    <form action="<c:url value="/process-camp-staff.htm" />">
+	                    <form action="<c:url value="/process-camp-staff.htm" />" id="staff-form-${staffMember.ID}">
 	
 	                        <input type="hidden" name="action" value="editStaffMember">
 	                        <input type="hidden" name="campID" value="${camp.ID}">
@@ -452,7 +452,7 @@
 	                            <a href="<c:url value="/staff-member.htm"/>?id=${staffMember.ID}">${staffMember.contact.secondName}, ${staffMember.contact.firstNames}</a>
 	                        </td>
 	                        <td>
-	                            <select name="job">
+	                            <select name="job" onchange="$('#staff-form-${staffMember.ID}').submit()">
 	                                <option value="0">Select a role...</option>
 	                                <c:if test="${staffMember.teacher}">
 	                                    <option value="teacher"  ${staffMember.job=='teacher'?'SELECTED':''}>teacher
