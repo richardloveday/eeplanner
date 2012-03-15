@@ -54,6 +54,7 @@
 			<th title="Drama Coordinator">DC</th>
 			<th title="Split/Mixed Role">Split</th>
 		</tr>
+		<c:set var="itemIndex" value="1"/>
         <c:forEach items="${staffMembers}" var="staffMember" varStatus="status">
             <c:choose>
                 <c:when test="${showYear==0}">
@@ -71,7 +72,7 @@
                         <td>${staffMember.drama ? 'Y' : 'N'}</td>
                         <td>${staffMember.mixedRole ? 'Y' : 'N'}</td>
                     </tr>
-
+					<c:set var="itemIndex" value="${itemIndex+1}"/>
                 </c:when>
 
                 <c:otherwise>
@@ -97,14 +98,14 @@
 	                        <td>${staffMember.drama ? 'Y' : 'N'}</td>
 	                        <td>${staffMember.mixedRole ? 'Y' : 'N'}</td>
                         </tr>
-
+						<c:set var="itemIndex" value="${itemIndex+1}"/>
                     </c:if>
 
                 </c:otherwise>
 
             </c:choose>
             
-            <c:if test="${status.count%20==0}">
+            <c:if test="${itemIndex%20==0}">
 	            <tr>
 			        <th>Name</th>
 			        <th title="Updated by Staff">Updated</th>
