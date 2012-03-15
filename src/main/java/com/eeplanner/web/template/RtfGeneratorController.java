@@ -120,7 +120,7 @@ public class RtfGeneratorController extends MultiActionController {
 		return null;
 	}
 	
-	public ModelAndView generateFlightInfo(HttpServletRequest request,
+	public ModelAndView generateFlightSummary(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
 		int flightId = ServletRequestUtils.getIntParameter(request, "id");
@@ -128,18 +128,33 @@ public class RtfGeneratorController extends MultiActionController {
 		List<StaffMember> staffMembers = staffDao.getStaffMembersForFlight(
 				flight, "secondName asc");
 
+		List<StaffWrapper> staffWrappers = new ArrayList<RtfGeneratorController.StaffWrapper>();
+		
+		if(!CollectionUtils.isEmpty(staffMembers)){
+			for(StaffMember staffMember : staffMembers){
+				Itinerary itinerary = itineraryDao.getItineraryByFlightAndStaffID(flightId, staffMember.getID());
+				
+				staffMember = staffDao.getStaffMemberForCamp(staffMember.getID(), itinerary.getCampID());
+				staffMember.setCamp(campDao.getCampByID(itinerary.getCampID()));
+				staffMember.getContact().setPhoneNumbers(phoneDao.getPhoneNumberListByContactID(staffMember.getContact().getID()));
+				staffWrappers.add(new StaffWrapper(staffMember, null));
+				
+			}
+		}
+		
 		Map<String, Object> sourceObjects = new HashMap<String, Object>();
 		sourceObjects.put("flight", flight);
-		sourceObjects.put("staffMembers", staffMembers);
+		sourceObjects.put("staffMembers", staffWrappers);
 		sourceObjects.put("currentDate", new Date());
 		sourceObjects.put("currentYear", new DateTime().toString("YYYY"));
-
-		String rtf = documentService.createRtfDocument(TemplateType.Flight_data, sourceObjects);
+		sourceObjects.put("dateTool", new DateTool());
+		
+		String rtf = documentService.createRtfDocument(TemplateType.Flight_summary, sourceObjects);
 
 		// Write to response
 		response.setContentType("application/rtf");
 		response.setHeader("content-disposition",
-				"attachment;filename=" + TemplateType.Flight_data.name() + "-"
+				"attachment;filename=" + TemplateType.Flight_summary.name() + "-"
 						+ flight.getFlightNumber() + ".rtf");
 		response.getWriter().print(rtf);
 		response.flushBuffer();

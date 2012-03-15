@@ -196,7 +196,7 @@
                 s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash,
                 c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
                 c.add3, c.add4, c.postCode, c.dob, c.sex,
-                cs.offered, cs.accepted, cs.job,
+                cs.offered, cs.accepted, cs.returned, cs.job,
                 cmp.ID as 'campID', cmp.name as 'campName', cmp.start, cmp.end, s.deleted
 
                 from eeplanner.staff s
@@ -206,25 +206,6 @@
                 where cs.campID = :campID
                 and cs.staffID = :staffMemberID
                 limit 1
-            </value>
-        </entry>
-        <entry key="getStaffMembersForCamps">
-            <value>
-                select s.ID, s.teacher, s.coordinator, s.drama, s.activityleader, s.kinName,
-                s.activityCoordinator, s.dptCoordinator, s.courseSpecialist,
-                s.kinNumber, s.archivePassword, s.existing, s.applied, s.interviewed, s.approved,
-                s.status, s.profile, s.medical, s.dietary, s.travelOutside, s.travelWithinLondon, s.officeNotes, s.mixedRole,
-                s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
-                s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash,
-                c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
-                c.add3, c.add4, c.postCode, c.dob, c.sex,
-                cs.offered, cs.accepted, cs.returned, cs.job, s.deleted
-
-                from eeplanner.staff s
-                inner join eeplanner.contact c on s.contactID = c.ID
-                inner join eeplanner.campstaff cs on s.ID = cs.staffID
-                left join eeplanner.camp cmp on cmp.ID = cs.campID
-
             </value>
         </entry>
         <entry key="getStaffMembersForCamp">
@@ -246,6 +227,25 @@
                 left join eeplanner.camp cmp on cmp.ID = cs.campID
                 where cs.campID = :campID
                 order by :orderBy
+            </value>
+        </entry>
+        <entry key="getStaffMembersForCamps">
+            <value>
+                select s.ID, s.teacher, s.coordinator, s.drama, s.activityleader, s.kinName,
+                s.activityCoordinator, s.dptCoordinator, s.courseSpecialist,
+                s.kinNumber, s.archivePassword, s.existing, s.applied, s.interviewed, s.approved,
+                s.status, s.profile, s.medical, s.dietary, s.travelOutside, s.travelWithinLondon, s.officeNotes, s.mixedRole,
+                s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
+                s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash,
+                c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.add3, c.add4, c.postCode, c.dob, c.sex,
+                cs.offered, cs.accepted, cs.returned, cs.job, s.deleted
+
+                from eeplanner.staff s
+                inner join eeplanner.contact c on s.contactID = c.ID
+                inner join eeplanner.campstaff cs on s.ID = cs.staffID
+                left join eeplanner.camp cmp on cmp.ID = cs.campID
+
             </value>
         </entry>
         <entry key="getStaffMembersCountForCamp">

@@ -24,6 +24,14 @@
                 ;
             </value>
         </entry>
+        <entry key="getItineraryByFlightAndStaffID">
+            <value>
+                select *
+                from eeplanner.itinerary
+                WHERE flight_id = ? and staff_id = ?
+                ;
+            </value>
+        </entry>
         <entry key="storeNewItinerary">
             <value>
                 INSERT INTO `eeplanner`.`itinerary`
