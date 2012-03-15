@@ -43,16 +43,18 @@
 <div class="clear"></div>
 <div>
     <table class="listTable">
-        <th>Name</th>
-        <th title="Updated by Staff">Updated</th>
-        <th title="Existing or New Staff">Existing</th>
-        <th title="Travelling within a 50 mile radius of London Gatwick">G50</th>
-        <th title="Activity Leader">AL</th>
-		<th title="Teacher">T</th>
-		<th title="Coordinator">Co</th>
-		<th title="Drama Coordinator">DC</th>
-		<th title="Split/Mixed Role">Split</th>
-        <c:forEach items="${staffMembers}" var="staffMember">
+    	<tr>
+	        <th>Name</th>
+	        <th title="Updated by Staff">Updated</th>
+	        <th title="Existing or New Staff">Existing</th>
+	        <th title="Travelling within a 50 mile radius of London Gatwick">G50</th>
+	        <th title="Activity Leader">AL</th>
+			<th title="Teacher">T</th>
+			<th title="Coordinator">Co</th>
+			<th title="Drama Coordinator">DC</th>
+			<th title="Split/Mixed Role">Split</th>
+		</tr>
+        <c:forEach items="${staffMembers}" var="staffMember" varStatus="status">
             <c:choose>
                 <c:when test="${showYear==0}">
 
@@ -101,6 +103,20 @@
                 </c:otherwise>
 
             </c:choose>
+            
+            <c:if test="${status.count%20==0}">
+	            <tr>
+			        <th>Name</th>
+			        <th title="Updated by Staff">Updated</th>
+			        <th title="Existing or New Staff">Existing</th>
+			        <th title="Travelling within a 50 mile radius of London Gatwick">G50</th>
+			        <th title="Activity Leader">AL</th>
+					<th title="Teacher">T</th>
+					<th title="Coordinator">Co</th>
+					<th title="Drama Coordinator">DC</th>
+					<th title="Split/Mixed Role">Split</th>
+				</tr>
+            </c:if>
 
         </c:forEach>
     </table>
