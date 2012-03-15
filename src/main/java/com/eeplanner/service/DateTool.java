@@ -8,13 +8,13 @@ import org.joda.time.LocalTime;
 
 public class DateTool {
 
-	String toTime(Date date){
+	public String toTime(Date date){
 		if(date==null)
 			return StringUtils.EMPTY;
 		return new LocalTime(date.getTime()).toString("HH:mm");
 	}
 	
-	String toDate(Date date){
+	public String toDate(Date date){
 		if(date==null)
 			return StringUtils.EMPTY;
 		return new LocalDate(date.getTime()).toString("dd/MM/yyyy");
