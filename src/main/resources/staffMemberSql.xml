@@ -181,7 +181,7 @@
                 from eeplanner.staff s
                 inner join eeplanner.contact c on s.contactID = c.ID
                 
-                where deleted = false or deleted = :showDeleted
+                where (deleted = false or deleted = :showDeleted)
                 
                 order by c.secondName asc
             </value>

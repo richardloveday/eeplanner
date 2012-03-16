@@ -193,7 +193,15 @@ $(document).ready(function() {
     $('#showYear').change(function() {
    	 	var param = $(this).val();
    	 	var param2 = $('#contacts').val();
-   	 	window.location.replace(location.pathname+"?action=camps&showYear="+param+"&contacts="+param2);     
+   	 	var paramRole = $('#showRole').val();
+   	 	window.location.replace(location.pathname+"?action=camps&showYear="+param+"&contacts="+param2+"&showRole="+paramRole);     
+   });
+    
+    $('#showRole').change(function() {
+   	 	var paramRole = $(this).val();
+   	 	var param2 = $('#contacts').val();
+   	 	var param = $('#showYear').val();
+   	 	window.location.replace(location.pathname+"?action=camps&showYear="+param+"&contacts="+param2+"&showRole="+paramRole);     
    });
     
     $('#staffYear').change(function() {

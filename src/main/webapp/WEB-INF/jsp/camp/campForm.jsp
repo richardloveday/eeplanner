@@ -501,9 +501,9 @@
 	                            contracts returned? <input type="checkbox" name="returned"
 	                                             value="returned" ${staffMember.returned?'CHECKED':''}/>
 	                        </td>
-	                        <td>
+	                        <!-- <td>
 	                            <input type="submit" value="save">
-	                        </td>
+	                        </td> -->
 	                    </form>
 	                    <form action="<c:url value="/generate-rtf.htm" />">
 					        <input type="hidden" name="action" value="generateStaffContract">

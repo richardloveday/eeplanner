@@ -263,7 +263,7 @@ public class StaffDaoImpl implements StaffDao {
         return null;
     }
 
-    public List<StaffMember> getStaffList(String orderBy, boolean showDeleted) {
+    public List<StaffMember> getStaffList(String orderBy, boolean showDeleted, String role) {
         
         try {
 
@@ -271,6 +271,11 @@ public class StaffDaoImpl implements StaffDao {
             Map params = new HashMap();
             params.put("orderBy", orderBy);
             params.put("showDeleted", showDeleted);
+            
+            if(StringUtils.isNotBlank(role)){
+            	qry = StringUtils.replaceOnce(qry, ":showDeleted)", ":showDeleted) and " + role + " = true");
+            }
+            
             List<StaffMember> staffMembers = this.namedParameterJdbcTemplate.query(qry, params, new StaffRowMapper());
 
             return staffMembers;

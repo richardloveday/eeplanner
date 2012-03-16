@@ -64,7 +64,7 @@ public class MailController extends MultiActionController {
         mav.setViewName(staffView);
 		
         String contacts = ServletRequestUtils.getStringParameter(request, "contacts");
-		List<StaffMember> staffMembers = staffDao.getStaffList("secondName", false);
+		List<StaffMember> staffMembers = staffDao.getStaffList("secondName", false, null);
 		
 		mav.addObject("staffMembers", staffMembers);        
         mav.addObject("contacts", contacts);
@@ -112,7 +112,7 @@ public ModelAndView addStaff(HttpServletRequest request, HttpServletResponse res
         mav.setViewName(mailView);
 		
 		String contacts = ServletRequestUtils.getStringParameter(request, "contacts");		
-		List<StaffMember> staffs = staffDao.getStaffList("ID", true);
+		List<StaffMember> staffs = staffDao.getStaffList("ID", true, null);
 		
 		for (StaffMember staff : staffs){
 			

@@ -42,8 +42,9 @@ public class StaffMemberListController extends AbstractController {
         mav.setViewName(viewName);
         boolean show = ServletRequestUtils.getBooleanParameter(request, "showDeleted", false);
         int year = ServletRequestUtils.getIntParameter(request, "showYear", 0);
+        String role = ServletRequestUtils.getStringParameter(request, "showRole", null);
 
-        List<StaffMember> staffMembers = staffDao.getStaffList("secondName", show);
+        List<StaffMember> staffMembers = staffDao.getStaffList("secondName", show, role);
 
         if (year != 0) {
             for (StaffMember staffMember : staffMembers) {
@@ -53,6 +54,7 @@ public class StaffMemberListController extends AbstractController {
 
         mav.addObject("staffMembers", staffMembers);
         mav.addObject("showYear", year);
+        mav.addObject("showRole", role);
 
         return mav;
     }

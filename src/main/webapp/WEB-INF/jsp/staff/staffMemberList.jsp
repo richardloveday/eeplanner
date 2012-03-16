@@ -32,7 +32,16 @@
         <option value="0" ${showYear==0?'selected="selected"':''}>Show All</option>
     </select>
 </div>
-
+<div>Role 
+    <select name="showRole" id="showRole">
+    	<option value="">All</option>
+        <option value="teacher" ${showRole=='teacher'?'selected="selected"':''}>Teacher</option>
+        <option value="coordinator" ${showRole=='coordinator'?'selected="selected"':''}>Coordinator</option>
+        <option value="drama" ${showRole=='drama'?'selected="selected"':''}>Drama</option>
+        <option value="activityleader" ${showRole=='activityleader'?'selected="selected"':''}>Activity Leader</option>
+        <option value="mixedRole" ${showRole=='mixedRole'?'selected="selected"':''}>Mixed Role</option>
+    </select>
+</div>
 <div>
     <form action="<c:url value="/staff-member-list.htm"/> ">
         show deleted?<input type="checkbox" name="showDeleted"
