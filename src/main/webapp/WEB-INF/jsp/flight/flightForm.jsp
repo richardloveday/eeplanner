@@ -170,20 +170,6 @@
             </table>
         </div>
 
-        <c:if test="${fn:length(flight.staffMembers) lt flight.numberOfSeats && fn:length(availableStaff)>0}">
-            <form class="marginAll" action="<c:url value="/process-flight-staff.htm" />">
-                <input type="hidden" name="action" value="addStaffMember">
-                <input type="hidden" name="flightID" value="${flight.ID}">
-                <select name="staffMemberID">
-                    <c:forEach items="${availableStaff}" var="staffMember">
-                        <option value="${staffMember.ID}">${staffMember.contact.secondName}
-                            - ${staffMember.contact.firstNames}</option>
-                    </c:forEach>
-                </select>
-                <input type="submit" value="Add staff member">
-            </form>
-        </c:if>
-
     </div>
 
 	<div class="marginTop left">
