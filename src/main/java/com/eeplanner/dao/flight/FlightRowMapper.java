@@ -22,6 +22,7 @@ public class FlightRowMapper implements RowMapper {
         flight.setCarrier(rs.getString("carrier"));
         flight.setType(rs.getString("type"));
         flight.setFlightNumber(rs.getString("flightNumber"));
+        flight.setReturnFlightNumber(rs.getString("returnFlightNumber"));
         flight.setDestination(rs.getString("destination"));
         flight.setCampID(rs.getInt("campID"));
         flight.setOutboundArrival(rs.getTimestamp("outboundArrival"));

@@ -49,7 +49,7 @@
         <c:forEach items="${flights}" var="flight">
             <tr>
                 <td><a href="<c:url value='/flight.htm'/>?id=${flight.ID}">${flight.destination}</a></td>
-            	<td><a href="<c:url value='/flight.htm'/>?id=${flight.ID}">${flight.flightNumber}</a></td>
+            	<td><a href="<c:url value='/flight.htm'/>?id=${flight.ID}">${flight.flightNumber} / ${flight.returnFlightNumber}</a></td>
                 <td><fmt:formatDate pattern='dd/MM/yyyy HH:mm' value='${flight.outboundDeparture}' /></td>
                 <td><fmt:formatDate pattern='dd/MM/yyyy HH:mm' value='${flight.returnDeparture}' /></td>
                 <td>${flight.numberOfSeats}</td>

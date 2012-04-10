@@ -54,7 +54,7 @@
           			select c.ID as 'campID', f.ID as 'flightID', s.ID as 'staffMemberID', scon.ID as 'staffMemberContactID', scon.firstNames as 'staffMemberFirstNames',
 				                scon.secondName as 'staffMemberSecondName', c.name as 'campName',
 				                c.start, c.end, ccon.orgname as 'campContactOrgName', f.type as 'flightType', f.outboundArrival,
-				                f.outboundDeparture, f.returnArrival, f.returnDeparture, f.destination, f.flightNumber, s.deleted, s.parentID, s.hash 
+				                f.outboundDeparture, f.returnArrival, f.returnDeparture, f.destination, f.flightNumber, f.returnFlightNumber, s.deleted, s.parentID, s.hash 
 
 				  	from eeplanner.flight f
 

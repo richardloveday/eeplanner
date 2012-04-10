@@ -80,12 +80,12 @@
         </entry>
         <entry key="storeNewFlight">
             <value>
-                insert into eeplanner.flight (carrier, type, flightNumber,
+                insert into eeplanner.flight (carrier, type, flightNumber, f.returnFlightNumber,
                                                destination, outboundArrival, outboundDeparture,
                                                returnArrival, returnDeparture,
                                                cost, campID, numberOfSeats, airport, notes)
 
-                values (:carrier, :type, :flightNumber,
+                values (:carrier, :type, :flightNumber, :returnFlightNumber,
                         :destination, :outboundArrival, :outboundDeparture,
                         :returnArrival, :returnDeparture,
                         :cost, :campID, :numberOfSeats, :airport, :notes)
@@ -97,6 +97,7 @@
                     carrier = :carrier,
                     type = :type,
                     flightNumber = :flightNumber,
+                    returnFlightNumber = :returnFlightNumber,
                     outboundArrival = :outboundArrival,
                     outboundDeparture = :outboundDeparture,
                     returnArrival = :returnArrival,

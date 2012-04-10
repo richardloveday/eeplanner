@@ -17,6 +17,7 @@ public class Flight {
     private String carrier;
     private String type;
     private String flightNumber;
+    private String returnFlightNumber;
     private String destination;
     private int numberOfSeats;
     private String airport;    
@@ -196,4 +197,13 @@ public class Flight {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
+
+	public String getReturnFlightNumber() {
+		return returnFlightNumber;
+	}
+
+	public void setReturnFlightNumber(String returnFlightNumber) {
+		this.returnFlightNumber = returnFlightNumber;
+	}
+	
 }

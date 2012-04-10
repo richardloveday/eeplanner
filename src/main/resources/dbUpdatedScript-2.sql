@@ -46,3 +46,5 @@ DROP TABLE `flightcamp`;
 
 /* Spring-Data Changes - 2:17:19 AM local */ 
 ALTER TABLE `flight` DROP `itineraryID`;
+ALTER TABLE `flight` ADD `returnFlightNumber` varchar(100) NULL DEFAULT NULL  AFTER `flightNumber`;
+

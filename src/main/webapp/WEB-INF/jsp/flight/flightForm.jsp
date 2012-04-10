@@ -53,8 +53,12 @@
                 </td>
             </tr>
             <tr>
-                <td>flight number:</td>
+                <td>Outbound flight number:</td>
                 <td><form:input path="flightNumber"/></td>
+            </tr>
+            <tr>
+                <td>Return flight number:</td>
+                <td><form:input path="returnFlightNumber"/></td>
             </tr>
             <tr>
                 <td>cost:</td>
