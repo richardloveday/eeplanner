@@ -32,7 +32,6 @@ public class FlightRowMapper implements RowMapper {
         flight.setNumberOfSeats(rs.getInt("numberOfSeats"));
         flight.setAirport(rs.getString("airport"));
         flight.setDeleted(rs.getBoolean("deleted"));
-        flight.setItineraryID(rs.getInt("itineraryID"));
         flight.setNotes(rs.getString("notes"));
 
         return flight;

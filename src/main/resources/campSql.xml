@@ -32,8 +32,8 @@
                 from eeplanner.camp c
 
 			    where c.ID not in (
-			        select fc.campID from eeplanner.flightcamp fc
-			        where fc.flightID = :ID
+			        select it.camp_id from eeplanner.itinerary it
+			        where it.flight_id = :ID
 			    )
                 and ( deleted = false or deleted = :includeDeleted )
                 order by :orderBy
@@ -43,8 +43,8 @@
             <value>
                 select *
                 from eeplanner.camp c
-                inner join eeplanner.flightcamp fc on fc.campID = c.ID
-                where fc.flightID = :ID
+                inner join eeplanner.itinerary it on it.camp_id = c.ID
+                where it.flight_id = :ID
                 order by :orderBy
                 ;
             </value>

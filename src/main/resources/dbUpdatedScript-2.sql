@@ -38,3 +38,11 @@ ALTER TABLE `itinerary` DROP `transfer_1_id`;
 ALTER TABLE `itinerary` DROP `transfer_2_id`;
 ALTER TABLE `itinerary` ADD `notes` text NULL DEFAULT NULL;
 
+
+/* 06/04/2012 11:40:01 PM local */ 
+DROP TABLE `flightstaff`;
+DROP TABLE `flightcamp`;
+
+
+/* Spring-Data Changes - 2:17:19 AM local */ 
+ALTER TABLE `flight` DROP `itineraryID`;

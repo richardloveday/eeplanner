@@ -35,34 +35,6 @@ public class StaffDaoImpl implements StaffDao {
     private NamedParameterJdbcTemplate  namedParameterJdbcTemplate;
     private HashMap<String, String> sqlQueries;
     Logger log = Logger.getLogger(StaffDaoImpl.class);
-
-
-    public List<StaffMember> getStaffMembersForCamps(int[] campIDs, String orderBy) {
-        try {
-
-            StringBuffer qry = new StringBuffer(sqlQueries.get("getStaffMembersForCamps"));
-            int x = 0;
-            if(campIDs!=null && campIDs.length>0) {
-	            for(int id : campIDs){
-	            	if(x==0) qry.append(" where cmp.ID in ("+id);
-	            	else{ qry.append(","+id); }
-	            	x++;
-	            }
-	            qry.append(")");
-            }
-            qry.append(" group by s.ID ");          
-
-            List<StaffMember> staffMembers = this.jdbcTemplate.query(qry.toString(), new StaffRowMapper());
-
-            return staffMembers;
-
-        } catch (DataAccessException e) {
-            log.fatal(e.getMessage());
-            // crap
-            return null;
-        }
-    }
-
     
 	public List<StaffMemberSearchData> getStaffMemberSearchData(int staffMemberID, String orderBy) {
         try {

@@ -58,8 +58,7 @@
 
 				  	from eeplanner.flight f
 
-					inner join eeplanner.flightstaff fs on fs.flightID = f.ID
-					inner join eeplanner.flightcamp fc on fc.flightID = f.ID
+					inner join eeplanner.itinerary it on it.flightID = f.ID
 					inner join eeplanner.camp c on c.ID = fc.campID
 					inner join eeplanner.staff s on s.ID = fs.staffID
          			inner join eeplanner.contact scon on scon.ID = s.contactID
@@ -229,25 +228,6 @@
                 order by :orderBy
             </value>
         </entry>
-        <entry key="getStaffMembersForCamps">
-            <value>
-                select s.ID, s.teacher, s.coordinator, s.drama, s.activityleader, s.kinName,
-                s.activityCoordinator, s.dptCoordinator, s.courseSpecialist,
-                s.kinNumber, s.archivePassword, s.existing, s.applied, s.interviewed, s.approved,
-                s.status, s.profile, s.medical, s.dietary, s.travelOutside, s.travelWithinLondon, s.officeNotes, s.mixedRole,
-                s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
-                s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash,
-                c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
-                c.add3, c.add4, c.postCode, c.dob, c.sex,
-                cs.offered, cs.accepted, cs.returned, cs.job, s.deleted
-
-                from eeplanner.staff s
-                inner join eeplanner.contact c on s.contactID = c.ID
-                inner join eeplanner.campstaff cs on s.ID = cs.staffID
-                left join eeplanner.camp cmp on cmp.ID = cs.campID
-
-            </value>
-        </entry>
         <entry key="getStaffMembersCountForCamp">
             <value>
                 select count(cs.staffID)
@@ -335,9 +315,9 @@
 
                 from eeplanner.staff s
                 inner join eeplanner.contact c on s.contactID = c.ID
-                left join eeplanner.flightstaff fs on s.ID = fs.staffID
+                left join eeplanner.itinerary it on it.staff_id = s.ID
 
-                where fs.flightID = :flightID
+                where it.flight_id = :flightID
                 order by :orderBy
             </value>
         </entry>
@@ -355,9 +335,9 @@
 
                 from eeplanner.staff s
                 inner join eeplanner.contact c on s.contactID = c.ID
-                left join eeplanner.flightstaff fs on s.ID = fs.staffID
+                left join eeplanner.itinerary it on it.staff_id = s.ID
 
-                where fs.flightID = :flightID
+                where it.flight_id = :flightID
                 and s.ID = :staffMemberID
                 limit 1
             </value>

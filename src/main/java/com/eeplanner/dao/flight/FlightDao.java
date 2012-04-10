@@ -20,10 +20,6 @@ public interface FlightDao {
     public List<Flight> getFlightsByCampID(int campID);
     public Flight getFlightByStaffMemberIDCampID(int staffMemberID, int campID);
     public boolean setDeleted(int id, boolean isDeleted);
-    public boolean addFlightStaffMember(int flightID, int staffMemberID);
-    public boolean removeFlightStaffMember(int flightID, int staffMemberID);
-    public boolean addFlightCamp(int flightID, int campID);
-    public boolean removeFlightCamp(int flightID, int campID);
     public List<Flight> getFlightListByYear(String orderBy, boolean showDeleted, int year);
 	public boolean removeFlight(int id);
 	public boolean removeAllFlights();

@@ -59,16 +59,13 @@ public class FlightController extends EEPlannerSimpleFormController {
 	protected Object formBackingObject(HttpServletRequest request) throws Exception {
 
 		Flight flight = new Flight();
-		List<Camp> camps;
 		List<StaffMember> staffMembers;
 
 		if (ServletRequestUtils.getIntParameter(request, "id") != null) {
 			flight = flightDao.getFlightByID(ServletRequestUtils.getIntParameter(request, "id"));
 			staffMembers = staffDao.getStaffMembersForFlight(flight, "secondName asc");
-			camps = campDao.getCampsForFlight(flight.getID(), "secondName asc");
 
 			flight.setStaffMembers(staffMembers);
-			flight.setCamps(camps);
 		}
 		return flight;
 	}
@@ -168,32 +165,4 @@ public class FlightController extends EEPlannerSimpleFormController {
 		this.persistService = persistService;
 	}
 
-	@Override
-	protected Map referenceData(HttpServletRequest request) throws Exception {
-		Map model = new HashMap();
-        
-		if (ServletRequestUtils.getIntParameter(request, "id") != null) {
-
-			Flight flight = flightDao.getFlightByID(ServletRequestUtils.getIntParameter(request, "id"));
-
-			int flightsYear = new DateTime(flight.getOutboundDeparture()).getYear();
-			
-			List<Camp> camps = campDao.getAvailableCampsForFlight(flight.getID(), "secondName asc", false);
-			List<Camp> currentYearsCamps = campDao.getCampsForYear(flightsYear);
-			int[] campIDs = new int[currentYearsCamps.size()];
-			int cntr = 0;
-			for(Camp camp: currentYearsCamps){
-				campIDs[cntr] = camp.getID();
-				cntr++;
-			}
-			List<StaffMember> staffMembers = staffDao.getStaffMembersForCamps(campIDs, "secondName asc");
-
-			model.put("availableCamps", camps);
-			model.put("availableStaff", staffMembers);
-
-		}
-
-		model.put("camps", campDao.getCampList("name asc", false));
-		return model;
-	}
 }

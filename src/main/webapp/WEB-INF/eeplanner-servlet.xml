@@ -261,15 +261,7 @@
 
     <bean id="processFlightStaffController" class="com.eeplanner.web.flight.ProcessFlightStaffController">
         <property name="flightDao" ref="flightDao"/>
-        <property name="methodNameResolver">
-            <bean class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
-                <property name="paramName" value="action"/>
-            </bean>
-        </property>
-    </bean>
-
-    <bean id="processFlightCampController" class="com.eeplanner.web.flight.ProcessFlightCampController">
-        <property name="flightDao" ref="flightDao"/>
+        <property name="itineraryDao" ref="itineraryDao"/>
         <property name="methodNameResolver">
             <bean class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
                 <property name="paramName" value="action"/>
@@ -337,7 +329,6 @@
                 <!-- processing servlets -->
                 <prop key="/process-camp-staff.htm">processCampStaffController</prop>
                 <prop key="/process-flight-staff.htm">processFlightStaffController</prop>
-                <prop key="/process-flight-camp.htm">processFlightCampController</prop>
                 <prop key="/process-phone-email-note.htm">processPhoneEmailNoteController</prop>
                 <prop key="/delete-entity.htm">deleteEntityController</prop>
 

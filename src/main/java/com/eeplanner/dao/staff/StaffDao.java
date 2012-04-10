@@ -23,7 +23,6 @@ public interface StaffDao {
     public StaffMember storeStaffMember(StaffMember staffMember);
     public List<StaffMember> getAvailableStaffMembers(int campID,int theYear, String orderBy, boolean showDeleted);
     public List<StaffMember> getAvailableStaffMembersForCamp(Camp camp, String orderBy);
-    public List<StaffMember> getStaffMembersForCamps(int[] campIDs, String orderBy);
     public List<StaffMember> getStaffMembersForCamp(Camp camp, String orderBy);
     public int getStaffMembersCountForCamp(Camp camp);
     public List<StaffMember> getStaffMembersForFlight(Flight flight, String orderBy);

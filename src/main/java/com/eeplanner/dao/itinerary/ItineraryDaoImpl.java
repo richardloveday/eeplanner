@@ -96,6 +96,22 @@ public class ItineraryDaoImpl implements ItineraryDao {
             return false;
         }
     }
+    
+    public boolean delete(int id) {
+        try {
+            Map params = new HashMap();
+            params.put("ID", id);
+
+            String qry = sqlQueries.get("deleteItinerary");
+            this.namedParameterJdbcTemplate.update(qry, params);
+
+            return true;
+
+        } catch (DataAccessException e) {
+            log.fatal(e.getMessage());
+            return false;
+        }
+    }
 
 	public Itinerary getItineraryByCampAndStaffID(int campID, int staffMemberID) {
 		try {

@@ -534,7 +534,7 @@
 					        <input type="hidden" name="name" value="${camp.name}">
 					        <input type="hidden" name="campID" value="${camp.ID}">
 					        <td>
-					        	<input type="submit" value="travel"/>
+					        	<input type="submit" value="add flight"/>
 					        </td>
 					    </form>
 	                </tr>

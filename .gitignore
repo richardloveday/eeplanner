@@ -11,3 +11,9 @@ target/*
 .settings/org.eclipse.jdt.core.prefs
 
 velocity.log*
+
+src/main/java/com/eeplanner/datastructures/Flight.java
+
+src/main/java/com/eeplanner/datastructures/Flight.java
+
+src/main/java/com/eeplanner/web/flight/FlightController.java

@@ -81,6 +81,14 @@
                 ;
             </value>
         </entry>
+        <entry key="deleteItinerary">
+            <value>
+                delete from eeplanner.itinerary
+                where ID = :ID
+                ;
+            </value>
+        </entry>
+        
     </util:map>
 
 </beans>

@@ -24,11 +24,10 @@
         <entry key="getFlightByCampAndStaffID">
             <value>                 
 					SELECT t.* FROM `eeplanner`.`flight` t
-					left join eeplanner.flightcamp tc on t.ID = tc.flightID
+					left join eeplanner.itinerary it on t.ID = it.flight_id
 					left join eeplanner.camp c on c.ID = tc.campID
 					left join eeplanner.campstaff cs on cs.campID = c.ID
 					left join eeplanner.staff s on s.ID = cs.staffID
-					left join eeplanner.itinerary i on i.ID = t.itineraryID
 					where i.staffID = :staffID and s.ID = :staffID and c.ID = :campID
 					;
             </value>
@@ -55,8 +54,7 @@
             <value>
                 select *
                 from eeplanner.flight t
-                inner join eeplanner.flightcamp fc fc.flightID = t.ID
-                inner join eeplanner.flightstaff fs on fs.flightID = t.ID
+                inner join eeplanner.itinerary it it.flightID = t.ID
                 where fc.campID = :campID
                 and fs.staffID = :staffMemberID
                 ;
@@ -85,12 +83,12 @@
                 insert into eeplanner.flight (carrier, type, flightNumber,
                                                destination, outboundArrival, outboundDeparture,
                                                returnArrival, returnDeparture,
-                                               cost, campID, numberOfSeats, airport, itineraryID, notes)
+                                               cost, campID, numberOfSeats, airport, notes)
 
                 values (:carrier, :type, :flightNumber,
                         :destination, :outboundArrival, :outboundDeparture,
                         :returnArrival, :returnDeparture,
-                        :cost, :campID, :numberOfSeats, :airport, :itineraryID, :notes)
+                        :cost, :campID, :numberOfSeats, :airport, :notes)
             </value>
         </entry>
         <entry key="editFlight">
@@ -108,31 +106,9 @@
                     numberOfSeats = :numberOfSeats,
                     airport = :airport,
                     deleted = :deleted,
-                    itineraryID = :itineraryID,
                     notes = :notes
                     
                 where ID = :ID
-                ;
-            </value>
-        </entry>
-        <entry key="addFlightCamp">
-            <value>
-                insert into eeplanner.flightcamp (flightID, campID)
-                values ( :flightID, :campID )
-                ;
-            </value>
-        </entry>
-        <entry key="removeFlightCamp">
-            <value>
-                delete from eeplanner.flightcamp
-                where campID = :campID and flightID = :flightID
-                ;
-            </value>
-        </entry>
-        <entry key="addFlightStaffMember">
-            <value>
-                insert into eeplanner.flightstaff (flightID, staffID)
-                values ( :flightID, :staffMemberID )
                 ;
             </value>
         </entry>

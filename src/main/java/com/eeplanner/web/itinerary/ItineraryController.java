@@ -91,7 +91,15 @@ public class ItineraryController extends EEPlannerSimpleFormController{
 
         int year = ServletRequestUtils.getIntParameter(request, "year", new DateTime().getYear());
 
-        model.put("flights", flightDao.getFlightListByYear("destination asc, outboundArrival desc", false, year));
+        List<Flight> flights = flightDao.getFlightListByYear("destination asc, outboundArrival desc", false, year);
+        if(flights!=null) {
+        	for(Flight flight: flights){
+        		List<StaffMember> staffMembers = staffDao.getStaffMembersForFlight(flight, "secondName asc");
+        		flight.setStaffMembers(staffMembers);
+        	}
+        }
+        
+        model.put("flights", flights);
 
         return model;
     }

@@ -8,4 +8,5 @@ public interface ItineraryDao {
 	public boolean setDeleted(int id, boolean isDeleted);
 	public Itinerary getItineraryByCampAndStaffID(int campID, int staffMemberID);
 	public Itinerary getItineraryByFlightAndStaffID(int flightID, int staffMemberID);
+	public boolean delete(int id);
 }

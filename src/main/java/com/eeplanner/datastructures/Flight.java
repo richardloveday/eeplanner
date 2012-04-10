@@ -26,7 +26,6 @@ public class Flight {
     private Date returnDeparture;    
     private BigDecimal cost;
     private boolean deleted;
-    private int itineraryID;
     private List<Camp> camps;
     private Camp camp;
     private int campID;
@@ -81,14 +80,6 @@ public class Flight {
     public void setCampID(int campID) {
         this.campID = campID;
     }
-
-    public int getItineraryID() {
-		return itineraryID;
-	}
-
-	public void setItineraryID(int itineraryID) {
-		this.itineraryID = itineraryID;
-	}
 
 	private List<StaffMember> staffMembers;
 
