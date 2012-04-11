@@ -61,7 +61,7 @@
                 </h3>
             </div>
             <c:forEach items="${staffData}" var="data">
-                <div class="staffData blueBorder marginBottom"">
+                <div class="staffData blueBorder marginBottom">
                     <div class="data left">
                     	
                         <h3>Camp - <a href="<c:url value="/camp.htm"/>?id=${data.camp.ID}">${data.camp.name}</a></h3>
