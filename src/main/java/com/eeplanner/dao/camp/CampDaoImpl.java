@@ -212,7 +212,9 @@ public class CampDaoImpl implements CampDao {
 	public boolean editCampStaffMember(CampStaff campStaff) {
         try {
 
-        	if(campStaff.getJob().equalsIgnoreCase("0")) campStaff.setJob(null);
+        	if("0".equalsIgnoreCase(campStaff.getJob())) {
+        		campStaff.setJob(null);
+        	}
 
         	Map params = new HashMap();
             params.put("campID", campStaff.getCampID());
