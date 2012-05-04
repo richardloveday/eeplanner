@@ -36,7 +36,7 @@
 				                scon.secondName as 'staffMemberSecondName',
 				                c.name as 'campName', c.start, c.end, ccon.orgname as 'campContactOrgName', null as 'flightType',
 				                null as 'outboundArrival', null as 'outboundDeparture', null as 'returnArrival', null as 'returnDeparture',
-				                null as 'destination', null as 'flightNumber', s.deleted, s.parentID, s.hash 
+				                null as 'destination', null as 'flightNumber', null as 'returnFlightNumber', null as 'carrier', s.deleted, s.parentID, s.hash 
 
 
 
@@ -48,6 +48,22 @@
 		          	inner join eeplanner.contact ccon on ccon.ID = c.contactID
 
 				  	where s.ID = :ID
+				  	
+				  	union
+				  	
+               		select c.ID as 'campID', f.ID as 'flightID', s.ID as 'staffMemberID', scon.ID as 'staffMemberContactID', scon.firstNames as 'staffMemberFirstNames',
+                        scon.secondName as 'staffMemberSecondName', 
+                        c.name as 'campName', c.start, c.end, ccon.orgname as 'campContactOrgName', f.type as 'flightType', f.outboundArrival,
+                        f.outboundDeparture, f.returnArrival, f.returnDeparture, f.destination, f.flightNumber, f.returnFlightNumber, f.carrier,
+                        s.deleted, s.parentID, s.hash 
+           			
+           			from eeplanner.flight f
+			          inner join eeplanner.itinerary it on it.flight_id = f.ID
+			          inner join eeplanner.camp c on c.ID = it.camp_id
+			          inner join eeplanner.staff s on s.ID = it.staff_id
+              			  inner join eeplanner.contact scon on scon.ID = s.contactID
+               		  inner join eeplanner.contact ccon on ccon.ID = c.contactID
+           			where it.staff_id = :ID
 
 				  	order by campID, flightID desc) thing
 

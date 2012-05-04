@@ -41,6 +41,7 @@ public class StaffSearchRowMapper implements RowMapper {
         data.getFlight().setReturnDeparture(rs.getTimestamp("returnDeparture"));
         data.getFlight().setDestination(rs.getString("destination"));
         data.getFlight().setFlightNumber(rs.getString("flightNumber"));
+        data.getFlight().setCarrier(rs.getString("carrier"));
 
         return data;
     }
