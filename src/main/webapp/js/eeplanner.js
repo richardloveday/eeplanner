@@ -10,11 +10,29 @@ $(document).ready(function() {
             arrhours: { min: 0, max: 23 },
             campID: { required: true, min: 1 },
             contactID: { required: true, min: 1 }
-        }
+        },
+        submitHandler: function(form) {
+        	if($('.validateAvailablity')){
+        		var n = $("input.staffAvailability:checked").length;
+        		if(n==0) {
+        			alert('Please select at least one available month!');
+        			return;
+        		}
+        	}
+        	form.submit();
+    	}
     });
 
     $(document).ready(function() {
-        $(".dateselect").datepicker({ buttonImage: '/i/icon_date_picker.jpg', buttonImageOnly: true, showOn: 'button', buttonText: "select", dateFormat: 'dd/mm/yy' });
+        $(".dateselect").datepicker({ 
+        	buttonImage: '/i/icon_date_picker.jpg', 
+        	buttonImageOnly: true, 
+        	showOn: 'button', 
+        	buttonText: "select", 
+        	dateFormat: 'dd/mm/yy', 
+        	changeMonth: true,
+			changeYear: true 
+		});
     });
 
     $('#addPhoneNumber').click(function() {

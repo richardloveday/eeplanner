@@ -343,37 +343,37 @@
 				<p class="label notice">Availability</p>
 				<div class="clearfix">
 					<label>Most of our camps will run from 9th-23rd June,
-						16th-30th June and 25th August- 8th September. Please tick the
-						month box only if you are available for the whole month, otherwise
-						please write your exact dates in the space below.</label>
+						16th-30th June and 25th August- 8th September.
+						You must select at least one month. If you are only available for specific 
+						persiods within the month, please add this information in the notes box</label>
 					<div class="input">
 		              <ul class="inputs-list">
 		                <li>
 		                  <label>
-		                  	<form:checkbox path="staffAvailability.available1" />
+		                  	<form:checkbox path="staffAvailability.available1" cssClass="staffAvailability "/>
 		                    <span>June</span>
 		                  </label>
 		                </li>
 		                <li>
 		                  <label>
-		                    <form:checkbox path="staffAvailability.available2" />
+		                    <form:checkbox path="staffAvailability.available2" cssClass="staffAvailability "/>
 		                    <span>July</span>
 		                  </label>
 		                </li>
 		                <li>
 		                  <label>
-		                    <form:checkbox path="staffAvailability.available3" />
+		                    <form:checkbox path="staffAvailability.available3" cssClass="staffAvailability" />
 		                    <span>August</span>
 		                  </label>
 		                </li>
 		                <li>
 		                  <label>
-		                    <form:checkbox path="staffAvailability.available4" />
+		                    <form:checkbox path="staffAvailability.available4" cssClass="staffAvailability" />
 		                    <span>September</span>
 		                  </label>
 		                </li>
 		                <li>
-		                	<form:textarea path="staffAvailability.note" rows="2" cssClass="xlarge"/>
+		                	<form:textarea path="staffAvailability.note" rows="2" cssClass="xlarge validateAvailablity"/>
 		                </li>
 		              </ul>
 		            </div>
