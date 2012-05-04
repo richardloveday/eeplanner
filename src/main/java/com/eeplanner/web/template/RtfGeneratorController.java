@@ -134,11 +134,12 @@ public class RtfGeneratorController extends MultiActionController {
 			for(StaffMember staffMember : staffMembers){
 				Itinerary itinerary = itineraryDao.getItineraryByFlightAndStaffID(flightId, staffMember.getID());
 				
-				staffMember = staffDao.getStaffMemberForCamp(staffMember.getID(), itinerary.getCampID());
-				staffMember.setCamp(campDao.getCampByID(itinerary.getCampID()));
+				if(itinerary!=null) {
+					staffMember = staffDao.getStaffMemberForCamp(staffMember.getID(), itinerary.getCampID());
+					staffMember.setCamp(campDao.getCampByID(itinerary.getCampID()));
+				}
 				staffMember.getContact().setPhoneNumbers(phoneDao.getPhoneNumberListByContactID(staffMember.getContact().getID()));
 				staffWrappers.add(new StaffWrapper(staffMember, null));
-				
 			}
 		}
 		

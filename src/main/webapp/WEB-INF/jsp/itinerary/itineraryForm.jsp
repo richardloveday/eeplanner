@@ -29,6 +29,7 @@
             <h2>Flight</h2>
 
             <form:select path="flightID">
+            	<option></option>
             	<c:forEach items="${flights}" var="flight">
             		<c:if test="${fn:length(flight.staffMembers) lt flight.numberOfSeats or itinerary.flightID eq flight.ID}">
                 		<form:option value="${flight.ID}" label="${flight.itemLabel}" />
