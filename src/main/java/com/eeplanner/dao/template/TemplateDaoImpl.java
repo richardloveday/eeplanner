@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.eeplanner.datastructures.Template;
 import com.eeplanner.datastructures.TemplateType;
@@ -50,6 +51,7 @@ public class TemplateDaoImpl implements TemplateDao {
 		}
 	}
 
+	@Transactional
 	public Template storeTemplate(Template template) {
 		SqlParameterSource fileParameters = new BeanPropertySqlParameterSource(template);
         KeyHolder keyHolder = new GeneratedKeyHolder();

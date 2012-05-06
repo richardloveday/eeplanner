@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 
@@ -43,6 +44,7 @@ public class NoteDaoImpl implements NoteDao {
         this.sqlQueries = sqlQueries;
     }
 
+    @Transactional
     public boolean removeNote(int id) {
 
         try {
@@ -75,6 +77,7 @@ public class NoteDaoImpl implements NoteDao {
         }
     }
 
+    @Transactional
     public Note storeNote(Note note) {
 
         SqlParameterSource fileParameters = new BeanPropertySqlParameterSource(note);

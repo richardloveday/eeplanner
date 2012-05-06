@@ -4,6 +4,7 @@ import com.eeplanner.datastructures.StaffAvailability;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.dao.DataAccessException;
 import org.apache.log4j.Logger;
@@ -36,6 +37,7 @@ public class StaffAvailabilityDaoImpl implements StaffAvailabilityDao {
         }
 	}
 
+	@Transactional
 	public void createNewStaffAvailabilityForStaff(int staffID, int theYear) {
         try {
     		Map params = new HashMap();
@@ -59,6 +61,7 @@ public class StaffAvailabilityDaoImpl implements StaffAvailabilityDao {
         }
 	}
 
+	@Transactional
 	public void storeStaffAvailability(StaffAvailability staffAvailability) {
 
         try {
@@ -97,6 +100,7 @@ public class StaffAvailabilityDaoImpl implements StaffAvailabilityDao {
         this.sqlQueries = sqlQueries;
     }
 
+    @Transactional
 	public void deleteAvailabilityForStaff(int staffId) {
 		 try {
 	            Map params = new HashMap();

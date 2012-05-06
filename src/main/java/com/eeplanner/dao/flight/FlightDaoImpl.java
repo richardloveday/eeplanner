@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.dao.DataAccessException;
 import org.apache.log4j.Logger;
 
@@ -35,6 +36,7 @@ public class FlightDaoImpl implements FlightDao {
     Logger log = Logger.getLogger(FlightDaoImpl.class);
 
     
+    @Transactional
     public boolean setDeleted(int id, boolean isDeleted) {
     	try {
     		Map params = new HashMap();
@@ -164,6 +166,7 @@ public class FlightDaoImpl implements FlightDao {
 
 
 
+    @Transactional
     public Flight storeFlight(Flight flight) {
 
         SqlParameterSource fileParameters = new BeanPropertySqlParameterSource(flight);
@@ -195,6 +198,7 @@ public class FlightDaoImpl implements FlightDao {
         this.sqlQueries = sqlQueries;
     }
     
+    @Transactional
     public boolean removeFlight(int id) 
 	{
 		try
@@ -213,6 +217,7 @@ public class FlightDaoImpl implements FlightDao {
 		}
 	}
 	
+    @Transactional
 	public boolean removeAllFlights()
 	{
 		try {

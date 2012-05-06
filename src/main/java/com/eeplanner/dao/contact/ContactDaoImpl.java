@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.dao.DataAccessException;
 import org.apache.log4j.Logger;
 import com.eeplanner.datastructures.Contact;
@@ -92,6 +93,7 @@ public class ContactDaoImpl implements ContactDao {
         }
     }
 
+    @Transactional
     public Contact storeContact(Contact contact) throws DataAccessException {
 
         SqlParameterSource fileParameters = new BeanPropertySqlParameterSource(contact);
@@ -114,6 +116,7 @@ public class ContactDaoImpl implements ContactDao {
         return contact;
     }
     
+    @Transactional
     public boolean removeContact(int contactID) {
     	try {
     		Map params = new HashMap();
@@ -130,7 +133,7 @@ public class ContactDaoImpl implements ContactDao {
     	}
 	}
 
-
+    @Transactional
     public boolean removeContactEmails(int contactID) {
 
         try {
@@ -147,6 +150,8 @@ public class ContactDaoImpl implements ContactDao {
             return false;
         }
     }
+    
+    @Transactional
     public boolean removeContactPhoneNumbers(int contactID) {
 
         try {
@@ -163,6 +168,8 @@ public class ContactDaoImpl implements ContactDao {
             return false;
         }
     }
+    
+    @Transactional
     public boolean removeContactNotes(int contactID) {
 
         try {

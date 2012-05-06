@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.eeplanner.datastructures.Camp;
 import com.eeplanner.datastructures.CampStaff;
@@ -35,6 +36,7 @@ public class CampDaoImpl implements CampDao {
 
 
 
+    @Transactional
     public boolean setDeleted(int id, boolean isDeleted) {
     	try {
     		Map params = new HashMap();
@@ -132,6 +134,7 @@ public class CampDaoImpl implements CampDao {
         }
 	}
 
+	@Transactional
     public boolean removeCampStaffMember(int campID, int staffMemberID) {
 
         try {
@@ -150,6 +153,7 @@ public class CampDaoImpl implements CampDao {
         }
     }
 
+	@Transactional
 	public boolean removeAllCampStaffMembers(int campID) {
 
         try {
@@ -209,6 +213,7 @@ public class CampDaoImpl implements CampDao {
             }
         }
 
+    @Transactional
 	public boolean editCampStaffMember(CampStaff campStaff) {
         try {
 
@@ -236,6 +241,7 @@ public class CampDaoImpl implements CampDao {
         }
     }
 
+    @Transactional
     public boolean addCampStaffMember(int campID, int staffMemberID) {
 
         try {
@@ -331,6 +337,8 @@ public class CampDaoImpl implements CampDao {
             return null;
         }
     }
+    
+    @Transactional
     public Camp storeCamp(Camp camp) {
 
         SqlParameterSource fileParameters = new BeanPropertySqlParameterSource(camp);

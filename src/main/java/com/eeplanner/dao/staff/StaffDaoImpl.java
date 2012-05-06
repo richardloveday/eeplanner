@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.eeplanner.dao.itinerary.ItineraryRowMapper;
 import com.eeplanner.datastructures.Camp;
@@ -259,6 +260,7 @@ public class StaffDaoImpl implements StaffDao {
         }
     }
 
+    @Transactional
     public boolean setDeleted(int id, boolean isDeleted) {
     	try {
     		Map params = new HashMap();
@@ -276,6 +278,7 @@ public class StaffDaoImpl implements StaffDao {
     	}
     }
     
+    @Transactional
     public boolean delete(int id) {
     	try {
     		Map params = new HashMap();
@@ -292,6 +295,7 @@ public class StaffDaoImpl implements StaffDao {
     	}
     }
     
+    @Transactional
     public StaffMember storeStaffMember(StaffMember staffMember) {
 
 

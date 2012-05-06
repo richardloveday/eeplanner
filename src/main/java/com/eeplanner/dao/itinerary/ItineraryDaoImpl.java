@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.eeplanner.datastructures.Flight;
 import com.eeplanner.datastructures.Itinerary;
@@ -39,6 +40,7 @@ public class ItineraryDaoImpl implements ItineraryDao {
         this.sqlQueries = sqlQueries;
     }
 
+    @Transactional
     public Itinerary storeItinerary(Itinerary itinerary) {
 
         SqlParameterSource fileParameters = new BeanPropertySqlParameterSource(itinerary);
@@ -80,6 +82,7 @@ public class ItineraryDaoImpl implements ItineraryDao {
         }
     }
 
+    @Transactional
     public boolean setDeleted(int id, boolean isDeleted) {
         try {
             Map params = new HashMap();
@@ -97,6 +100,7 @@ public class ItineraryDaoImpl implements ItineraryDao {
         }
     }
     
+    @Transactional
     public boolean delete(int id) {
         try {
             Map params = new HashMap();

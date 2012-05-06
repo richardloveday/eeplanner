@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 
@@ -44,6 +45,7 @@ public class EmailDaoImpl implements EmailDao {
         this.sqlQueries = sqlQueries;
     }
 
+    @Transactional
     public boolean removeEmail(int id) {
 
         try {
@@ -72,6 +74,7 @@ public class EmailDaoImpl implements EmailDao {
         return emls;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
+    @Transactional
     public Email storeEmail(Email email) {
 
         SqlParameterSource fileParameters = new BeanPropertySqlParameterSource(email);

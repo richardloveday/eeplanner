@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.eeplanner.dao.flight.FlightRowMapper;
 import com.eeplanner.dao.staff.StaffSearchRowMapper;
@@ -39,6 +40,7 @@ public class TransferDaoImpl implements TransferDao {
     }
 
 
+    @Transactional
     public boolean setDeleted(int id, boolean isDeleted) {
         try {
             Map params = new HashMap();
@@ -56,6 +58,7 @@ public class TransferDaoImpl implements TransferDao {
         }
     }
 
+    @Transactional
     public Transfer storeTransfer(Transfer transfer) {
         SqlParameterSource fileParameters = new BeanPropertySqlParameterSource(transfer);
         KeyHolder keyHolder = new GeneratedKeyHolder();
