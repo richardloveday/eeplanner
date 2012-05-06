@@ -12,7 +12,8 @@ $(document).ready(function() {
             contactID: { required: true, min: 1 }
         },
         submitHandler: function(form) {
-        	if($('.validateAvailablity')){
+        	var avals = $('.validateAvailablity')
+        	if(avals && avals.length > 0){
         		var n = $("input.staffAvailability:checked").length;
         		if(n==0) {
         			alert('Please select at least one available month!');
