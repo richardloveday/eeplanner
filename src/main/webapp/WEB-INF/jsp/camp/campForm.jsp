@@ -617,6 +617,7 @@
 	   <%-- <li>${activityCoordinatorsStillNeeded} activity coordinators</li>
 	  		<li>${dptCoordinatorsStillNeeded} dpt coordinators</li> --%>
 	        <li>${courseSpecialistsStillNeeded} course specialists</li>
+	        <li>${splitRoleStillNeeded} Split roles</li>
 	    </div>
 	
 	    <c:if test="${fn:length(availableStaff)>0}">

@@ -32,6 +32,7 @@ public class Camp {
     private int activityCoordinatorsStillNeeded;
     private int dptCoordinatorsStillNeeded;
     private int courseSpecialistsStillNeeded;
+    private int splitRoleStillNeeded;
     
     private Contact schoolContact = new Contact();
     private int schoolContactID;
@@ -615,6 +616,14 @@ public class Camp {
 
 	public void setStudentLevel8(int studentLevel8) {
 		this.studentLevel8 = studentLevel8;
+	}
+
+	public int getSplitRoleStillNeeded() {
+		return splitRoleStillNeeded;
+	}
+
+	public void setSplitRoleStillNeeded(int splitRoleStillNeeded) {
+		this.splitRoleStillNeeded = splitRoleStillNeeded;
 	}
 
 }

@@ -148,6 +148,7 @@ public class CampController extends EEPlannerSimpleFormController {
             int activityCoordinators = 0;
             int dptCoordinators = 0;
             int courseSpecialists = 0;
+            int splitRoles = 0;
 
             for (StaffMember staffMember : staffMembers) {
                 if (staffMember.getJob() != null) {
@@ -158,6 +159,7 @@ public class CampController extends EEPlannerSimpleFormController {
                     else if (staffMember.getJob().equalsIgnoreCase("activityCoordinator")) activityCoordinators++;
                     else if (staffMember.getJob().equalsIgnoreCase("dptCoordinator")) dptCoordinators++;
                     else if (staffMember.getJob().equalsIgnoreCase("courseSpecialist")) courseSpecialists++;
+                    else if (staffMember.getJob().equalsIgnoreCase("mixedRole")) splitRoles++;
                 }
 
             }
@@ -169,6 +171,7 @@ public class CampController extends EEPlannerSimpleFormController {
             int activityCoordinatorsStillNeeded = camp.getActivityCoordinatorsNeeded() - activityCoordinators;
             int dptCoordinatorsStillNeeded = camp.getDptCoordinatorsNeeded() - dptCoordinators;
             int courseSpecialistsStillNeeded = camp.getCourseSpecialistsNeeded() - courseSpecialists;
+            int splitRoleStillNeeded = camp.getSplitRoleNeeded() - splitRoles;
 
 
             model.put("coordinatorsStillNeeded", coordinatorsStillNeeded);
@@ -178,6 +181,8 @@ public class CampController extends EEPlannerSimpleFormController {
             model.put("activityCoordinatorsStillNeeded", activityCoordinatorsStillNeeded);
             model.put("dptCoordinatorsStillNeeded", dptCoordinatorsStillNeeded);
             model.put("courseSpecialistsStillNeeded", courseSpecialistsStillNeeded);
+            model.put("splitRoleStillNeeded", splitRoleStillNeeded);
+            
             SimpleDateFormat simpleDateformat=new SimpleDateFormat("yyyy");
             int theYear = Integer.parseInt(simpleDateformat.format(camp.getStart()));
             model.put("availableStaff", staffDao.getAvailableStaffMembers(camp.getID(),theYear, "secondName", false));

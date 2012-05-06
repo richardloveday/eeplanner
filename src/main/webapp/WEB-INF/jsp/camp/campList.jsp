@@ -60,6 +60,7 @@
         <th>coordinators needed</th>
         <th>drama teachers needed</th>
         <th>teachers needed</th>
+        <th>split roles needed</th>
         <c:forEach items="${camps}" var="camp">
             <tr>
                 <c:if test="${camp.name == 'Total'}">
@@ -72,11 +73,12 @@
                 <td><fmt:formatDate pattern='dd/MM/yyyy' value='${camp.end}' /></td>
                 
                 
-                <td>${camp.activityLeadersStillNeeded + camp.coordinatorsStillNeeded + camp.dramaTeachersStillNeeded + camp.teachersStillNeeded}</td>
+                <td>${camp.activityLeadersStillNeeded + camp.coordinatorsStillNeeded + camp.dramaTeachersStillNeeded + camp.teachersStillNeeded + camp.splitRoleStillNeeded}</td>
                 <td>${camp.activityLeadersStillNeeded}</td>
                 <td>${camp.coordinatorsStillNeeded}</td> 
                 <td>${camp.dramaTeachersStillNeeded}</td> 
                 <td>${camp.teachersStillNeeded}</td>
+                <td>${camp.splitRoleStillNeeded}</td>
             </tr>
         </c:forEach>
     </table>

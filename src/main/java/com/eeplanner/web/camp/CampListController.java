@@ -81,6 +81,7 @@ public class CampListController extends AbstractController {
         int iCoordinatorsStillNeeded = 0 ;
         int iDramaTeachersStillNeeded = 0 ;
         int iActivityLeadersStillNeeded = 0 ;
+        int iSplitRolesStillNeeded = 0 ;
         List<Camp> camps = campDao.getCampListWithStaffWithYear("secondName", showDeleted, theYear);
         
         for(Camp camp : camps){
@@ -89,6 +90,7 @@ public class CampListController extends AbstractController {
 			camp.setCoordinatorsStillNeeded(camp.getCoordinatorsNeeded());
 			camp.setDramaTeachersStillNeeded(camp.getDramaTeachersNeeded());
 			camp.setActivityLeadersStillNeeded(camp.getActivityLeadersNeeded());
+			camp.setSplitRoleStillNeeded(camp.getSplitRoleNeeded());
 			
         	for(StaffMember staff: camp.getStaffMembers()){
         		if(staff.getJob()!=null){
@@ -104,12 +106,16 @@ public class CampListController extends AbstractController {
 	        		else if(staff.getJob().equalsIgnoreCase("activityleader")){
 	        			camp.setActivityLeadersStillNeeded(camp.getActivityLeadersStillNeeded()-1);
 	        		}
+	        		else if(staff.getJob().equalsIgnoreCase("mixedRole")){
+	        			camp.setSplitRoleStillNeeded(camp.getSplitRoleStillNeeded()-1);
+	        		}
         		}
         	}
             iTeachersStillNeeded += camp.getTeachersStillNeeded();
             iCoordinatorsStillNeeded += camp.getCoordinatorsStillNeeded() ;
             iDramaTeachersStillNeeded += camp.getDramaTeachersStillNeeded();
             iActivityLeadersStillNeeded += camp.getActivityLeadersStillNeeded();
+            iSplitRolesStillNeeded += camp.getSplitRoleStillNeeded();
         }
 
         if(orderBy.equalsIgnoreCase("name")){
@@ -126,7 +132,8 @@ public class CampListController extends AbstractController {
         totalCamp.setTeachersStillNeeded(iTeachersStillNeeded);
         totalCamp.setCoordinatorsStillNeeded(iCoordinatorsStillNeeded);
         totalCamp.setDramaTeachersStillNeeded(iDramaTeachersStillNeeded);
-        totalCamp.setActivityLeadersStillNeeded(iActivityLeadersStillNeeded);   
+        totalCamp.setActivityLeadersStillNeeded(iActivityLeadersStillNeeded);
+        totalCamp.setSplitRoleStillNeeded(iSplitRolesStillNeeded);
         camps.add(totalCamp);
         
         /*List<Camp> camps = campDao.getCampList("secondName", show);
