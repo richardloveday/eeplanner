@@ -48,10 +48,24 @@ public class CampSearchResultSetExtractor implements ResultSetExtractor{
                 camp.setCourseSpecialistsNeeded(rs.getInt("courseSpecialistsNeeded"));
                 camp.setLegacyID(rs.getInt("legacyID"));
                 camp.setSiblingNumber(rs.getInt("siblingNumber"));
-                camp.setAgeRange6_7(rs.getInt("ageRange6_7"));
-                camp.setAgeRange8_10(rs.getInt("ageRange8_10"));
-                camp.setAgeRange11_12(rs.getInt("ageRange11_12"));
-                camp.setAgeRange13_14(rs.getInt("ageRange13_14"));
+                camp.setStudentLevel1(rs.getInt("studentLevel1"));
+                camp.setStudentLevel2(rs.getInt("studentLevel2"));
+                camp.setStudentLevel3(rs.getInt("studentLevel3"));
+                camp.setStudentLevel4(rs.getInt("studentLevel4"));
+                camp.setStudentLevel5(rs.getInt("studentLevel5"));
+                camp.setStudentLevel6(rs.getInt("studentLevel6"));
+                camp.setStudentLevel7(rs.getInt("studentLevel7"));
+                camp.setStudentLevel8(rs.getInt("studentLevel8"));
+                
+                camp.setSplitRoleNeeded(rs.getInt("splitRoleNeeded"));
+                camp.setOtherNotes(rs.getString("otherNotes"));
+                camp.setHeadTeacher(rs.getString("headTeacher"));
+                camp.setAdminSchoolName(rs.getString("adminSchoolName"));
+                camp.setAdminSchoolAddress(rs.getString("adminSchoolAddress"));
+                camp.setTimetablingNotes(rs.getString("timetablingNotes"));
+                camp.setFinalRegLastYear(rs.getInt("finalRegLastYear"));
+                camp.setFinalRegCurrentYear(rs.getInt("finalRegCurrentYear"));
+                
                 camp.setForwardingDate(rs.getDate("forwardingDate"));
                 camp.setDeliveryDate(rs.getDate("deliveryDate"));
                 camp.setDeleted(rs.getBoolean("deleted"));

@@ -24,6 +24,7 @@ public class Camp {
     private int activityCoordinatorsNeeded;
     private int dptCoordinatorsNeeded;
     private int courseSpecialistsNeeded;
+    private int splitRoleNeeded;
     private int coordinatorsStillNeeded;
     private int teachersStillNeeded;
     private int dramaTeachersStillNeeded;
@@ -31,10 +32,7 @@ public class Camp {
     private int activityCoordinatorsStillNeeded;
     private int dptCoordinatorsStillNeeded;
     private int courseSpecialistsStillNeeded;
-    private int ageRange6_7;
-    private int ageRange8_10;
-    private int ageRange11_12;
-    private int ageRange13_14;
+    
     private Contact schoolContact = new Contact();
     private int schoolContactID;
     private Contact contact = new Contact();
@@ -61,7 +59,23 @@ public class Camp {
     private int schoolFax;
     private String schoolEmail;
     
-  
+    private String otherNotes;
+
+	private String headTeacher;
+    private String adminSchoolName;
+    private String adminSchoolAddress;
+    private String timetablingNotes;
+    private int finalRegLastYear;
+    private int finalRegCurrentYear;
+    private int studentLevel1;
+    private int studentLevel2;
+    private int studentLevel3;
+    private int studentLevel4;
+    private int studentLevel5;
+    private int studentLevel6;
+    private int studentLevel7;
+    private int studentLevel8;
+    
     
     public Camp(){}
 
@@ -286,38 +300,6 @@ public class Camp {
 		this.deleted = deleted;
 	}
 
-	public int getAgeRange6_7() {
-        return ageRange6_7;
-    }
-
-    public void setAgeRange6_7(int ageRange6_7) {
-        this.ageRange6_7 = ageRange6_7;
-    }
-
-    public int getAgeRange8_10() {
-        return ageRange8_10;
-    }
-
-    public void setAgeRange8_10(int ageRange8_10) {
-        this.ageRange8_10 = ageRange8_10;
-    }
-
-    public int getAgeRange11_12() {
-        return ageRange11_12;
-    }
-
-    public void setAgeRange11_12(int ageRange11_12) {
-        this.ageRange11_12 = ageRange11_12;
-    }
-
-    public int getAgeRange13_14() {
-        return ageRange13_14;
-    }
-
-    public void setAgeRange13_14(int ageRange13_14) {
-        this.ageRange13_14 = ageRange13_14;
-    }
-
     public Date getDeliveryDate() {
 		return deliveryDate;
 	}
@@ -506,7 +488,133 @@ public class Camp {
 			int activityCoordinatorsStillNeeded) {
 		this.activityCoordinatorsStillNeeded = activityCoordinatorsStillNeeded;
 	}
+
+	public String getOtherNotes() {
+		return otherNotes;
+	}
+
+	public void setOtherNotes(String otherNotes) {
+		this.otherNotes = otherNotes;
+	}
+
+	public String getHeadTeacher() {
+		return headTeacher;
+	}
+
+	public void setHeadTeacher(String headTeacher) {
+		this.headTeacher = headTeacher;
+	}
+
+	public String getAdminSchoolName() {
+		return adminSchoolName;
+	}
+
+	public void setAdminSchoolName(String adminSchoolName) {
+		this.adminSchoolName = adminSchoolName;
+	}
+
+	public String getAdminSchoolAddress() {
+		return adminSchoolAddress;
+	}
+
+	public void setAdminSchoolAddress(String adminSchoolAddress) {
+		this.adminSchoolAddress = adminSchoolAddress;
+	}
     
-    
-    
+    public String getTimetablingNotes() {
+		return timetablingNotes;
+	}
+
+	public void setTimetablingNotes(String timetablingNotes) {
+		this.timetablingNotes = timetablingNotes;
+	}
+
+	public int getSplitRoleNeeded() {
+		return splitRoleNeeded;
+	}
+
+	public void setSplitRoleNeeded(int splitRoleNeeded) {
+		this.splitRoleNeeded = splitRoleNeeded;
+	}
+
+	public int getFinalRegLastYear() {
+		return finalRegLastYear;
+	}
+
+	public void setFinalRegLastYear(int finalRegLastYear) {
+		this.finalRegLastYear = finalRegLastYear;
+	}
+
+	public int getFinalRegCurrentYear() {
+		return finalRegCurrentYear;
+	}
+
+	public void setFinalRegCurrentYear(int finalRegCurrentYear) {
+		this.finalRegCurrentYear = finalRegCurrentYear;
+	}
+
+	public int getStudentLevel1() {
+		return studentLevel1;
+	}
+
+	public void setStudentLevel1(int studentLevel1) {
+		this.studentLevel1 = studentLevel1;
+	}
+
+	public int getStudentLevel2() {
+		return studentLevel2;
+	}
+
+	public void setStudentLevel2(int studentLevel2) {
+		this.studentLevel2 = studentLevel2;
+	}
+
+	public int getStudentLevel3() {
+		return studentLevel3;
+	}
+
+	public void setStudentLevel3(int studentLevel3) {
+		this.studentLevel3 = studentLevel3;
+	}
+
+	public int getStudentLevel4() {
+		return studentLevel4;
+	}
+
+	public void setStudentLevel4(int studentLevel4) {
+		this.studentLevel4 = studentLevel4;
+	}
+
+	public int getStudentLevel5() {
+		return studentLevel5;
+	}
+
+	public void setStudentLevel5(int studentLevel5) {
+		this.studentLevel5 = studentLevel5;
+	}
+
+	public int getStudentLevel6() {
+		return studentLevel6;
+	}
+
+	public void setStudentLevel6(int studentLevel6) {
+		this.studentLevel6 = studentLevel6;
+	}
+
+	public int getStudentLevel7() {
+		return studentLevel7;
+	}
+
+	public void setStudentLevel7(int studentLevel7) {
+		this.studentLevel7 = studentLevel7;
+	}
+
+	public int getStudentLevel8() {
+		return studentLevel8;
+	}
+
+	public void setStudentLevel8(int studentLevel8) {
+		this.studentLevel8 = studentLevel8;
+	}
+
 }

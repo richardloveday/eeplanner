@@ -91,8 +91,10 @@
 
 				select c.ID, c.name, c.start, c.end, c.studentNumber, c.coordinatorsNeeded, c.teachersNeeded, c.dramaTeachersNeeded,
                 		  c.activityCoordinatorsNeeded, c.dptCoordinatorsNeeded, c.courseSpecialistsNeeded,
-				          c.activityLeadersNeeded, c.legacyID, c.siblingNumber, c.ageRange6_7, c.ageRange8_10, c.ageRange11_12,
-				          c.ageRange13_14, c.forwardingDate, c.deliveryDate, c.deleted,
+				          c.activityLeadersNeeded, c.legacyID, c.siblingNumber, 
+				          c.studentLevel1, c.studentLevel2, c.studentLevel3, c.studentLevel4, c.studentLevel5, c.studentLevel6, c.studentLevel7, c.studentLevel8,
+				          c.splitRoleNeeded, c.otherNotes, c.headTeacher, c.adminSchoolName, c.adminSchoolAddress, c.timetablingNotes, c.finalRegLastYear, c.finalRegCurrentYear,
+				          c.forwardingDate, c.deliveryDate, c.deleted,
 
 				          cs.accepted, cs.offered, cs.returned, cs.job, cs.staffID as 'staffID'
 
@@ -112,8 +114,10 @@
             <value>
 				select c.ID, c.name, c.start, c.end, c.studentNumber, c.coordinatorsNeeded, c.teachersNeeded, c.dramaTeachersNeeded,
                 		  c.activityCoordinatorsNeeded, c.dptCoordinatorsNeeded, c.courseSpecialistsNeeded,
-				          c.activityLeadersNeeded, c.legacyID, c.siblingNumber, c.ageRange6_7, c.ageRange8_10, c.ageRange11_12,
-				          c.ageRange13_14, c.forwardingDate, c.deliveryDate, c.deleted,
+				          c.activityLeadersNeeded, c.legacyID, c.siblingNumber, 
+				          c.studentLevel1, c.studentLevel2, c.studentLevel3, c.studentLevel4, c.studentLevel5, c.studentLevel6, c.studentLevel7, c.studentLevel8,
+				          c.splitRoleNeeded, c.otherNotes, c.headTeacher, c.adminSchoolName, c.adminSchoolAddress, c.timetablingNotes, c.finalRegLastYear, c.finalRegCurrentYear,  
+				          c.forwardingDate, c.deliveryDate, c.deleted,
 
 				          cs.accepted, cs.offered, cs.returned, cs.job, cs.staffID as 'staffID'
 
@@ -130,8 +134,10 @@
             <value>
 				select c.ID, c.name, c.start, c.end, c.studentNumber, c.coordinatorsNeeded, c.teachersNeeded, c.dramaTeachersNeeded,
                 		  c.activityCoordinatorsNeeded, c.dptCoordinatorsNeeded, c.courseSpecialistsNeeded,
-				          c.activityLeadersNeeded, c.legacyID, c.siblingNumber, c.ageRange6_7, c.ageRange8_10, c.ageRange11_12,
-				          c.ageRange13_14, c.forwardingDate, c.deliveryDate, c.deleted, c.contactID,
+				          c.activityLeadersNeeded, c.legacyID, c.siblingNumber, 
+				          c.studentLevel1, c.studentLevel2, c.studentLevel3, c.studentLevel4, c.studentLevel5, c.studentLevel6, c.studentLevel7, c.studentLevel8,
+				          c.splitRoleNeeded, c.otherNotes, c.headTeacher, c.adminSchoolName, c.adminSchoolAddress, c.timetablingNotes, c.finalRegLastYear, c.finalRegCurrentYear,
+				          c.forwardingDate, c.deliveryDate, c.deleted, c.contactID,
 
 				          cs.accepted, cs.offered, cs.returned, cs.job, cs.staffID as 'staffID'
 
@@ -192,10 +198,22 @@
                     activityCoordinatorsNeeded = :activityCoordinatorsNeeded,
                     dptCoordinatorsNeeded = :dptCoordinatorsNeeded,
                     courseSpecialistsNeeded = :courseSpecialistsNeeded,
-                    ageRange6_7 = :ageRange6_7,
-                    ageRange8_10 = :ageRange8_10,
-                    ageRange11_12 = :ageRange11_12,
-                    ageRange13_14 = :ageRange13_14,
+                    studentLevel1 = :studentLevel1,
+                    studentLevel2 = :studentLevel2,
+                    studentLevel3 = :studentLevel3,
+                    studentLevel4 = :studentLevel4,
+                    studentLevel5 = :studentLevel5,
+                    studentLevel6 = :studentLevel6,
+                    studentLevel7 = :studentLevel7,
+                    studentLevel8 = :studentLevel8,
+                    splitRoleNeeded = :splitRoleNeeded, 
+                    otherNotes = :otherNotes, 
+                    headTeacher = :headTeacher, 
+                    adminSchoolName = :adminSchoolName, 
+                    adminSchoolAddress = :adminSchoolAddress, 
+                    timetablingNotes = :timetablingNotes, 
+                    finalRegLastYear = :finalRegLastYear, 
+                    finalRegCurrentYear = :finalRegCurrentYear,
                     contactID = :contactID,
                     schoolContactID = :schoolContactID,
                     legacyID = :legacyID,
@@ -228,14 +246,18 @@
                     (name,start,end,studentNumber,coordinatorsNeeded,teachersNeeded,dramaTeachersNeeded,
                 		activityCoordinatorsNeeded,dptCoordinatorsNeeded,courseSpecialistsNeeded,
                         activityLeadersNeeded,contactID,schoolContactID,legacyID,siblingNumber,forwardingDate,deliveryDate,
-                        ageRange6_7,ageRange8_10,ageRange11_12,ageRange13_14,predictedStudents,studentRegistrations,
+                        studentLevel1, studentLevel2, studentLevel3, studentLevel4, studentLevel5, studentLevel6, studentLevel7, studentLevel8,
+                        splitRoleNeeded, otherNotes, headTeacher, adminSchoolName, adminSchoolAddress, timetablingNotes, finalRegLastYear, finalRegCurrentYear,
+                        predictedStudents,studentRegistrations, 
                         dateStamp,students2Week, students1week, dailyHours, presentationTime, materialsSent, itemsSent,
                         timeReceived,signature,schoolPhone,schoolFax,schoolEmail)
                 values
                     (:name,:start,:end,:studentNumber,:coordinatorsNeeded,:teachersNeeded,
                 		:activityCoordinatorsNeeded,:dptCoordinatorsNeeded,:courseSpecialistsNeeded,
                         :dramaTeachersNeeded,:activityLeadersNeeded,:contactID, :schoolContactID,:legacyID,:siblingNumber,:forwardingDate,:deliveryDate,
-                        :ageRange6_7,:ageRange8_10,:ageRange11_12,:ageRange13_14,:predictedStudents,:studentRegistrations,
+                        :studentLevel1, :studentLevel2, :studentLevel3, :studentLevel4, :studentLevel5, :studentLevel6, :studentLevel7, :studentLevel8,
+                        :splitRoleNeeded, :otherNotes, :headTeacher, :adminSchoolName, :adminSchoolAddress, :timetablingNotes, :finalRegLastYear, :finalRegCurrentYear,
+                        :predictedStudents,:studentRegistrations,
                         :dateStamp,:students2Week,:students1week, :dailyHours, :presentationTime, :materialsSent, :itemsSent,
                         :timeReceived, :signature,:schoolPhone, :schoolFax,:schoolEmail )
                         ;

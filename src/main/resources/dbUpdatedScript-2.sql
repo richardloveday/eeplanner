@@ -48,3 +48,22 @@ DROP TABLE `flightcamp`;
 ALTER TABLE `flight` DROP `itineraryID`;
 ALTER TABLE `flight` ADD `returnFlightNumber` varchar(100) NULL DEFAULT NULL  AFTER `flightNumber`;
 
+
+/** Camp form changes. */
+ALTER TABLE `camp` CHANGE `ageRange6_7` `studentLevel1` int(10) UNSIGNED NULL DEFAULT NULL;
+ALTER TABLE `camp` CHANGE `ageRange8_10` `studentLevel2` int(10) UNSIGNED NULL DEFAULT NULL;
+ALTER TABLE `camp` CHANGE `ageRange11_12` `studentLevel3` int(10) UNSIGNED NULL DEFAULT NULL;
+ALTER TABLE `camp` CHANGE `ageRange13_14` `studentLevel4` int(10) UNSIGNED NULL DEFAULT NULL;
+ALTER TABLE `camp` ADD `studentLevel5` int(10) UNSIGNED NULL DEFAULT NULL  AFTER `studentLevel4`;
+ALTER TABLE `camp` ADD `studentLevel6` int(10) UNSIGNED NULL DEFAULT NULL  AFTER `studentLevel5`;
+ALTER TABLE `camp` ADD `studentLevel7` int(10) UNSIGNED NULL DEFAULT NULL  AFTER `studentLevel6`;
+ALTER TABLE `camp` ADD `studentLevel8` int(10) UNSIGNED NULL DEFAULT NULL  AFTER `studentLevel7`;
+ALTER TABLE `camp` ADD `splitRoleNeeded` int(10) UNSIGNED NULL DEFAULT '0'  AFTER `schoolContactID`;
+ALTER TABLE `camp` ADD `otherNotes` text NULL DEFAULT NULL  AFTER `splitRoleNeeded`;
+ALTER TABLE `camp` ADD `headTeacher` text NULL DEFAULT NULL  AFTER `splitRoleNeeded`;
+ALTER TABLE `camp` ADD `adminSchoolName` text NULL DEFAULT NULL  AFTER `splitRoleNeeded`;
+ALTER TABLE `camp` ADD `adminSchoolAddress` text NULL DEFAULT NULL  AFTER `splitRoleNeeded`;
+ALTER TABLE `camp` ADD `timetablingNotes` text NULL DEFAULT NULL  AFTER `splitRoleNeeded`;
+ALTER TABLE `camp` ADD `finalRegLastYear` int(10) UNSIGNED NULL DEFAULT NULL  AFTER `splitRoleNeeded`;
+ALTER TABLE `camp` ADD `finalRegCurrentYear` int(10) UNSIGNED NULL DEFAULT NULL  AFTER `splitRoleNeeded`;
+
