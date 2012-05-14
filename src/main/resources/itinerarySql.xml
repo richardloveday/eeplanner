@@ -24,6 +24,14 @@
                 ;
             </value>
         </entry>
+       	<entry key="getItineraryByCampID">
+            <value>
+                select *
+                from eeplanner.itinerary
+                WHERE camp_id = ?
+                ;
+            </value>
+        </entry>
         <entry key="getItineraryByFlightAndStaffID">
             <value>
                 select *

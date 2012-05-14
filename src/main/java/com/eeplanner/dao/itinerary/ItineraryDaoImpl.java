@@ -132,6 +132,21 @@ public class ItineraryDaoImpl implements ItineraryDao {
         }
 	}
 	
+	public List<Itinerary> getItineraryByCampID(int campID) {
+		try {
+
+            String qry = sqlQueries.get("getItineraryByCampID");
+            List<Itinerary> itineraryList = this.jdbcTemplate.query(qry, new Object[]{campID}, new ItineraryRowMapper());
+
+            return itineraryList;
+
+        } catch (DataAccessException e) {
+            log.fatal(e.getMessage());
+            // crap
+            return null;
+        }
+	}
+	
 	public Itinerary getItineraryByFlightAndStaffID(int flightID, int staffMemberID) {
 		try {
 

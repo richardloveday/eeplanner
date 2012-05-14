@@ -28,7 +28,7 @@
 
             <h2>Flight</h2>
 
-            <form:select path="flightID">
+            <form:select path="flightID" cssClass="required">
             	<option></option>
             	<c:forEach items="${flights}" var="flight">
             		<c:if test="${fn:length(flight.staffMembers) lt flight.numberOfSeats or itinerary.flightID eq flight.ID}">
@@ -49,17 +49,5 @@
     </div>
     
 </div>
-<div class="marginTop marginLeft left">
-	<div class="blueborder">
-		<h2 class="marginAll">Personal Travel Info document</h2>            
-		<form action="<c:url value="/generate-rtf.htm" />">
-			<input type="hidden" name="action" value="generatePersonalInfoDocument">
-	           <input type="hidden" name="staffMemberID" value="${itinerary.staffID}"/>
-	           <input type="hidden" name="campID" value="${itinerary.campID}"/>
-	           <input type="submit" value="generate"/>
-	   	</form>
-	</div>
-</div>
-
 
 <jsp:include page="../wireframe/footer.jsp"/>
