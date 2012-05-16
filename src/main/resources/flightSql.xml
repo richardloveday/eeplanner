@@ -80,7 +80,7 @@
         </entry>
         <entry key="storeNewFlight">
             <value>
-                insert into eeplanner.flight (carrier, type, flightNumber, f.returnFlightNumber,
+                insert into eeplanner.flight (carrier, type, flightNumber, returnFlightNumber,
                                                destination, outboundArrival, outboundDeparture,
                                                returnArrival, returnDeparture,
                                                cost, campID, numberOfSeats, airport, notes)
