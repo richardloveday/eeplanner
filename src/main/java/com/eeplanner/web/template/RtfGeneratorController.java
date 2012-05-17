@@ -93,7 +93,7 @@ public class RtfGeneratorController extends MultiActionController {
 			}
 		}
 		
-		if(campStaff.getJob().equalsIgnoreCase("Coordinator")){
+		if(campStaff.getJob().equalsIgnoreCase("Coordinator") && templateType==TemplateType.Contract_of_a_staff_member){
 			templateType = TemplateType.Contract_of_a_coordinator;
 		}
 		
