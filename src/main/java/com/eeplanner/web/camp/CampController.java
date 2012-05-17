@@ -42,6 +42,7 @@ public class CampController extends EEPlannerSimpleFormController {
     private PhoneDao phoneDao;
     private NoteDao noteDao;
     private Persist persistService;
+    private ItineraryDao itineraryDao;
 
     @Override
     protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object command, BindException errors) throws Exception {
@@ -119,6 +120,17 @@ public class CampController extends EEPlannerSimpleFormController {
             schoolPhoneNumbers = phoneDao.getPhoneNumberListByContactID(schoolContact.getID());                    
             
             staffMembers = staffDao.getStaffMembersForCamp(camp, "job asc");
+            
+            if(staffMembers!=null) {
+	            for(StaffMember staff : staffMembers){ 
+	            	Itinerary itinerary = itineraryDao.getItineraryByCampAndStaffID(camp.getID(), staff.getID());
+	            	if(itinerary!=null) {
+	            		List<Itinerary> items = new ArrayList<Itinerary>();
+	            		items.add(itinerary);
+	            		staff.setItineraries(items);
+	            	}
+	            }
+            }
 
             contact.setPhoneNumbers(phoneNumbers);
             contact.setEmails(emails);
@@ -243,4 +255,7 @@ public class CampController extends EEPlannerSimpleFormController {
         this.persistService = persistService;
     }
 
+	public void setItineraryDao(ItineraryDao itineraryDao) {
+		this.itineraryDao = itineraryDao;
+	}
 }

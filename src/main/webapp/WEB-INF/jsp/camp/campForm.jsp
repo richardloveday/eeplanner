@@ -599,7 +599,12 @@
 					        <input type="hidden" name="name" value="${camp.name}">
 					        <input type="hidden" name="campID" value="${camp.ID}">
 					        <td>
-					        	<input type="submit" value="add flight"/>
+					        	<c:if test="${empty staffMember.itineraries}">
+					        		<input type="submit" value="add flight"/>
+					        	</c:if>
+					        	<c:if test="${not (empty staffMember.itineraries)}">
+					        		<input type="submit" value="update flight"/>
+					        	</c:if>
 					        </td>
 					    </form>
 	                </tr>

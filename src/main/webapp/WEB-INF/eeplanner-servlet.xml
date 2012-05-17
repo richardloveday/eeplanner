@@ -135,6 +135,7 @@
         <property name="campDao" ref="campDao" />
         <property name="staffDao" ref="staffDao" />
         <property name="persistService" ref="persistService"/>
+        <property name="itineraryDao" ref="itineraryDao"/>
     </bean>
 
     <bean id="campListController" class="com.eeplanner.web.camp.CampListController">
