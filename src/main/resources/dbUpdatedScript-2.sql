@@ -67,3 +67,6 @@ ALTER TABLE `camp` ADD `timetablingNotes` text NULL DEFAULT NULL  AFTER `splitRo
 ALTER TABLE `camp` ADD `finalRegLastYear` int(10) UNSIGNED NULL DEFAULT NULL  AFTER `splitRoleNeeded`;
 ALTER TABLE `camp` ADD `finalRegCurrentYear` int(10) UNSIGNED NULL DEFAULT NULL  AFTER `splitRoleNeeded`;
 
+/* 4:16:00 AM local */ 
+ALTER TABLE `camp` CHANGE `dailyHours` `dailyHours` varchar(100) NULL DEFAULT '0';
+ALTER TABLE `camp` CHANGE `materialsSent` `materialsSent` varchar(100) NULL DEFAULT '0';

@@ -68,9 +68,9 @@ public class CampRowMapper implements RowMapper {
         camp.setContactID(rs.getInt("contactID"));
         camp.setSchoolContactID(rs.getInt("schoolContactID"));
         camp.setContact(contact);
-        camp.setDailyHours(rs.getInt("dailyHours"));
+        camp.setDailyHours(rs.getString("dailyHours"));
         camp.setPresentationTime(rs.getString("presentationTime"));
-        camp.setMaterialsSent(rs.getInt("materialsSent"));
+        camp.setMaterialsSent(rs.getString("materialsSent"));
         camp.setItemsSent(rs.getString("itemsSent"));
         camp.setTimeReceived(rs.getString("timeReceived"));
         camp.setSignature(rs.getString("signature"));

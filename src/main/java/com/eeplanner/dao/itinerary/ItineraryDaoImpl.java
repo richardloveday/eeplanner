@@ -16,19 +16,14 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.eeplanner.datastructures.Flight;
 import com.eeplanner.datastructures.Itinerary;
-import com.eeplanner.datastructures.Transfer;
-import com.eeplanner.dao.flight.*;
-import com.eeplanner.dao.transfer.*;
-import com.eeplanner.web.staff.StaffMemberController;
 
 public class ItineraryDaoImpl implements ItineraryDao {
 
     private JdbcTemplate jdbcTemplate;
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private HashMap<String, String> sqlQueries;
-    Logger log = Logger.getLogger(StaffMemberController.class);
+    Logger log = Logger.getLogger(ItineraryDaoImpl.class);
 
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -126,7 +121,7 @@ public class ItineraryDaoImpl implements ItineraryDao {
             return itinerary;
 
         } catch (DataAccessException e) {
-            log.fatal(e.getMessage());
+            log.info(e.getMessage());
             // crap
             return null;
         }

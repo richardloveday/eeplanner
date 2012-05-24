@@ -19,6 +19,17 @@
 <div class="left marginAll blueBorder">
 <form:form commandName="camp" cssClass="addValidation"  name="editForm">
 
+
+<table>
+<tr>
+	<td class="error">
+		<br/>
+		<form:errors path="*" />
+		<br/>
+	</td>
+</tr>
+</table>
+
 <table>
 <tr>
 	<td>

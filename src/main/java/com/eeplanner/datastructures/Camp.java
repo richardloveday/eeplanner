@@ -50,9 +50,9 @@ public class Camp {
     private int students2Week;
     private int students1week;
     private Date dateStamp;
-    private int dailyHours;
+    private String dailyHours;
     private String presentationTime;
-    private int materialsSent;
+    private String materialsSent;
     private String itemsSent;
     private String timeReceived;
     private String signature;   
@@ -173,11 +173,11 @@ public class Camp {
 		this.schoolEmail = schoolEmail;
 	}
 
-	public int getDailyHours() {
+	public String getDailyHours() {
 		return dailyHours;
 	}
 
-	public void setDailyHours(int dailyHours) {
+	public void setDailyHours(String dailyHours) {
 		this.dailyHours = dailyHours;
 	}
 
@@ -189,11 +189,11 @@ public class Camp {
 		this.presentationTime = presentationTime;
 	}
 
-	public int getMaterialsSent() {
+	public String getMaterialsSent() {
 		return materialsSent;
 	}
 
-	public void setMaterialsSent(int materialsSent) {
+	public void setMaterialsSent(String materialsSent) {
 		this.materialsSent = materialsSent;
 	}
 
