@@ -68,5 +68,23 @@ ALTER TABLE `camp` ADD `finalRegLastYear` int(10) UNSIGNED NULL DEFAULT NULL  AF
 ALTER TABLE `camp` ADD `finalRegCurrentYear` int(10) UNSIGNED NULL DEFAULT NULL  AFTER `splitRoleNeeded`;
 
 /* 4:16:00 AM local */ 
-ALTER TABLE `camp` CHANGE `dailyHours` `dailyHours` varchar(100) NULL DEFAULT '0';
-ALTER TABLE `camp` CHANGE `materialsSent` `materialsSent` varchar(100) NULL DEFAULT '0';
+/* CHANGES 24th MAY 2012 change syntax on column types is not supported on the cloud based db instance we have, so...*/
+ALTER TABLE `camp` ADD `dailyHours2` varchar(100) NULL DEFAULT '0' ;
+UPDATE `camp` SET `dailyHours2` = `dailyHours`;
+
+ALTER TABLE `camp` ADD `materialsSent2` varchar(100) NULL DEFAULT '0' ;
+UPDATE `camp` SET `materialsSent2` = `materialsSent`;
+
+alter table camp drop column dailyHours;
+alter table camp drop column materialsSent;
+
+ALTER TABLE `camp` ADD `dailyHours` varchar(100) NULL DEFAULT '0' ;
+UPDATE `camp` SET `dailyHours` = `dailyHours2`;
+
+ALTER TABLE `camp` ADD `materialsSent` varchar(100) NULL DEFAULT '0' ;
+UPDATE `camp` SET `materialsSent` = `materialsSent2`;
+
+alter table camp drop column dailyHours2;
+alter table camp drop column materialsSent2;
+/* CHANGES 24th MAY 2012 */
+
