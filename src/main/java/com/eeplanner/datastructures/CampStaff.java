@@ -17,12 +17,12 @@ public class CampStaff {
 
 
 
-	public CampStaff(int staffID, int campID, boolean accepted,
-			boolean offered, boolean returned, String job) {
+	public CampStaff(int staffID, int campID, boolean offered,
+			boolean accepted, boolean returned, String job) {
 		this.staffID = staffID;
 		this.campID = campID;
-		this.accepted = accepted;
 		this.offered = offered;
+		this.accepted = accepted;
 		this.returned = returned;
 		this.job = job;
 	}

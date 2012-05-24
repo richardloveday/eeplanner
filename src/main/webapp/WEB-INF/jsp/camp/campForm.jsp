@@ -566,16 +566,22 @@
 	                            </select>
 	                        </td>
 	                        <td>
-	                            offered? <input type="checkbox" name="offered"
-	                                            value="offered" ${staffMember.offered?'CHECKED':''}/>
+	                            <label>offered? <input type="checkbox" name="offered"
+	                                            value="offered" ${staffMember.offered?'CHECKED':''}
+	                                            onchange="$('#staff-form-${staffMember.ID}').submit()"/>
+	                            </label>
 	                        </td>
 	                        <td>
-	                            accepted? <input type="checkbox" name="accepted"
-	                                             value="offered" ${staffMember.accepted?'CHECKED':''}/>
+	                            <label>accepted? <input type="checkbox" name="accepted"
+	                                             value="accepted" ${staffMember.accepted?'CHECKED':''}
+	                                             onchange="$('#staff-form-${staffMember.ID}').submit()"/>
+	                            </label>
 	                        </td>
 	                        <td>
-	                            contracts returned? <input type="checkbox" name="returned"
-	                                             value="returned" ${staffMember.returned?'CHECKED':''}/>
+	                            <label>contracts returned? <input type="checkbox" name="returned"
+	                                             value="returned" ${staffMember.returned?'CHECKED':''}
+	                                             onchange="$('#staff-form-${staffMember.ID}').submit()"/>
+	                            </label>
 	                        </td>
 	                        <!-- <td>
 	                            <input type="submit" value="save">
