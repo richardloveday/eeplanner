@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="NewPersistenceUnit">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>com.eeplanner.domain.CampEntity</class>
+        <class>com.eeplanner.domain.CampstaffEntity</class>
+        <class>com.eeplanner.domain.ContactEntity</class>
+        <class>com.eeplanner.domain.EmailEntity</class>
+        <class>com.eeplanner.domain.FlightEntity</class>
+        <class>com.eeplanner.domain.ItineraryEntity</class>
+        <class>com.eeplanner.domain.NoteEntity</class>
+        <class>com.eeplanner.domain.PhoneEntity</class>
+        <class>com.eeplanner.domain.StaffEntity</class>
+        <class>com.eeplanner.domain.StaffavailabilityEntity</class>
+        <class>com.eeplanner.domain.TemplateEntity</class>
+        <class>com.eeplanner.domain.TransferEntity</class>
+        <class>com.eeplanner.domain.TransfercampEntity</class>
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/eeplanner"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+            <property name="hibernate.connection.username" value="eeplanner"/>
+            <property name="hibernate.connection.password" value="catherinesyder1"/>
+            <property name="hibernate.archive.autodetection" value="class"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>
