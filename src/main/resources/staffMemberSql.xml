@@ -76,6 +76,7 @@
                 s.activityCoordinator, s.dptCoordinator, s.courseSpecialist,
                 s.kinNumber, s.archivePassword, s.existing, s.applied, s.interviewed, s.approved, s.status,
                 c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.accountHolderName, c.accountNumber, c.accountSortCode, c.nationalInsuranceNumber,
                 c.add3, c.add4, c.postCode, c.dob, c.sex, s.deleted, 
                 s.profile, s.medical, s.dietary , s.travelOutside, s.travelWithinLondon, s.officeNotes, s.mixedRole,
                 s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
@@ -94,6 +95,7 @@
                 s.activityCoordinator, s.dptCoordinator, s.courseSpecialist,
                 s.kinNumber, s.archivePassword, s.existing, s.applied, s.interviewed, s.approved, s.status,
                 c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.accountHolderName, c.accountNumber, c.accountSortCode, c.nationalInsuranceNumber,
                 c.add3, c.add4, c.postCode, c.dob, c.sex, s.deleted, s.profile, s.medical, s.dietary, 
                 s.travelOutside, s.travelWithinLondon, s.officeNotes, s.mixedRole,
                 s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
@@ -171,6 +173,7 @@
                 s.kinNumber, s.archivePassword, s.existing, s.applied, s.interviewed, s.approved, s.status,
                 c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
                 c.add3, c.add4, c.postCode, c.dob, c.sex, s.deleted, s.profile, s.medical, s.dietary,
+                c.accountHolderName, c.accountNumber, c.accountSortCode, c.nationalInsuranceNumber,
                 s.travelOutside, s.travelWithinLondon, s.officeNotes, s.mixedRole,
                 s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
                 s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash
@@ -192,6 +195,7 @@
                 s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
                 s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash,
                 c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.accountHolderName, c.accountNumber, c.accountSortCode, c.nationalInsuranceNumber,
                 c.add3, c.add4, c.postCode, c.dob, c.sex,
                 cs.offered, cs.accepted, cs.returned, cs.job,
                 cmp.ID as 'campID', cmp.name as 'campName', cmp.start, cmp.end, s.deleted
@@ -214,6 +218,7 @@
                 s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
                 s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash,
                 c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.accountHolderName, c.accountNumber, c.accountSortCode, c.nationalInsuranceNumber,
                 c.add3, c.add4, c.postCode, c.dob, c.sex,
                 cs.offered, cs.accepted, cs.returned, cs.job,
                 cmp.ID as 'campID', cmp.name as 'campName', cmp.start, cmp.end, s.deleted
@@ -239,6 +244,7 @@
                 s.activityCoordinator, s.dptCoordinator, s.courseSpecialist,
                 s.kinNumber, s.archivePassword, s.existing, s.applied, s.interviewed, s.approved, s.status, 
                 c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.accountHolderName, c.accountNumber, c.accountSortCode, c.nationalInsuranceNumber,
                 c.add3, c.add4, c.postCode, c.dob, c.sex, s.deleted , s.profile, s.medical, s.dietary,
                 s.travelOutside, s.travelWithinLondon, s.officeNotes, s.mixedRole,
                 s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
@@ -262,6 +268,7 @@
                 s.activityCoordinator, s.dptCoordinator, s.courseSpecialist,
                 s.kinNumber, s.archivePassword, s.existing, s.applied, s.interviewed, s.approved, s.status, 
                 c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.accountHolderName, c.accountNumber, c.accountSortCode, c.nationalInsuranceNumber,
                 c.add3, c.add4, c.postCode, c.dob, c.sex, s.deleted, s.profile, s.medical, s.dietary,
                 s.travelOutside, s.travelWithinLondon, s.officeNotes, s.mixedRole,
                 s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
@@ -285,6 +292,7 @@
                 s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
                 s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash,
                 c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.accountHolderName, c.accountNumber, c.accountSortCode, c.nationalInsuranceNumber,
                 c.add3, c.add4, c.postCode, c.dob, c.sex, s.deleted
 
                 from eeplanner.staff s
@@ -309,6 +317,7 @@
                 s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
                 s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash,
                 c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.accountHolderName, c.accountNumber, c.accountSortCode, c.nationalInsuranceNumber,
                 c.add3, c.add4, c.postCode, c.dob, c.sex, s.deleted
 
                 from eeplanner.staff s
@@ -329,6 +338,7 @@
                 s.staffNotes, s.prefAgeAny, s.prefAgeGroup1, s.prefAgeGroup2, s.prefActivityArt, s.prefActivitySport, 
                 s.prefActivityDrama, s.prefActivityAny, s.parentID, s.hash,
                 c.ID as 'contactID', c.firstNames, c.secondName, c.add1, c.add2,
+                c.accountHolderName, c.accountNumber, c.accountSortCode, c.nationalInsuranceNumber,
                 c.add3, c.add4, c.postCode, c.dob, c.sex, s.deleted
 
                 from eeplanner.staff s

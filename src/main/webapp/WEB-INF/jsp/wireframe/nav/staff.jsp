@@ -12,6 +12,7 @@
 
         <li><a href="<c:url value='/staff-member.htm'/>">Add staff member</a></li>
         <li><a href="<c:url value='/staff-member-list.htm'/>">Edit staff</a></li>
+        <li><a href="#" id="staff-export-link">Export listed staffs to Excel</a></li>
         
     </div>
     <div class="clear"></div>

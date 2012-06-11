@@ -276,6 +276,11 @@ $(document).ready(function() {
     if($("#accordion")) {
     	$("#accordion").accordion();
     }
+    
+    $('#staff-export-link').click(function() {
+      	 $('#staffExport').val('true');
+      	 $('#staff-search-form').submit();    
+      });
 
     // ajax stuff for transfer and flight ajax forms
 

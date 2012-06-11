@@ -8,6 +8,8 @@ import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 
 public class DateTool {
+	
+	public static DateTool instance = new DateTool();
 
 	public String toTime(Date date){
 		if(date==null)

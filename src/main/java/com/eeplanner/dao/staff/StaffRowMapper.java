@@ -65,7 +65,11 @@ public class StaffRowMapper implements RowMapper {
         contact.setPostCode(rs.getString("postCode"));
         contact.setDob(rs.getTimestamp("dob"));
         contact.setSex(rs.getString("sex"));
-
+        contact.setAccountHolderName(rs.getString("accountHolderName"));
+        contact.setAccountNumber(rs.getString("accountNumber"));
+        contact.setAccountSortCode(rs.getString("accountSortCode"));
+        contact.setNationalInsuranceNumber(rs.getString("nationalInsuranceNumber"));
+        
         staffMember.setContact(contact);
         
         return staffMember;

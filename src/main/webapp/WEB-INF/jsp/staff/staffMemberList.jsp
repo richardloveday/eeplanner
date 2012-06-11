@@ -19,7 +19,8 @@
 
 <div class="clear"></div>
 
-
+<form id="staff-search-form" action="<c:url value="/staff-member-list.htm"/> ">
+<input type="hidden" name="staffExport" id="staffExport">
 <div>Available in
     <select name="showYear" id="showYear">
         <option value="2012" ${showYear==2016?'selected="selected"':''}>2016</option>
@@ -43,11 +44,12 @@
     </select>
 </div>
 <div>
-    <form action="<c:url value="/staff-member-list.htm"/> ">
+    
         show deleted?<input type="checkbox" name="showDeleted"
                             onchange="submit();" ${not empty param.showDeleted?'checked="checked"':''}/>
-    </form>
+    
 </div>
+</form>
 
 <div class="clear"></div>
 <div>
@@ -65,6 +67,7 @@
 		</tr>
 		<c:set var="itemIndex" value="1"/>
         <c:forEach items="${staffMembers}" var="staffMember" varStatus="status">
+        	<c:set var="printed" value="false"/>
             <c:choose>
                 <c:when test="${showYear==0}">
 
@@ -82,6 +85,7 @@
                         <td>${staffMember.mixedRole ? 'Y' : 'N'}</td>
                     </tr>
 					<c:set var="itemIndex" value="${itemIndex+1}"/>
+					<c:set var="printed" value="true"/>
                 </c:when>
 
                 <c:otherwise>
@@ -108,13 +112,14 @@
 	                        <td>${staffMember.mixedRole ? 'Y' : 'N'}</td>
                         </tr>
 						<c:set var="itemIndex" value="${itemIndex+1}"/>
+						<c:set var="printed" value="true"/>
                     </c:if>
 
                 </c:otherwise>
 
             </c:choose>
             
-            <c:if test="${itemIndex%20==0}">
+            <c:if test="${itemIndex%20==0 && printed eq true}">
 	            <tr>
 			        <th>Name</th>
 			        <th title="Updated by Staff">Updated</th>

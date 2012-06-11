@@ -118,6 +118,7 @@
 
     <bean id="staffMemberListController" class="com.eeplanner.web.staff.StaffMemberListController">
         <property name="staffDao" ref="staffDao"/>
+        <property name="campDao" ref="campDao" />
         <property name="staffAvailabilityDao" ref="staffAvailabilityDao"/>
         <property name="viewName" value="/staff/staffMemberList"/>
         <property name="cacheSeconds" value="0"/>
