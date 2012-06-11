@@ -32,6 +32,7 @@
         <option value="2010" ${showYear==2010?'selected="selected"':''}>2010</option>
         <option value="0" ${showYear==0?'selected="selected"':''}>Show All</option>
     </select>
+    <input type="button" id="staff-export-link" value="export to excel">
 </div>
 <div>Role 
     <select name="showRole" id="showRole">
@@ -90,13 +91,7 @@
 
                 <c:otherwise>
 
-                    <c:if test="${staffMember.staffAvailability.available1
-                                    || staffMember.staffAvailability.available2
-                                    || staffMember.staffAvailability.available3
-                                    || staffMember.staffAvailability.available4
-                                    || staffMember.staffAvailability.available5
-                                    || staffMember.staffAvailability.available6
-                                    || staffMember.staffAvailability.available7}">
+                    <c:if test="${staffMember.staffAvailability.available}">
 
                         <tr>
                             <td>

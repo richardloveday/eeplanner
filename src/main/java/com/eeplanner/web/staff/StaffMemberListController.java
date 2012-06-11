@@ -19,6 +19,7 @@ import com.eeplanner.dao.camp.CampDao;
 import com.eeplanner.dao.staff.StaffDao;
 import com.eeplanner.dao.staffavailability.StaffAvailabilityDao;
 import com.eeplanner.datastructures.Camp;
+import com.eeplanner.datastructures.StaffAvailability;
 import com.eeplanner.datastructures.StaffMember;
 import com.eeplanner.service.DateTool;
 
@@ -88,34 +89,49 @@ public class StaffMemberListController extends AbstractController {
 		
 		for (StaffMember staffMember : staffMembers) {
 			
+			
+			
 			if (year != 0) {
-				List<Camp> camps = campDao.getCampsByStaffMemberID(staffMember.getID(), "start");
-				if( !CollectionUtils.isEmpty(camps) ) {
-					staffMember.setCamp(camps.get(0));
+				
+				if(staffMember.getStaffAvailability()!=null && staffMember.getStaffAvailability().isAvailable()) {
+					
+					List<Camp> camps = campDao.getCampsByStaffMemberID(staffMember.getID(), "start");
+					if( !CollectionUtils.isEmpty(camps) ) {
+						staffMember.setCamp(camps.get(0));
+					}
+					
+					writeRow(csvWriter, staffMember);
 				}
+				
+			} else {
+			
+				writeRow(csvWriter, staffMember);
 			}
-			
-			List<String> row = new ArrayList<String>();
-			row.add(staffMember.getContact().getSecondName());
-			row.add(staffMember.getContact().getFirstNames());
-			row.add(DateTool.instance.toDate(staffMember.getContact().getDob()));
-			row.add(staffMember.getContact().getNationalInsuranceNumber());
-			row.add(staffMember.getContact().getAccountSortCode());
-			row.add(staffMember.getContact().getAccountNumber());
-			row.add(DateTool.instance.toDate(staffMember.getCamp().getStart()));
-			row.add(staffMember.getContact().getSex());
-			row.add(staffMember.getContact().getAdd1() 
-					+ " " + staffMember.getContact().getAdd2()
-					+ " " + staffMember.getContact().getAdd3()
-					+ " " + staffMember.getContact().getAdd4());
-			
-			csvWriter.writeNext(row.toArray(new String[0]));
         }
 		
 		csvWriter.close();
 		response.flushBuffer();
     	return null;
     }
+
+	private void writeRow(CSVWriter csvWriter, StaffMember staffMember) {
+		
+		List<String> row = new ArrayList<String>();
+		row.add(staffMember.getContact().getSecondName());
+		row.add(staffMember.getContact().getFirstNames());
+		row.add(DateTool.instance.toDate(staffMember.getContact().getDob()));
+		row.add(staffMember.getContact().getNationalInsuranceNumber());
+		row.add(staffMember.getContact().getAccountSortCode());
+		row.add(staffMember.getContact().getAccountNumber());
+		row.add(DateTool.instance.toDate(staffMember.getCamp().getStart()));
+		row.add(staffMember.getContact().getSex());
+		row.add(staffMember.getContact().getAdd1() 
+				+ " " + staffMember.getContact().getAdd2()
+				+ " " + staffMember.getContact().getAdd3()
+				+ " " + staffMember.getContact().getAdd4());
+		
+		csvWriter.writeNext(row.toArray(new String[0]));
+	}
 
 
 }

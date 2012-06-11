@@ -49,6 +49,15 @@ public class StaffAvailability {
 		this.available7 = available7;
 		this.note = note;
 	}
+	
+	public boolean isAvailable() {
+		
+		if(available1 || available2 || available3 || available4 || available5 || available6 || available7) {
+			return true;
+		}
+		
+		return false;
+	}
 
 	public int getStaffID() {
 		return staffID;
