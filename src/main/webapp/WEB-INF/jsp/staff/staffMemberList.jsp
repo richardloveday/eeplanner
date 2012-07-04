@@ -23,10 +23,10 @@
 <input type="hidden" name="staffExport" id="staffExport">
 <div>Available in
     <select name="showYear" id="showYear">
-        <option value="2012" ${showYear==2016?'selected="selected"':''}>2016</option>
-        <option value="2012" ${showYear==2015?'selected="selected"':''}>2015</option>
-        <option value="2012" ${showYear==2014?'selected="selected"':''}>2014</option>
-        <option value="2012" ${showYear==2013?'selected="selected"':''}>2013</option>
+        <option value="2016" ${showYear==2016?'selected="selected"':''}>2016</option>
+        <option value="2015" ${showYear==2015?'selected="selected"':''}>2015</option>
+        <option value="2014" ${showYear==2014?'selected="selected"':''}>2014</option>
+        <option value="2013" ${showYear==2013?'selected="selected"':''}>2013</option>
         <option value="2012" ${showYear==2012?'selected="selected"':''}>2012</option>
         <option value="2011" ${showYear==2011?'selected="selected"':''}>2011</option>
         <option value="2010" ${showYear==2010?'selected="selected"':''}>2010</option>
