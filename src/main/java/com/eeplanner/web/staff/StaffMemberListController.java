@@ -57,12 +57,12 @@ public class StaffMemberListController extends AbstractController {
         int year = ServletRequestUtils.getIntParameter(request, "showYear", 0);
         String role = ServletRequestUtils.getStringParameter(request, "showRole", null);
 
-        List<StaffMember> staffMembers = staffDao.getStaffList("secondName", show, role);
+        List<StaffMember> staffMembers = null;
 
         if (year != 0) {
-            for (StaffMember staffMember : staffMembers) {
-                staffMember.setStaffAvailability(staffAvailabilityDao.getStaffAvailabilityByIDAndYear(staffMember.getID(), year));
-            }
+            staffMembers = staffDao.getStaffList("secondName", show, role, year);
+        } else {
+        	staffMembers = staffDao.getStaffList("secondName", show, role);
         }
         
         boolean export = ServletRequestUtils.getBooleanParameter(request, "staffExport", false);

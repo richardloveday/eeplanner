@@ -259,6 +259,31 @@ public class StaffDaoImpl implements StaffDao {
             return null;
         }
     }
+    
+    public List<StaffMember> getStaffList(String orderBy, boolean showDeleted, String role, int year) {
+        
+        try {
+
+            String qry = sqlQueries.get("getStaffMemberListByYear");
+            Map params = new HashMap();
+            params.put("orderBy", orderBy);
+            params.put("showDeleted", showDeleted);
+            params.put("year", year);
+            
+            if(StringUtils.isNotBlank(role)){
+            	qry = StringUtils.replaceOnce(qry, ":showDeleted)", ":showDeleted) and " + role + " = true");
+            }
+            
+            List<StaffMember> staffMembers = this.namedParameterJdbcTemplate.query(qry, params, new StaffRowMapper());
+
+            return staffMembers;
+
+        } catch (DataAccessException e) {
+            log.fatal(e.getMessage());
+            // crap
+            return null;
+        }
+    }
 
     @Transactional
     public boolean setDeleted(int id, boolean isDeleted) {

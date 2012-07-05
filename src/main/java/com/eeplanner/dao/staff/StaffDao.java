@@ -19,6 +19,7 @@ public interface StaffDao {
     public StaffMember getStaffMemberByID(int id);
     public StaffMember getStaffMemberByHash(String hash);
     public List<StaffMember> getStaffList(String orderBy, boolean showDeleted, String role);
+    public List<StaffMember> getStaffList(String orderBy, boolean showDeleted, String role, int year);
     public List<StaffMember> getStaffByName(String name, String orderBy);
     public StaffMember storeStaffMember(StaffMember staffMember);
     public List<StaffMember> getAvailableStaffMembers(int campID,int theYear, String orderBy, boolean showDeleted);

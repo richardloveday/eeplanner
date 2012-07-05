@@ -5,7 +5,9 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.eeplanner.dao.staffavailability.StaffAvailabilityRowMapper;
 import com.eeplanner.datastructures.Contact;
+import com.eeplanner.datastructures.StaffAvailability;
 import com.eeplanner.datastructures.StaffMember;
 
 /**
@@ -16,6 +18,9 @@ import com.eeplanner.datastructures.StaffMember;
  * To change this template use File | Settings | File Templates.
  */
 public class StaffRowMapper implements RowMapper {
+	
+	StaffAvailabilityRowMapper availabilityRowMapper = new StaffAvailabilityRowMapper();
+	
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 
         StaffMember staffMember = new StaffMember();
@@ -71,6 +76,14 @@ public class StaffRowMapper implements RowMapper {
         contact.setNationalInsuranceNumber(rs.getString("nationalInsuranceNumber"));
         
         staffMember.setContact(contact);
+        
+        StaffAvailability staffAvailability = null;
+        try {
+        	staffAvailability = availabilityRowMapper.mapRow(rs, rowNum);
+        	staffMember.setStaffAvailability(staffAvailability);
+        }catch(SQLException exception) {
+        	//ignore
+        }
         
         return staffMember;
     }
