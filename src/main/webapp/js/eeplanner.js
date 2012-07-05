@@ -222,8 +222,17 @@ $(document).ready(function() {
    	 	var param = $('#showYear').val();
    	 	window.location.replace(location.pathname+"?action=camps&showYear="+param+"&contacts="+param2+"&showRole="+paramRole);     
    });
+   
+   var refreshStaffList = function() {	
+    	$('#staffExport').val('false');
+	 	$('#staff-search-form').submit();
+	 	return true;
+   };
+   $('#showDeletedStaffList').click(refreshStaffList);
+   $('#showYearStaffList').change(refreshStaffList);
+   $('#showRoleStaffList').change(refreshStaffList);
     
-    $('#staffYear').change(function() {
+   $('#staffYear').change(function() {
    	   var param = $("td:eq(2)").html();
    	   var param2 = $(this).val();
        window.location.replace(location.pathname+"?id="+param+"&staffYear="+param2);     

@@ -22,7 +22,7 @@
 <form id="staff-search-form" action="<c:url value="/staff-member-list.htm"/> ">
 <input type="hidden" name="staffExport" id="staffExport">
 <div>Available in
-    <select name="showYear" id="showYear">
+    <select name="showYear" id="showYearStaffList">
         <option value="2016" ${showYear==2016?'selected="selected"':''}>2016</option>
         <option value="2015" ${showYear==2015?'selected="selected"':''}>2015</option>
         <option value="2014" ${showYear==2014?'selected="selected"':''}>2014</option>
@@ -35,7 +35,7 @@
     <input type="button" id="staff-export-link" value="export to excel">
 </div>
 <div>Role 
-    <select name="showRole" id="showRole">
+    <select name="showRole" id="showRoleStaffList">
     	<option value="">All</option>
         <option value="teacher" ${showRole=='teacher'?'selected="selected"':''}>Teacher</option>
         <option value="coordinator" ${showRole=='coordinator'?'selected="selected"':''}>Coordinator</option>
@@ -46,7 +46,7 @@
 </div>
 <div>
     
-        show deleted?<input type="checkbox" name="showDeleted"
+        show deleted?<input type="checkbox" name="showDeleted" id="showDeletedStaffList"
                             onchange="submit();" ${not empty param.showDeleted?'checked="checked"':''}/>
     
 </div>
