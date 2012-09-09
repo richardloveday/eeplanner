@@ -39,8 +39,8 @@
     	<option value="">All</option>
         <option value="teacher" ${showRole=='teacher'?'selected="selected"':''}>Teacher</option>
         <option value="coordinator" ${showRole=='coordinator'?'selected="selected"':''}>Coordinator</option>
-        <option value="drama" ${showRole=='drama'?'selected="selected"':''}>Drama</option>
-        <option value="activityleader" ${showRole=='activityleader'?'selected="selected"':''}>Activity Leader</option>
+        <option value="drama" ${showRole=='drama'?'selected="selected"':''}>Drama Coordinator</option>
+        <option value="activity leader" ${showRole=='activity leader'?'selected="selected"':''}>Activity Leader</option>
         <option value="mixedRole" ${showRole=='mixedRole'?'selected="selected"':''}>Mixed Role</option>
     </select>
 </div>

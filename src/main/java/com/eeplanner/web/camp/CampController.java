@@ -166,8 +166,8 @@ public class CampController extends EEPlannerSimpleFormController {
                 if (staffMember.getJob() != null) {
                     if (staffMember.getJob().equalsIgnoreCase("coordinator")) coordinators++;
                     else if (staffMember.getJob().equalsIgnoreCase("teacher")) teachers++;
-                    else if (staffMember.getJob().equalsIgnoreCase("drama")) dramaTeachers++;
-                    else if (staffMember.getJob().equalsIgnoreCase("activityleader")) activityLeaders++;
+                    else if (staffMember.getJob().equalsIgnoreCase("drama coordinator")) dramaTeachers++;
+                    else if (staffMember.getJob().equalsIgnoreCase("activity leader")) activityLeaders++;
                     else if (staffMember.getJob().equalsIgnoreCase("activityCoordinator")) activityCoordinators++;
                     else if (staffMember.getJob().equalsIgnoreCase("dptCoordinator")) dptCoordinators++;
                     else if (staffMember.getJob().equalsIgnoreCase("courseSpecialist")) courseSpecialists++;

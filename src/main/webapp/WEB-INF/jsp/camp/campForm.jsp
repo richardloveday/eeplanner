@@ -540,11 +540,11 @@
 	                                    </option>
 	                                </c:if>
 	                                <c:if test="${staffMember.drama}">
-	                                    <option value="drama" ${staffMember.job=='drama'?'SELECTED':''}>drama teacher
+	                                    <option value="drama coordinator" ${staffMember.job=='drama coordinator'?'SELECTED':''}>drama teacher
 	                                    </option>
 	                                </c:if>
 	                                <c:if test="${staffMember.activityleader}">
-	                                    <option value="activityleader" ${staffMember.job=='activityleader'?'SELECTED':''}>
+	                                    <option value="activity leader" ${staffMember.job=='activity leader'?'SELECTED':''}>
 	                                        activity leader
 	                                    </option>
 	                                </c:if>
