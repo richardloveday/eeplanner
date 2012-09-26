@@ -89,16 +89,12 @@ alter table camp drop column materialsSent2;
 /* CHANGES 24th MAY 2012 */
 
 
-/* 11:25:08  local */ 
-/* STEP 1: Export staffs with job is 'drama' */
-/* STEP 2: Execute the following SQL to update column type */
-ALTER TABLE `staff` CHANGE `job` `job` ENUM('teacher','coordinator','drama coordinator','activityleader')  NULL  DEFAULT NULL;
-/* STEP 3: Update job column of the exported staffs in STEP-1 with the new value: 'drama coordinator' */
-
-/* STEP 1: Export staffs with job is 'activityleader' */
-/* STEP 2: Execute the following SQL to update column type */
+/* 11:25:08  local */
+/* changes 26 sept 2012 */
+ALTER TABLE `staff` CHANGE `job` `job` ENUM('teacher','coordinator','drama','drama coordinator','activityleader','activity leader')  NULL  DEFAULT NULL;
+UPDATE `staff` SET job = 'drama coordinator' WHERE job = 'drama';
+UPDATE `staff` SET job = 'activity leader' WHERE job = 'activityleader';
 ALTER TABLE `staff` CHANGE `job` `job` ENUM('teacher','coordinator','drama coordinator','activity leader')  NULL  DEFAULT NULL;
-/* STEP 3: Update job column of the exported staffs in STEP-1 with the new value: 'activity leader' */
 
 
 
