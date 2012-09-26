@@ -91,10 +91,14 @@ alter table camp drop column materialsSent2;
 
 /* 11:25:08  local */
 /* changes 26 sept 2012 */
-ALTER TABLE `staff` CHANGE `job` `job` ENUM('teacher','coordinator','drama','drama coordinator','activityleader','activity leader')  NULL  DEFAULT NULL;
-UPDATE `staff` SET job = 'drama coordinator' WHERE job = 'drama';
-UPDATE `staff` SET job = 'activity leader' WHERE job = 'activityleader';
-ALTER TABLE `staff` CHANGE `job` `job` ENUM('teacher','coordinator','drama coordinator','activity leader')  NULL  DEFAULT NULL;
+ALTER TABLE `staff` ADD `job_2` ENUM('teacher','coordinator','drama','drama coordinator','activityleader','activity leader')  NULL  DEFAULT NULL;
+UPDATE `staff` SET job_2 = job;
+ALTER TABLE `staff` DROP COLUMN job;
+UPDATE `staff` SET job_2 = 'drama coordinator' WHERE job_2 = 'drama';
+UPDATE `staff` SET job_2 = 'activity leader' WHERE job_2 = 'activityleader';
+ALTER TABLE `staff` ADD `job` ENUM('teacher','coordinator','drama coordinator','activity leader')  NULL  DEFAULT NULL;
+UPDATE `staff` SET job = job_2;
+ALTER TABLE `staff` DROP COLUMN job_2;
 
 
 
