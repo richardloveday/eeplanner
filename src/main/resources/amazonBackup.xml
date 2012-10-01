@@ -1,0 +1,20 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.eeplanner.service.AmazonS3Service" id="amazonS3Service">
+        <constructor-arg name="s3Client" ref="s3Client" />
+        <constructor-arg name="bucketName" value="redmondivie"/>
+    </bean>
+
+    <bean class="com.amazonaws.auth.BasicAWSCredentials" id="awsCredentials">
+        <constructor-arg name="accessKey" value="${AWS_ACCESS_KEY}"/>
+        <constructor-arg name="secretKey" value="${AWS_SECRET_ACCESS_KEY}"/>
+    </bean>
+
+    <bean class="com.amazonaws.services.s3.AmazonS3Client" id="s3Client">
+        <constructor-arg ref="awsCredentials"/>
+    </bean>
+
+</beans>

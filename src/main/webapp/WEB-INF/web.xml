@@ -24,6 +24,7 @@
             classpath:templateSql.xml
             /WEB-INF/applicationContext-security.xml
             classpath:app-config-rtf.xml
+            classpath:amazonBackup.xml
         </param-value>
     </context-param>
 
