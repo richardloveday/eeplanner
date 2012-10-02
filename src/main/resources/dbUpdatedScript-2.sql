@@ -100,5 +100,15 @@ ALTER TABLE `staff` ADD `job` ENUM('teacher','coordinator','drama coordinator','
 UPDATE `staff` SET job = job_2;
 ALTER TABLE `staff` DROP COLUMN job_2;
 
+/* changes 01 Oct 2012 */
+ALTER TABLE `campstaff` ADD `job_2` ENUM('teacher','coordinator','drama','activityleader','activityCoordinator','dptCoordinator','courseSpecialist','drama coordinator','activity leader')  NULL  DEFAULT NULL;
+UPDATE `campstaff` SET job_2 = job;
+ALTER TABLE `campstaff` DROP COLUMN job;
+UPDATE `campstaff` SET job_2 = 'drama coordinator' WHERE job_2 = 'drama';
+UPDATE `campstaff` SET job_2 = 'activity leader' WHERE job_2 = 'activityleader';
+ALTER TABLE `campstaff` ADD `job` ENUM('teacher','coordinator','activityCoordinator','dptCoordinator','courseSpecialist','drama coordinator','activity leader')  NULL  DEFAULT NULL;
+UPDATE `campstaff` SET job = job_2;
+ALTER TABLE `campstaff` DROP COLUMN job_2;
+
 
 
