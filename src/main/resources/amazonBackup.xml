@@ -9,8 +9,8 @@
     </bean>
 
     <bean class="com.amazonaws.auth.BasicAWSCredentials" id="awsCredentials">
-        <constructor-arg name="accessKey" value="${AWS_ACCESS_KEY}"/>
-        <constructor-arg name="secretKey" value="${AWS_SECRET_ACCESS_KEY}"/>
+        <constructor-arg name="accessKey" value="key"/>
+        <constructor-arg name="secretKey" value="secretKey"/>
     </bean>
 
     <bean class="com.amazonaws.services.s3.AmazonS3Client" id="s3Client">

@@ -4,13 +4,11 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 
 
@@ -34,9 +32,7 @@ public class AmazonS3Service {
 
     }
 
-    public void persistFile(File file) throws IOException {
-
-		byte[] bytes = FileUtils.readFileToByteArray(file);
+    public void persistFileFromBytes(byte[] bytes) throws IOException {
 
 		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
 

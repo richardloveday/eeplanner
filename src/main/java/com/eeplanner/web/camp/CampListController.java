@@ -1,20 +1,20 @@
 package com.eeplanner.web.camp;
 
-import org.springframework.web.bind.ServletRequestUtils;
-import org.springframework.web.servlet.mvc.AbstractController;
-import org.springframework.web.servlet.ModelAndView;
-import org.apache.log4j.Logger;
-import com.eeplanner.web.staff.StaffMemberController;
-import com.eeplanner.dao.staff.StaffDao;
 import com.eeplanner.dao.camp.CampDao;
-import com.eeplanner.datastructures.StaffMember;
+import com.eeplanner.dao.staff.StaffDao;
 import com.eeplanner.datastructures.Camp;
-
-import org.joda.time.*;
+import com.eeplanner.datastructures.StaffMember;
+import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
+import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.AbstractController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.TreeMap;
 
 /**
  * Created by IntelliJ IDEA.
@@ -52,7 +52,7 @@ public class CampListController extends AbstractController {
         int theYear = ServletRequestUtils.getIntParameter(request, "showYear",new DateTime().getYear());
         String orderBy = ServletRequestUtils.getStringParameter(request, "orderBy", "date");
     
-        if (copyAll==true){
+        if (copyAll){
         	
         	List<Camp> camps = campDao.getCampListWithStaffWithYear("secondName", showDeleted, theYear-1);
         	
@@ -100,10 +100,10 @@ public class CampListController extends AbstractController {
 	        		else if(staff.getJob().equalsIgnoreCase("coordinator")){
 	        			camp.setCoordinatorsStillNeeded(camp.getCoordinatorsStillNeeded()-1);
 	        		}
-	        		else if(staff.getJob().equalsIgnoreCase("drama")){
+	        		else if(staff.getJob().equalsIgnoreCase("drama coordinator")){
 	        			camp.setDramaTeachersStillNeeded(camp.getDramaTeachersStillNeeded()-1);
 	        		}
-	        		else if(staff.getJob().equalsIgnoreCase("activityleader")){
+	        		else if(staff.getJob().equalsIgnoreCase("activity leader")){
 	        			camp.setActivityLeadersStillNeeded(camp.getActivityLeadersStillNeeded()-1);
 	        		}
 	        		else if(staff.getJob().equalsIgnoreCase("mixedRole")){
