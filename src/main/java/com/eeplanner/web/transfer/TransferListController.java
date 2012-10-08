@@ -1,12 +1,6 @@
 package com.eeplanner.web.transfer;
 
-import com.eeplanner.dao.camp.CampDao;
-import com.eeplanner.dao.flight.FlightDao;
-import com.eeplanner.dao.staff.StaffDao;
 import com.eeplanner.dao.transfer.TransferDao;
-import com.eeplanner.datastructures.Camp;
-import com.eeplanner.datastructures.Flight;
-import com.eeplanner.datastructures.StaffMember;
 import com.eeplanner.datastructures.Transfer;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
@@ -18,13 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: charlesivie
- * Date: 10/05/11
- * Time: 12:13
- * To change this template use File | Settings | File Templates.
- */
 public class TransferListController extends AbstractController{
 
     Logger log  = Logger.getLogger(TransferListController.class);

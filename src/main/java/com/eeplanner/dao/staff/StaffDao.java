@@ -1,20 +1,9 @@
 package com.eeplanner.dao.staff;
 
+import com.eeplanner.datastructures.*;
+
 import java.util.List;
 
-import com.eeplanner.datastructures.Camp;
-import com.eeplanner.datastructures.Flight;
-import com.eeplanner.datastructures.Itinerary;
-import com.eeplanner.datastructures.StaffMember;
-import com.eeplanner.datastructures.StaffMemberSearchData;
-
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 10-Dec-2009
- * Time: 14:57:22
- * To change this template use File | Settings | File Templates.
- */
 public interface StaffDao {
     public StaffMember getStaffMemberByID(int id);
     public StaffMember getStaffMemberByHash(String hash);

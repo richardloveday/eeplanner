@@ -1,33 +1,21 @@
 package com.eeplanner.dao.flight;
 
+import com.eeplanner.datastructures.Flight;
+import org.apache.log4j.Logger;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.dao.DataAccessException;
-import org.apache.log4j.Logger;
 
+import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-import javax.sql.DataSource;
-
-import com.eeplanner.dao.transfer.TransferRowMapper;
-import com.eeplanner.datastructures.Flight;
-import com.eeplanner.datastructures.Transfer;
-
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 15-Jan-2010
- * Time: 14:29:16
- * To change this template use File | Settings | File Templates.
- */
 public class FlightDaoImpl implements FlightDao {
 
     private JdbcTemplate jdbcTemplate;

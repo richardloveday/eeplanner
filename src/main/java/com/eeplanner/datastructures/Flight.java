@@ -4,13 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.math.BigDecimal;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 15-Jan-2010
- * Time: 14:13:39
- * To change this template use File | Settings | File Templates.
- */
+
 public class Flight {
 
     private int ID;

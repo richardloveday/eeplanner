@@ -30,13 +30,6 @@ import com.eeplanner.datastructures.StaffAvailability;
 import com.eeplanner.datastructures.StaffMember;
 import com.eeplanner.web.EEPlannerSimpleFormController;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 10-Dec-2009
- * Time: 16:07:25
- * To change this template use File | Settings | File Templates.
- */
 public class StaffMemberController extends EEPlannerSimpleFormController {
 
     Logger log  = Logger.getLogger(getClass());

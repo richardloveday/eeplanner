@@ -1,11 +1,7 @@
 package com.eeplanner.dao.staff;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.sql.DataSource;
-
+import com.eeplanner.dao.itinerary.ItineraryRowMapper;
+import com.eeplanner.datastructures.*;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
@@ -17,19 +13,11 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.eeplanner.dao.itinerary.ItineraryRowMapper;
-import com.eeplanner.datastructures.Camp;
-import com.eeplanner.datastructures.Flight;
-import com.eeplanner.datastructures.Itinerary;
-import com.eeplanner.datastructures.StaffMember;
-import com.eeplanner.datastructures.StaffMemberSearchData;
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 10-Dec-2009
- * Time: 14:57:35
- * To change this template use File | Settings | File Templates.
- */
+import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class StaffDaoImpl implements StaffDao {
 
     private JdbcTemplate jdbcTemplate;

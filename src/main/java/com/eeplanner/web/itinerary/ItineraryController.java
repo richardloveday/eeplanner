@@ -17,14 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
-/**
- * Created by IntelliJ IDEA.
- * User: charlesivie
- * Date: 06/05/11
- * Time: 14:30
- * To change this template use File | Settings | File Templates.
- */
-
 public class ItineraryController extends EEPlannerSimpleFormController{
 
 

@@ -3,13 +3,6 @@ package com.eeplanner.datastructures;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 23-Dec-2009
- * Time: 16:49:10
- * To change this template use File | Settings | File Templates.
- */
 public class Camp {
 
     private int ID;

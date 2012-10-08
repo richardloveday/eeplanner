@@ -1,17 +1,9 @@
 package com.eeplanner.dao.flight;
 
 import com.eeplanner.datastructures.Flight;
-import com.eeplanner.datastructures.Transfer;
 
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 15-Jan-2010
- * Time: 14:29:07
- * To change this template use File | Settings | File Templates.
- */
 public interface FlightDao {
     public Flight getFlightByID(int id);
     public List<Flight> getFlightList(String orderBy, boolean showDeleted);

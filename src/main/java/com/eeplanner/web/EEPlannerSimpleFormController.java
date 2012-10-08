@@ -11,13 +11,6 @@ import java.util.Enumeration;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 17-Dec-2009
- * Time: 16:00:58
- * To change this template use File | Settings | File Templates.
- */
 public class EEPlannerSimpleFormController extends SimpleFormController {
 
     protected Date getDateFromString(String date) throws Exception {

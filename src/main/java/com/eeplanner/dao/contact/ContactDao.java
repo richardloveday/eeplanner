@@ -4,13 +4,6 @@ import com.eeplanner.datastructures.Contact;
 
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 07-Dec-2009
- * Time: 13:39:32
- * To change this template use File | Settings | File Templates.
- */
 public interface ContactDao {
 
     public Contact storeContact(Contact contact) throws Exception;

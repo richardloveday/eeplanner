@@ -20,13 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.eeplanner.datastructures.Camp;
 import com.eeplanner.datastructures.CampStaff;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 11-Jan-2010
- * Time: 15:11:27
- * To change this template use File | Settings | File Templates.
- */
 public class CampDaoImpl implements CampDao {
 
     private JdbcTemplate jdbcTemplate;

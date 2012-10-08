@@ -16,13 +16,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeMap;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 11-Jan-2010
- * Time: 16:05:27
- * To change this template use File | Settings | File Templates.
- */
 public class CampListController extends AbstractController {
 
     Logger log = Logger.getLogger(CampListController.class);

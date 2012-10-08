@@ -12,13 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 
-/**
- * Created by IntelliJ IDEA.
- * User: charlieivie
- * Date: 26/04/2011
- * Time: 18:31
- * To change this template use File | Settings | File Templates.
- */
 public class TransferAjaxController extends EEPlannerSimpleFormController {
 
 

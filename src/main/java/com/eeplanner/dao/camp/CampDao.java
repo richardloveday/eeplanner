@@ -6,13 +6,6 @@ import com.eeplanner.datastructures.CampStaff;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 11-Jan-2010
- * Time: 15:11:13
- * To change this template use File | Settings | File Templates.
- */
 public interface CampDao {
 
     public Camp getCampByID(int id);

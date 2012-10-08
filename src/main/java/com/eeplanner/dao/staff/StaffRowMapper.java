@@ -1,22 +1,14 @@
 package com.eeplanner.dao.staff;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import org.springframework.jdbc.core.RowMapper;
-
 import com.eeplanner.dao.staffavailability.StaffAvailabilityRowMapper;
 import com.eeplanner.datastructures.Contact;
 import com.eeplanner.datastructures.StaffAvailability;
 import com.eeplanner.datastructures.StaffMember;
+import org.springframework.jdbc.core.RowMapper;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 10-Dec-2009
- * Time: 14:58:13
- * To change this template use File | Settings | File Templates.
- */
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class StaffRowMapper implements RowMapper {
 	
 	StaffAvailabilityRowMapper availabilityRowMapper = new StaffAvailabilityRowMapper();

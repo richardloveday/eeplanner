@@ -2,13 +2,6 @@ package com.eeplanner.datastructures;
 
 import java.sql.Date;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 11-Dec-2009
- * Time: 12:47:26
- * To change this template use File | Settings | File Templates.
- */
 public class Note {
 
     private int ID;

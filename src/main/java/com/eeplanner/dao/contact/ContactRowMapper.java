@@ -1,17 +1,11 @@
 package com.eeplanner.dao.contact;
 
+import com.eeplanner.datastructures.Contact;
 import org.springframework.jdbc.core.RowMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import com.eeplanner.datastructures.Contact;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 08-Dec-2009
- * Time: 16:17:06
- * To change this template use File | Settings | File Templates.
- */
 public class ContactRowMapper implements RowMapper {
 
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {

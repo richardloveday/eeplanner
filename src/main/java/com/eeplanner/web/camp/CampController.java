@@ -25,13 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 11-Jan-2010
- * Time: 16:05:40
- * To change this template use File | Settings | File Templates.
- */
 public class CampController extends EEPlannerSimpleFormController {
 
     Logger log = Logger.getLogger(CampController.class);

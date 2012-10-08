@@ -1,19 +1,11 @@
 package com.eeplanner.dao.camp;
 
+import com.eeplanner.datastructures.CampStaff;
+import org.springframework.jdbc.core.RowMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.springframework.jdbc.core.RowMapper;
-
-import com.eeplanner.datastructures.CampStaff;
-
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 11-Jan-2010
- * Time: 15:11:20
- * To change this template use File | Settings | File Templates.
- */
 public class CampStaffRowMapper implements RowMapper {
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 

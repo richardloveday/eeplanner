@@ -1,24 +1,16 @@
 package com.eeplanner.web;
 
-import org.springframework.web.servlet.mvc.SimpleFormController;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.bind.ServletRequestUtils;
-import org.springframework.validation.BindException;
+import com.eeplanner.dao.contact.ContactDao;
+import com.eeplanner.datastructures.Contact;
 import org.apache.log4j.Logger;
+import org.springframework.validation.BindException;
+import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.SimpleFormController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.eeplanner.dao.contact.ContactDao;
-import com.eeplanner.datastructures.Contact;
-
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 07-Dec-2009
- * Time: 13:52:08
- * To change this template use File | Settings | File Templates.
- */
 public class ContactController extends SimpleFormController {
 
     Logger log  = Logger.getLogger(ContactController.class);

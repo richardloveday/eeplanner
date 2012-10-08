@@ -1,12 +1,5 @@
 package com.eeplanner.datastructures;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 11-Dec-2009
- * Time: 12:31:26
- * To change this template use File | Settings | File Templates.
- */
 public class Phone {
     private int ID;
     private String number;

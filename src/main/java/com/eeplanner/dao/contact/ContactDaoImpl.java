@@ -24,13 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 07-Dec-2009
- * Time: 13:40:21
- * To change this template use File | Settings | File Templates.
- */
 public class ContactDaoImpl implements ContactDao {
 
     //JdbcTemplate jdbcTemplate = getJdbcTemplate();

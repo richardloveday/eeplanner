@@ -13,13 +13,6 @@ import com.eeplanner.datastructures.Note;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 26-Jan-2010
- * Time: 13:59:55
- * To change this template use File | Settings | File Templates.
- */
 public class ProcessPhoneEmailNoteController extends MultiActionController{
 
     private PhoneDao phoneDao;

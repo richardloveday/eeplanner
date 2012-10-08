@@ -18,13 +18,6 @@ import com.eeplanner.datastructures.ContactType;
 import com.eeplanner.datastructures.Flight;
 import com.eeplanner.datastructures.StaffMember;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 11-Dec-2009
- * Time: 15:59:44
- * To change this template use File | Settings | File Templates.
- */
 public class PersistImpl implements Persist {
 
     private StaffDao staffDao;

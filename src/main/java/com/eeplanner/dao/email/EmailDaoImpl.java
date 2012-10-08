@@ -1,5 +1,8 @@
 package com.eeplanner.dao.email;
 
+import com.eeplanner.datastructures.Contact;
+import com.eeplanner.datastructures.Email;
+import com.eeplanner.web.staff.StaffMemberController;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,23 +14,11 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.eeplanner.datastructures.Email;
-import com.eeplanner.datastructures.Contact;
-import com.eeplanner.web.staff.StaffMemberController;
-
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 11-Dec-2009
- * Time: 16:15:59
- * To change this template use File | Settings | File Templates.
- */
 public class EmailDaoImpl implements EmailDao {
 
     private JdbcTemplate jdbcTemplate;

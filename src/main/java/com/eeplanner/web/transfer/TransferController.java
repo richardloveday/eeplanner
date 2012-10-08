@@ -13,13 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by IntelliJ IDEA.
- * User: charlesivie
- * Date: 09/05/11
- * Time: 13:16
- * To change this template use File | Settings | File Templates.
- */
 public class TransferController extends EEPlannerSimpleFormController{
 
     Logger log = Logger.getLogger(TransferController.class);

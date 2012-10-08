@@ -21,13 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 15-Jan-2010
- * Time: 16:18:02
- * To change this template use File | Settings | File Templates.
- */
 public class FlightController extends EEPlannerSimpleFormController {
 
 

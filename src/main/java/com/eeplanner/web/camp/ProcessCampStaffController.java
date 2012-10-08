@@ -1,22 +1,14 @@
 package com.eeplanner.web.camp;
 
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
-import org.springframework.web.servlet.ModelAndView;
+import com.eeplanner.dao.camp.CampDao;
+import com.eeplanner.datastructures.CampStaff;
 import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.eeplanner.dao.camp.CampDao;
-import com.eeplanner.datastructures.CampStaff;
-
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 19-Jan-2010
- * Time: 18:09:19
- * To change this template use File | Settings | File Templates.
- */
 public class ProcessCampStaffController extends MultiActionController {
 
     private CampDao campDao;

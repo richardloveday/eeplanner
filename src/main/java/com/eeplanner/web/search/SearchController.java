@@ -16,13 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 01-Feb-2010
- * Time: 16:40:46
- * To change this template use File | Settings | File Templates.
- */
 public class SearchController extends AbstractController{
 
     private StaffDao staffDao;

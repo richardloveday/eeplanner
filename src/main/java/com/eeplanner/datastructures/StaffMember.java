@@ -6,14 +6,6 @@ import com.eeplanner.datastructures.Camp;
 import com.eeplanner.datastructures.Contact;
 import com.eeplanner.datastructures.StaffAvailability;
 
-
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 10-Dec-2009
- * Time: 14:52:08
- * To change this template use File | Settings | File Templates.
- */
 public class StaffMember {
 
     private int ID;

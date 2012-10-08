@@ -21,13 +21,6 @@ import com.eeplanner.datastructures.Note;
 import com.eeplanner.datastructures.Contact;
 import com.eeplanner.web.staff.StaffMemberController;
 
-/**
- * Created by IntelliJ IDEA.
- * User: IvieC
- * Date: 11-Dec-2009
- * Time: 16:18:04
- * To change this template use File | Settings | File Templates.
- */
 public class NoteDaoImpl implements NoteDao {
 
     private JdbcTemplate jdbcTemplate;

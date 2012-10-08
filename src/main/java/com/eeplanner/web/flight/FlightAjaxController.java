@@ -12,13 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 
-/**
- * Created by IntelliJ IDEA.
- * User: charlieivie
- * Date: 26/04/2011
- * Time: 22:19
- * To change this template use File | Settings | File Templates.
- */
 public class FlightAjaxController extends EEPlannerSimpleFormController{
     Logger log  = Logger.getLogger(FlightAjaxController.class);
 
