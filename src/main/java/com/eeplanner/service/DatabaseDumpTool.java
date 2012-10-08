@@ -102,9 +102,41 @@ public class DatabaseDumpTool {
 						fos.write(value);
 						break;
 					}
+					case DATETIME: {
+						if (new String(value).equalsIgnoreCase("0000-00-00 00:00:00")) {
+							fos.write("NULL".getBytes());
+						} else {
+							fos.write("'".getBytes());
+							fos.write(value);
+							fos.write("'".getBytes());
+						}
+						break;
+					}
+
+					case TIMESTAMP: {
+						if (new String(value).equalsIgnoreCase("0000-00-00 00:00:00")) {
+							fos.write("NULL".getBytes());
+						} else {
+							fos.write("'".getBytes());
+							fos.write(value);
+							fos.write("'".getBytes());
+						}
+						break;
+					}
+					case DATE: {
+						if (new String(value).equalsIgnoreCase("0000-00-00")) {
+							fos.write("NULL".getBytes());
+						} else {
+							fos.write("'".getBytes());
+							fos.write(value);
+							fos.write("'".getBytes());
+						}
+						break;
+					}
+
 					default: {
 						fos.write("'".getBytes());
-						fos.write(value);
+						fos.write(new String(value).replace("'", "''").getBytes());
 						fos.write("'".getBytes());
 						break;
 					}

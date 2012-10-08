@@ -200,48 +200,24 @@ public class CampController extends EEPlannerSimpleFormController {
         this.staffDao = staffDao;
     }
 
-    public CampDao getCampDao() {
-        return campDao;
-    }
-
     public void setCampDao(CampDao campDao) {
         this.campDao = campDao;
-    }
-
-    public ContactDao getContactDao() {
-        return contactDao;
     }
 
     public void setContactDao(ContactDao contactDao) {
         this.contactDao = contactDao;
     }
 
-    public EmailDao getEmailDao() {
-        return emailDao;
-    }
-
     public void setEmailDao(EmailDao emailDao) {
         this.emailDao = emailDao;
-    }
-
-    public PhoneDao getPhoneDao() {
-        return phoneDao;
     }
 
     public void setPhoneDao(PhoneDao phoneDao) {
         this.phoneDao = phoneDao;
     }
 
-    public NoteDao getNoteDao() {
-        return noteDao;
-    }
-
     public void setNoteDao(NoteDao noteDao) {
         this.noteDao = noteDao;
-    }
-
-    public Persist getPersistService() {
-        return persistService;
     }
 
     public void setPersistService(Persist persistService) {

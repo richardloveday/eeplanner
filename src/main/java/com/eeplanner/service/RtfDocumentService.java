@@ -1,17 +1,17 @@
 package com.eeplanner.service;
 
-import java.io.StringReader;
+import com.eeplanner.dao.template.TemplateDao;
+import com.eeplanner.datastructures.Template;
+import com.eeplanner.datastructures.TemplateType;
+import net.sourceforge.rtf.RTFTemplate;
+import net.sourceforge.rtf.helper.RTFTemplateBuilder;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.util.CollectionUtils;
+
+import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Map;
-
-import net.sourceforge.rtf.RTFTemplate;
-import net.sourceforge.rtf.helper.RTFTemplateBuilder;
-
-import org.springframework.util.CollectionUtils;
-
-import com.eeplanner.dao.template.TemplateDao;
-import com.eeplanner.datastructures.TemplateType;
 
 public class RtfDocumentService implements DocumentService {
 
@@ -30,13 +30,14 @@ public class RtfDocumentService implements DocumentService {
 		RTFTemplate rtfTemplate = builder.newRTFTemplate();
 
 		// 3. Set the RTF model source
-		StringReader reader = new StringReader(templateDao.getTemplateByType(documentType.name()).getText());
-		rtfTemplate.setTemplate(reader);
+		Template templateByType = templateDao.getTemplateByType(documentType.name());
+		InputStream templateStream = new ClassPathResource("rtf/"+templateByType.getText()+".rtf").getInputStream();
+		rtfTemplate.setTemplate(templateStream);
 
 		// 4. Put the context
 		if(!CollectionUtils.isEmpty(sourceObjectMap)){
 			for(String objectName : sourceObjectMap.keySet()){
-				rtfTemplate.put(objectName, sourceObjectMap.get(objectName));				
+				rtfTemplate.put(objectName, sourceObjectMap.get(objectName));
 			}
 		}
 		

@@ -1,11 +1,7 @@
 package com.eeplanner.dao.camp;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.sql.DataSource;
-
+import com.eeplanner.datastructures.Camp;
+import com.eeplanner.datastructures.CampStaff;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.springframework.dao.DataAccessException;
@@ -17,8 +13,10 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.eeplanner.datastructures.Camp;
-import com.eeplanner.datastructures.CampStaff;
+import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CampDaoImpl implements CampDao {
 
@@ -364,7 +362,6 @@ public class CampDaoImpl implements CampDao {
     }
 
 	public HashMap<String, Object> getCampSearchData(int campID, String orderBy) {
-		// TODO Auto-generated method stub
 
        try {
     		Map params = new HashMap();
