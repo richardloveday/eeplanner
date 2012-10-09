@@ -18,8 +18,10 @@ public class AmazonS3Service {
     private AmazonS3Client s3Client;
     private String bucketName;
 
+	public AmazonS3Service() {
+	}
 
-    public AmazonS3Service(AmazonS3Client s3Client, String bucketName) {
+	public AmazonS3Service(AmazonS3Client s3Client, String bucketName) {
         this.s3Client = s3Client;
         this.bucketName = bucketName;
     }

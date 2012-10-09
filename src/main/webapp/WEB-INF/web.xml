@@ -4,7 +4,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
-    <display-name>Archetype Created Web Application</display-name>
+    <display-name>EE Planner</display-name>
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -22,7 +22,7 @@
             classpath:itinerarySql.xml
             classpath:transferSql.xml
             classpath:templateSql.xml
-            /WEB-INF/applicationContext-security.xml
+            classpath:applicationContext-security.xml
             classpath:app-config-rtf.xml
             classpath:amazonBackup.xml
         </param-value>

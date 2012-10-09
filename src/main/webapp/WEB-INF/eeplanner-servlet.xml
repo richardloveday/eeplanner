@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-	http://www.springframework.org/schema/context
-	http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+    <context:component-scan base-package="com.eeplanner" />
 
     <!-- =============== Core WebApplicationContext configuration ===================-->
 
     <!-- declare resource bundle - using a list to specify multiple basenames - as its best to use split files
         if possible -->
-<!--    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    <!--    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basenames">
             <list>
                 <value>/WEB-INF/res/example</value>
@@ -20,33 +20,33 @@
     </bean>-->
 
     <!-- ========================  Resolvers ======================= -->
-	
-	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
-		<property name="definitions">
-			<list>
-				<value>/WEB-INF/tiles.xml</value>
-			</list>
-		</property>
-	</bean>
-	
-	<bean class="com.eeplanner.web.view.CustomViewResolver">
-	    <property name="tilesResolver">
-	    	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-				<property name="viewClass">
-					<value>
-						org.springframework.web.servlet.view.tiles2.TilesView
-					</value>
-				</property>
-			</bean>
-	    </property>
-	    <property name="jspResolver">
-		    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-		        <property name="prefix" value="/WEB-INF/jsp/"/>
-		        <property name="suffix" value=".jsp"/>
-		    </bean>
-	    </property>
-	</bean>
+
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="com.eeplanner.web.view.CustomViewResolver">
+        <property name="tilesResolver">
+            <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+                <property name="viewClass">
+                    <value>
+                        org.springframework.web.servlet.view.tiles2.TilesView
+                    </value>
+                </property>
+            </bean>
+        </property>
+        <property name="jspResolver">
+            <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+                <property name="prefix" value="/WEB-INF/jsp/"/>
+                <property name="suffix" value=".jsp"/>
+            </bean>
+        </property>
+    </bean>
 
     <!-- force a fixed locale instead of using browser headers - note this bean
     MUST be called 'localeResolver' or spring will not use it -->
@@ -54,8 +54,9 @@
         <property name="defaultLocale" value="en"/>
     </bean>
 
-    <bean id="simpleMappingExceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-   		<!--<property name="exceptionMappings">
+    <bean id="simpleMappingExceptionResolver"
+          class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <!--<property name="exceptionMappings">
             <props>
                 <prop key="MissingServletRequestParameterException">/errors/unknownPage</prop>
                 <prop key="IncorrectResultSizeDataAccessException">/errors/handledError</prop>
@@ -66,14 +67,14 @@
     </bean>
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-	    <!-- one of the properties available; the maximum file size in bytes -->
-	    <property name="maxUploadSize" value="5000000"/>
-	</bean>
+        <!-- one of the properties available; the maximum file size in bytes -->
+        <property name="maxUploadSize" value="5000000"/>
+    </bean>
 
-	<bean id="messageSource"
-		class="org.springframework.context.support.ResourceBundleMessageSource">
-		<property name="basename" value="messages" />
-	</bean>
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages"/>
+    </bean>
 
     <!-- ========================  Controller config ======================= -->
 
@@ -81,16 +82,16 @@
     <!-- declare a controller which doesnt do anything significant, but its mapped to a URL Pattern which
         is secured in our security configuration -->
     <bean id="contactController" class="com.eeplanner.web.ContactController">
-        <property name="formView" value="/contact/contactForm" />
-        <property name="successView" value="/contact/contactSuccess" />
+        <property name="formView" value="/contact/contactForm"/>
+        <property name="successView" value="/contact/contactSuccess"/>
         <property name="commandClass" value="com.eeplanner.datastructures.Contact"/>
         <property name="commandName" value="contact"/>
         <property name="contactDao" ref="contactDao"/>
     </bean>
 
     <bean id="staffMemberController" class="com.eeplanner.web.staff.StaffMemberController">
-        <property name="formView" value="/staff/staffMemberForm" />
-        <property name="successView" value="/staff/staffMemberSuccess" />
+        <property name="formView" value="/staff/staffMemberForm"/>
+        <property name="successView" value="/staff/staffMemberSuccess"/>
         <property name="commandClass" value="com.eeplanner.datastructures.StaffMember"/>
         <property name="commandName" value="staffMember"/>
         <property name="staffDao" ref="staffDao"/>
@@ -101,10 +102,10 @@
         <property name="staffAvailabilityDao" ref="staffAvailabilityDao"/>
         <property name="persistService" ref="persistService"/>
     </bean>
-    
+
     <bean id="staffMemberExternalController" class="com.eeplanner.web.staff.StaffMemberExternalController">
-        <property name="formView" value="staffMemberExternalForm" />
-        <property name="successView" value="staffMemberExternalSuccess" />
+        <property name="formView" value="staffMemberExternalForm"/>
+        <property name="successView" value="staffMemberExternalSuccess"/>
         <property name="commandClass" value="com.eeplanner.datastructures.StaffMember"/>
         <property name="commandName" value="staffMember"/>
         <property name="staffDao" ref="staffDao"/>
@@ -118,49 +119,49 @@
 
     <bean id="staffMemberListController" class="com.eeplanner.web.staff.StaffMemberListController">
         <property name="staffDao" ref="staffDao"/>
-        <property name="campDao" ref="campDao" />
+        <property name="campDao" ref="campDao"/>
         <property name="staffAvailabilityDao" ref="staffAvailabilityDao"/>
         <property name="viewName" value="/staff/staffMemberList"/>
         <property name="cacheSeconds" value="0"/>
     </bean>
 
     <bean id="campController" class="com.eeplanner.web.camp.CampController">
-        <property name="formView" value="/camp/campForm" />
-        <property name="successView" value="/camp/campSuccess" />
+        <property name="formView" value="/camp/campForm"/>
+        <property name="successView" value="/camp/campSuccess"/>
         <property name="commandClass" value="com.eeplanner.datastructures.Camp"/>
         <property name="commandName" value="camp"/>
         <property name="contactDao" ref="contactDao"/>
         <property name="phoneDao" ref="phoneDao"/>
         <property name="emailDao" ref="emailDao"/>
         <property name="noteDao" ref="noteDao"/>
-        <property name="campDao" ref="campDao" />
-        <property name="staffDao" ref="staffDao" />
+        <property name="campDao" ref="campDao"/>
+        <property name="staffDao" ref="staffDao"/>
         <property name="persistService" ref="persistService"/>
         <property name="itineraryDao" ref="itineraryDao"/>
     </bean>
 
     <bean id="campListController" class="com.eeplanner.web.camp.CampListController">
         <property name="campDao" ref="campDao"/>
-        <property name="staffDao" ref="staffDao" />
+        <property name="staffDao" ref="staffDao"/>
         <property name="viewName" value="/camp/campList"/>
         <property name="cacheSeconds" value="0"/>
     </bean>
 
     <bean id="flightController" class="com.eeplanner.web.flight.FlightController">
-        <property name="formView" value="/flight/flightForm" />
-        <property name="successView" value="/flight/flightSuccess" />
+        <property name="formView" value="/flight/flightForm"/>
+        <property name="successView" value="/flight/flightSuccess"/>
         <property name="commandClass" value="com.eeplanner.datastructures.Flight"/>
         <property name="commandName" value="flight"/>
         <property name="flightDao" ref="flightDao"/>
         <property name="campDao" ref="campDao"/>
-        <property name="staffDao" ref="staffDao" />
+        <property name="staffDao" ref="staffDao"/>
         <property name="persistService" ref="persistService"/>
         <property name="cacheSeconds" value="0"/>
     </bean>
 
     <bean id="transferController" class="com.eeplanner.web.transfer.TransferController">
-        <property name="formView" value="/transfer/transferForm" />
-        <property name="successView" value="/transfer/transferSuccess" />
+        <property name="formView" value="/transfer/transferForm"/>
+        <property name="successView" value="/transfer/transferSuccess"/>
         <property name="commandClass" value="com.eeplanner.datastructures.Transfer"/>
         <property name="commandName" value="transfer"/>
         <property name="transferDao" ref="transferDao"/>
@@ -183,7 +184,7 @@
 
     <bean id="mailController" class="com.eeplanner.web.mail.MailController">
         <property name="campDao" ref="campDao"/>
-        <property name="staffDao" ref="staffDao" />
+        <property name="staffDao" ref="staffDao"/>
         <property name="emailDao" ref="emailDao"/>
         <property name="mailView" value="/mail/mail"/>
         <property name="campView" value="/mail/campContacts"/>
@@ -201,11 +202,11 @@
         <property name="flightDao" ref="flightDao"/>
         <property name="transferDao" ref="transferDao"/>
         <property name="itineraryDao" ref="itineraryDao"/>
-        <property name="campView" value="redirect:camp.htm" />
-        <property name="transferView" value="redirect:transfer.htm" />
-        <property name="flightView" value="redirect:flight.htm" />
-         <property name="itineraryView" value="redirect:itinerary/itineraryUpdate.htm" />
-        <property name="staffMemberView" value="redirect:staff-member.htm" />
+        <property name="campView" value="redirect:camp.htm"/>
+        <property name="transferView" value="redirect:transfer.htm"/>
+        <property name="flightView" value="redirect:flight.htm"/>
+        <property name="itineraryView" value="redirect:itinerary/itineraryUpdate.htm"/>
+        <property name="staffMemberView" value="redirect:staff-member.htm"/>
         <property name="methodNameResolver">
             <bean class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
                 <property name="paramName" value="action"/>
@@ -214,8 +215,8 @@
     </bean>
 
     <bean id="rtfGeneratorController" class="com.eeplanner.web.template.RtfGeneratorController">
-    	<property name="documentService" ref="rtfDocumentService"/>
-    	<property name="templateDao" ref="templateDao"/>
+        <property name="documentService" ref="rtfDocumentService"/>
+        <property name="templateDao" ref="templateDao"/>
         <property name="staffDao" ref="staffDao"/>
         <property name="campDao" ref="campDao"/>
         <property name="flightDao" ref="flightDao"/>
@@ -239,16 +240,16 @@
     </bean>
 
     <bean id="templateController" class="com.eeplanner.web.template.TemplateController">
-        <property name="formView" value="/template/templateForm" />
-        <property name="successView" value="/template/templateSuccess" />
+        <property name="formView" value="/template/templateForm"/>
+        <property name="successView" value="/template/templateSuccess"/>
         <property name="commandClass" value="com.eeplanner.datastructures.Template"/>
         <property name="commandName" value="template"/>
         <property name="templateDao" ref="templateDao"/>
         <property name="cacheSeconds" value="0"/>
         <property name="validator">
-        	<bean class="com.eeplanner.web.template.TemplateValidator">
-        		<property name="templateDao" ref="templateDao"/>
-        	</bean>
+            <bean class="com.eeplanner.web.template.TemplateValidator">
+                <property name="templateDao" ref="templateDao"/>
+            </bean>
         </property>
     </bean>
 
@@ -285,13 +286,13 @@
     <bean id="searchController" class="com.eeplanner.web.search.SearchController">
         <property name="viewName" value="/search/search"/>
         <property name="campDao" ref="campDao"/>
-        <property name="staffDao" ref="staffDao" />
+        <property name="staffDao" ref="staffDao"/>
         <property name="cacheSeconds" value="0"/>
     </bean>
 
     <bean id="itineraryController" class="com.eeplanner.web.itinerary.ItineraryController">
-        <property name="formView" value="/itinerary/itineraryForm" />
-        <property name="successView" value="/itinerary/itinerarySuccess" />
+        <property name="formView" value="/itinerary/itineraryForm"/>
+        <property name="successView" value="/itinerary/itinerarySuccess"/>
         <property name="commandClass" value="com.eeplanner.datastructures.Itinerary"/>
         <property name="commandName" value="itinerary"/>
         <property name="transferDao" ref="transferDao"/>
@@ -301,7 +302,7 @@
         <property name="cacheSeconds" value="0"/>
     </bean>
 
-    <bean id="handlerMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+    <bean id="handlerMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
 
     <!-- url mappings -->
     <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
@@ -321,8 +322,8 @@
                 <prop key="/transfer-list.htm">transferListController</prop>
 
                 <prop key="/mail.htm">mailController</prop>
-				<prop key="/camp-contacts.htm">mailController</prop>
-				<prop key="/staff-contacts.htm">mailController</prop>
+                <prop key="/camp-contacts.htm">mailController</prop>
+                <prop key="/staff-contacts.htm">mailController</prop>
                 <prop key="/itinerary.htm">itineraryController</prop>
 
                 <!-- search lists -->
