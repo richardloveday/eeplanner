@@ -59,7 +59,7 @@ public class DatabaseDumpTool {
 
 		Map<String, String> columns = new LinkedHashMap<String, String>();
 
-		for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
+		for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
 			columns.put(rs.getMetaData().getColumnName(i), rs.getMetaData().getColumnTypeName(i));
 		}
 
@@ -74,87 +74,77 @@ public class DatabaseDumpTool {
 
 		while (rs.next()) {
 
-			fos.write("\n(".getBytes());
+			String row = "\n(";
 
-			for (int i = 1; i < rs.getMetaData().getColumnCount(); i++) {
+			List<String> values = new ArrayList<String>();
+
+			for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
 
 				String columnType = (String) columns.values().toArray()[i - 1];
-				byte[] value = rs.getBytes(i);
+				String value = rs.getString(i);
+
 
 				if (value == null) {
-					fos.write("NULL".getBytes());
+					values.add("NULL");
 				} else {
 
 					switch (ColumnTypes.valueOf(columnType.replace(' ', '_'))) {
 						case TINYINT: {
-							fos.write(value);
+							values.add(value);
 							break;
 						}
 						case INT: {
-							fos.write(value);
+							values.add(value);
 							break;
 						}
 						case INT_UNSIGNED: {
-							fos.write(value);
+							values.add(value);
 							break;
 						}
 						case TINYINT_UNSIGNED: {
-							fos.write(value);
+							values.add(value);
 							break;
 						}
 						case DATETIME: {
-							if (new String(value).equalsIgnoreCase("0000-00-00 00:00:00")) {
-								fos.write("NULL".getBytes());
+							if (value.equalsIgnoreCase("0000-00-00 00:00:00")) {
+								values.add("NULL");
 							} else {
-								fos.write("'".getBytes());
-								fos.write(value);
-								fos.write("'".getBytes());
+								values.add("'"+value+"'");
 							}
 							break;
 						}
 
 						case TIMESTAMP: {
-							if (new String(value).equalsIgnoreCase("0000-00-00 00:00:00")) {
-								fos.write("NULL".getBytes());
+							if (value.equalsIgnoreCase("0000-00-00 00:00:00")) {
+								values.add("NULL");
 							} else {
-								fos.write("'".getBytes());
-								fos.write(value);
-								fos.write("'".getBytes());
+								values.add("'"+value+"'");
 							}
 							break;
 						}
 						case DATE: {
-							if (new String(value).equalsIgnoreCase("0000-00-00")) {
-								fos.write("NULL".getBytes());
+							if (value.equalsIgnoreCase("0000-00-00")) {
+								values.add("NULL");
 							} else {
-								fos.write("'".getBytes());
-								fos.write(value);
-								fos.write("'".getBytes());
+								values.add("'"+value+"'");
 							}
 							break;
 						}
 
 						default: {
-							fos.write("'".getBytes());
-							fos.write(new String(value).replace("'", "''").getBytes());
-							fos.write("'".getBytes());
+							values.add("'"+value.replace("'", "''")+"'");
 							break;
 						}
 					}
 				}
 
-				if (i < rs.getMetaData().getColumnCount() - 1) {
-					fos.write(",".getBytes());
-				} else {
-					fos.write(")".getBytes());
-					if (rs.isLast()) {
-						fos.write(";\n\n\n".getBytes());
-					} else {
-						fos.write(",".getBytes());
-					}
-				}
 			}
+			row = row + StringUtils.join(values.toArray(), ",") + ")";
+
+			rows.add(row);
 		}
+
+		fos.write((StringUtils.join(rows.toArray(), ",") + ";").getBytes()) ;
 
 
 	}
