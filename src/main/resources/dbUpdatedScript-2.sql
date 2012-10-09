@@ -111,4 +111,28 @@ UPDATE `campstaff` SET job = job_2;
 ALTER TABLE `campstaff` DROP COLUMN job_2;
 
 
+/* changes 8 october 2012 */
+/************/
+DROP TABLE `template`;
 
+CREATE TABLE `template` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(100) DEFAULT NULL,
+  `text` longtext,
+  `edited_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQUE` (`type`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1 ;
+
+INSERT INTO `template` (id,type,text) VALUES
+(2,'Offer_Letter','offer_letter'),
+(9,'Personal_transfer_info','personal_transfer_info'),
+(1,'Contract_of_a_staff_member','contract_staff_member'),
+(6,'Contract_of_a_coordinator','contract_coordinator'),
+(8,'Host_family_profiles_for_a_camp','host_family_profiles_for_camp'),
+(3,'Flight_summary','flight_summary'),
+(5,'Staff_profiles_for_a_camp','staff_profiles_for_camp'),
+(10,'Travel_info_for_a_camp','travel_info_for_camp'),
+(7,'Staff_data_form','staff_data_form');
+/************/
+/* end changes 8 october 2012 */

@@ -82,65 +82,67 @@ public class DatabaseDumpTool {
 				byte[] value = rs.getBytes(i);
 
 				if (value == null) {
-					value = "NULL".getBytes();
+					fos.write("NULL".getBytes());
+				} else {
+
+					switch (ColumnTypes.valueOf(columnType.replace(' ', '_'))) {
+						case TINYINT: {
+							fos.write(value);
+							break;
+						}
+						case INT: {
+							fos.write(value);
+							break;
+						}
+						case INT_UNSIGNED: {
+							fos.write(value);
+							break;
+						}
+						case TINYINT_UNSIGNED: {
+							fos.write(value);
+							break;
+						}
+						case DATETIME: {
+							if (new String(value).equalsIgnoreCase("0000-00-00 00:00:00")) {
+								fos.write("NULL".getBytes());
+							} else {
+								fos.write("'".getBytes());
+								fos.write(value);
+								fos.write("'".getBytes());
+							}
+							break;
+						}
+
+						case TIMESTAMP: {
+							if (new String(value).equalsIgnoreCase("0000-00-00 00:00:00")) {
+								fos.write("NULL".getBytes());
+							} else {
+								fos.write("'".getBytes());
+								fos.write(value);
+								fos.write("'".getBytes());
+							}
+							break;
+						}
+						case DATE: {
+							if (new String(value).equalsIgnoreCase("0000-00-00")) {
+								fos.write("NULL".getBytes());
+							} else {
+								fos.write("'".getBytes());
+								fos.write(value);
+								fos.write("'".getBytes());
+							}
+							break;
+						}
+
+						default: {
+							fos.write("'".getBytes());
+							fos.write(new String(value).replace("'", "''").getBytes());
+							fos.write("'".getBytes());
+							break;
+						}
+					}
 				}
 
-				switch (ColumnTypes.valueOf(columnType.replace(' ', '_'))) {
-					case TINYINT: {
-						fos.write(value);
-						break;
-					}
-					case INT: {
-						fos.write(value);
-						break;
-					}
-					case INT_UNSIGNED: {
-						fos.write(value);
-						break;
-					}
-					case TINYINT_UNSIGNED: {
-						fos.write(value);
-						break;
-					}
-					case DATETIME: {
-						if (new String(value).equalsIgnoreCase("0000-00-00 00:00:00")) {
-							fos.write("NULL".getBytes());
-						} else {
-							fos.write("'".getBytes());
-							fos.write(value);
-							fos.write("'".getBytes());
-						}
-						break;
-					}
-
-					case TIMESTAMP: {
-						if (new String(value).equalsIgnoreCase("0000-00-00 00:00:00")) {
-							fos.write("NULL".getBytes());
-						} else {
-							fos.write("'".getBytes());
-							fos.write(value);
-							fos.write("'".getBytes());
-						}
-						break;
-					}
-					case DATE: {
-						if (new String(value).equalsIgnoreCase("0000-00-00")) {
-							fos.write("NULL".getBytes());
-						} else {
-							fos.write("'".getBytes());
-							fos.write(value);
-							fos.write("'".getBytes());
-						}
-						break;
-					}
-
-					default: {
-						fos.write("'".getBytes());
-						fos.write(new String(value).replace("'", "''").getBytes());
-						fos.write("'".getBytes());
-						break;
-					}
-				}
 				if (i < rs.getMetaData().getColumnCount() - 1) {
 					fos.write(",".getBytes());
 				} else {
