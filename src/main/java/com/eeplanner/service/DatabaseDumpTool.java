@@ -1,12 +1,14 @@
 package com.eeplanner.service;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -18,11 +20,22 @@ public class DatabaseDumpTool {
 	private static DataSource dataSource;
 	private static File file;
 
+	@Autowired
+	private AmazonS3Service amazonS3Service;
+	private InputStream inputStream;
+
 	public DatabaseDumpTool(DataSource dataSource) throws SQLException, IOException {
 
 		DatabaseDumpTool.dataSource = dataSource;
-		file = new ClassPathResource("backup/eeplanner.bak.sql").getFile();
+		ClassPathResource classPathResource = new ClassPathResource("backup/eeplanner.bak.sql");
+		file = classPathResource.getFile();
+		inputStream = classPathResource.getInputStream();
 
+	}
+
+	public void executeBackup() throws IOException, SQLException {
+		dump();
+		amazonS3Service.persistFile(inputStream, file.length());
 	}
 
 	public static void dump() throws SQLException, IOException {

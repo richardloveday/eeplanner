@@ -1,20 +1,33 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd">
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/task
+       http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
     <bean class="com.eeplanner.service.AmazonS3Service" id="amazonS3Service">
-        <constructor-arg name="s3Client" ref="s3Client" />
-        <constructor-arg name="bucketName" value="redmondivie"/>
+        <constructor-arg name="s3Client" ref="s3Client"/>
+        <constructor-arg name="bucketName" value="${EEPLANNER_S3_BUCKET}"/>
     </bean>
 
     <bean class="com.amazonaws.auth.BasicAWSCredentials" id="awsCredentials">
-        <constructor-arg name="accessKey" value="key"/>
-        <constructor-arg name="secretKey" value="secretKey"/>
+        <constructor-arg name="accessKey" value="${EEPLANNER_S3_KEY}"/>
+        <constructor-arg name="secretKey" value="${EEPLANNER_S3_SECRET_KEY}"/>
     </bean>
 
     <bean class="com.amazonaws.services.s3.AmazonS3Client" id="s3Client">
         <constructor-arg ref="awsCredentials"/>
     </bean>
+
+    <bean class="com.eeplanner.service.DatabaseDumpTool" id="databaseDumpTool">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <task:scheduled-tasks>
+        <task:scheduled ref="databaseDumpTool" method="executeBackup" cron="${EEPLANNER_BACKUP_SCHEDULE}"/>
+    </task:scheduled-tasks>
+    <task:executor id="myExecutor" pool-size="1"/>
+    <task:scheduler id="myScheduler" pool-size="1"/>
 
 </beans>

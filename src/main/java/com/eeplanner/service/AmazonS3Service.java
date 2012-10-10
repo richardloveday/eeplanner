@@ -3,16 +3,11 @@ package com.eeplanner.service;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
-import org.apache.commons.io.IOUtils;
 import org.joda.time.DateTime;
-import org.springframework.stereotype.Service;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
-
-@Service
 public class AmazonS3Service {
 
     private AmazonS3Client s3Client;
@@ -26,25 +21,15 @@ public class AmazonS3Service {
         this.bucketName = bucketName;
     }
 
-    public byte[] getFile(String id) throws IOException {
-
-        S3Object s3Object = s3Client.getObject(bucketName, id);
-
-        return IOUtils.toByteArray(s3Object.getObjectContent());
-
-    }
-
-    public void persistFileFromBytes(byte[] bytes) throws IOException {
-
-		ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
+    public void persistFile(InputStream inputStream, long length) throws IOException {
 
         ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setContentLength(bytes.length);
+        metadata.setContentLength(length);
 
         s3Client.putObject(new PutObjectRequest(
                 bucketName,
                 String.valueOf(new DateTime()) + ".sql.bak",
-                byteArrayInputStream,
+                inputStream,
                 metadata)
         );
 
